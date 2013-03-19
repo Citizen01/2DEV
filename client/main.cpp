@@ -11,10 +11,11 @@
 
 using namespace std;
 
-int main(int argc, char **argv){
 
-	printf("Hello everyone !\n");
-	system("PAUSE");
+int main(int argc, char **argv)
+{
+
+	
 
 	return 0;
 }

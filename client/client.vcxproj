@@ -79,11 +79,33 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>Irrlicht.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Irrlicht.lib;irrKlang.lib;boost_filesystem.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="engine.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="game_engine.cpp" />
+    <ClCompile Include="graphics_engine.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="network_engine.cpp" />
+    <ClCompile Include="plane.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="sound_engine.cpp" />
+    <ClCompile Include="utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="game_engine.h" />
+    <ClInclude Include="graphics_engine.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="network_engine.h" />
+    <ClInclude Include="plane.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="sound_engine.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

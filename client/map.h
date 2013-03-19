@@ -1,0 +1,70 @@
+#pragma once
+
+#include <irrlicht.h>
+#include <stdio.h>
+#include <string>
+#include <io.h>
+
+using namespace std;
+using namespace irr;
+
+class Map
+{
+
+private:
+	string _name; //Nom de la map
+	string _path; //Chemin vers le dossier de la map (inclut)
+	string _heightmap; //Nom du fichier de la heightmap
+	string _texture; //Nom du fichier de la texture
+	core::vector3d<s32> _position; //Position (X; Z; Y)
+	core::vector3d<s32> _rotation; //Rotation (X; Z; Y)
+	core::vector3d<s32> _scale; //Taille (X; Z; Y)
+	//Objet terrain chargé d'après les infos d'au-dessus
+	scene::ITerrainSceneNode* _terrain;
+
+	bool loadTerrain();
+
+public:
+	Map( string name, string path, string heightmap, string texture, core::vector3d<s32> position, core::vector3d<s32> rotation, core::vector3d<s32> scale );
+
+
+
+	/// Getters and Setters ///
+	
+	//Name
+	bool setName(string s);
+	string getName();
+	
+
+	//Path
+	bool setPath(string s);
+	string getPath();
+	
+
+	//Heightmap
+	bool setHeightmap(string s);
+	string getHeightmap();
+	
+
+	//Texture
+	bool setTexture(string s);
+	string getTexture();
+	
+
+	//Position
+	bool setPosition(core::vector3d<s32> position);
+	core::vector3d<s32> getPosition();
+	
+
+	//Rotation
+	bool setRotation(core::vector3d<s32> rotation);
+	core::vector3d<s32> getRotation();
+	
+
+	//Scale
+	bool setScale(core::vector3d<s32> scale);
+	core::vector3d<s32> getScale();
+
+	/// Dump ///
+	void dump();
+};
