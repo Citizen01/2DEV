@@ -1,11 +1,19 @@
 #include "sound_engine.h"
 
 
-sound_engine::sound_engine(void)
+sound_engine::sound_engine(Game* g) : engine(g)
 {
+
 }
 
 
 sound_engine::~sound_engine(void)
 {
+}
+
+
+//Implémentation de la méthode virtuelle pure héritée de la classe engine
+void sound_engine::frame()
+{
+	//Do stuff
 }

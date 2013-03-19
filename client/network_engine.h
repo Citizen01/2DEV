@@ -1,10 +1,12 @@
 #pragma once
+
 #include "engine.h"
-class network_engine :
-	public Engine
+class network_engine : public engine
 {
 public:
-	network_engine(void);
+	network_engine(Game*);
 	~network_engine(void);
+
+	void frame();
 };
 

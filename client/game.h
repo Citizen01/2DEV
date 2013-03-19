@@ -13,7 +13,7 @@ private:
 	graphics_engine *gfx;
 	network_engine *n;
 	sound_engine *s;
-
+	
 public:
 	Game();
 	~Game();

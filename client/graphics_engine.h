@@ -1,10 +1,12 @@
 #pragma once
+
 #include "engine.h"
-class graphics_engine :
-	public Engine
+class graphics_engine : public engine
 {
 public:
-	graphics_engine(void);
+	graphics_engine(Game*);
 	~graphics_engine(void);
+
+	void frame();
 };
 
