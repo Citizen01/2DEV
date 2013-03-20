@@ -4,29 +4,34 @@
 #include <stdio.h>
 #include <string>
 #include <io.h>
-
+#include "game.h"
 using namespace std;
 using namespace irr;
+
+class game;
 
 class Map
 {
 
 private:
+	game* _game; //Objet game auquel il fait partit
 	string _name; //Nom de la map
 	string _path; //Chemin vers le dossier de la map (inclut)
 	string _heightmap; //Nom du fichier de la heightmap
 	string _texture; //Nom du fichier de la texture
-	core::vector3d<s32> _position; //Position (X; Z; Y)
-	core::vector3d<s32> _rotation; //Rotation (X; Z; Y)
-	core::vector3d<s32> _scale; //Taille (X; Z; Y)
+	core::vector3df _position; //Position (X; Z; Y)
+	core::vector3df _rotation; //Rotation (X; Z; Y)
+	core::vector3df _scale; //Taille (X; Z; Y)
 	//Objet terrain chargé d'après les infos d'au-dessus
 	scene::ITerrainSceneNode* _terrain;
 
 	bool loadTerrain();
 
 public:
-	Map( string name, string path, string heightmap, string texture, core::vector3d<s32> position, core::vector3d<s32> rotation, core::vector3d<s32> scale );
 
+	Map(game* g, string name, string path, string heightmap = "heightmap.png", string texture = "texture.png",
+		 core::vector3df position = core::vector3df(0, 0, 0), core::vector3df rotation = core::vector3df(0, 0, 0),
+		 core::vector3df scale = core::vector3df(120, 60, 120));
 
 
 	/// Getters and Setters ///
@@ -52,18 +57,24 @@ public:
 	
 
 	//Position
-	bool setPosition(core::vector3d<s32> position);
-	core::vector3d<s32> getPosition();
+	bool setPosition(core::vector3df position);
+	core::vector3df getPosition();
 	
 
 	//Rotation
-	bool setRotation(core::vector3d<s32> rotation);
-	core::vector3d<s32> getRotation();
+	bool setRotation(core::vector3df rotation);
+	core::vector3df getRotation();
 	
 
 	//Scale
-	bool setScale(core::vector3d<s32> scale);
-	core::vector3d<s32> getScale();
+	bool setScale(core::vector3df scale);
+	core::vector3df getScale();
+
+	//Terrain
+
+	scene::ITerrainSceneNode* getTerrain();
+
+
 
 	/// Dump ///
 	void dump();

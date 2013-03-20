@@ -1,12 +1,16 @@
 #pragma once
 
-#include "game.h"
+class game_engine;
+class graphics_engine;
+class network_engine;
+class sound_engine;
+class game;
 
 class engine
 {
 public:
 	//Partie du constructeur commune à tous les moteurs
-	engine(Game*);
+	engine(game*);
 	virtual ~engine();
 
 	//Méthodes permettant le linkage avec les autres modules
@@ -20,8 +24,8 @@ public:
 	virtual void frame() = 0;
 
 protected:
-	//Contiendra l'objet Game instancié
-	Game* parent;
+	//Contiendra l'objet game instancié
+	game* parent;
 
 	//Référencement de tous les moteurs
 	game_engine *ge;

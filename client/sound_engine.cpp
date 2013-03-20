@@ -1,7 +1,7 @@
 #include "sound_engine.h"
 
 
-sound_engine::sound_engine(Game* g) : engine(g)
+sound_engine::sound_engine(game* g) : engine(g)
 {
 
 }

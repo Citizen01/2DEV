@@ -1,7 +1,12 @@
 #include "engine.h"
 #include <cstdlib> //Pour NULL
 
-engine::engine(Game* g_ptr)
+#include "game_engine.h"
+#include "graphics_engine.h"
+#include "network_engine.h"
+#include "sound_engine.h"
+
+engine::engine(game* g_ptr)
 {
 	parent = g_ptr;
 	ge = NULL;
@@ -13,7 +18,6 @@ engine::engine(Game* g_ptr)
 
 engine::~engine(void)
 {
-
 }
 
 

@@ -1,11 +1,13 @@
+#include "game.h"
 #include "map.h"
 #include "utils.h"
 #include <iostream>
 
 using namespace std;
 
-Map::Map( string name, string path, string heightmap, string texture, core::vector3d<s32> position, core::vector3d<s32> rotation, core::vector3d<s32> scale )
+Map::Map(game* g, string name, string path, string heightmap, string texture, core::vector3df position, core::vector3df rotation, core::vector3df scale)
 {
+	_game = g;
 	_name = name;
 	_path = path;
 	_heightmap = heightmap;
@@ -20,50 +22,58 @@ bool Map::loadTerrain()
 {
 	if (isValidPath(_path))
 	{
-		string heightmap = _path + _heightmap;
+		string heightmap = _path + "/" + _name + "/" + _heightmap;
 		if (isFile(heightmap))
 		{
-			string texture = _path + _texture;
+			string texture = _path + "/" + _name + "/" + _texture;
 			if (isFile(texture))
 			{
 				// add terrain scene node
-				scene::ITerrainSceneNode* terrain = smgr->addTerrainSceneNode(
-					_heightmap,
+				video::IVideoDriver* driver = _game->getGraphicEngine()->getDriver();
+				scene::ISceneManager* smgr = _game->getGraphicEngine()->getSceneManager();
+				_terrain = smgr->addTerrainSceneNode(
+					heightmap.c_str(),
 					0,                  // parent node
 					-1,                 // node id
-					core::vector3df(0.f, 0.f, 0.f),     // position
-					core::vector3df(0.f, 0.f, 0.f),     // rotation
-					core::vector3df(120.f, 60.f, 120.f),  // scale
+					_position,     // position
+					_rotation,     // rotation
+					_scale,  // scale
 					video::SColor ( 255, 255, 255, 255 ),   // vertexColor
 					5,                  // maxLOD
 					scene::ETPS_17,     // patchSize
 					4                   // smoothFactor
 					);
 
-				//Auto luminescence de la map (pour les test)
-				terrain->setMaterialFlag(video::EMF_LIGHTING, true);
+				//Auto-éclairage de la map (pour les test)
+				_terrain->setMaterialFlag(video::EMF_LIGHTING, false);
 
-				terrain->setMaterialTexture(0,
-						driver->getTexture(_texture));
+				_terrain->setMaterialTexture(0,
+						driver->getTexture(texture.c_str()));
     
-				terrain->setMaterialType(video::EMT_DETAIL_MAP);
+				_terrain->setMaterialType(video::EMT_DETAIL_MAP);
 
-				terrain->scaleTexture(1.0f, 1.0f);
+				_terrain->scaleTexture(1.0f, 1.0f);
+
+				return true;
 			}
 			else
 			{
 				cout << "[ERROR] The texture given isn't valid !" << endl;
+				cout << texture << endl;
 			}
 		}
 		else
 		{
 			cout << "[ERROR] The heightmap given isn't valid !" << endl;
+			cout << heightmap << endl;
 		}
 	}
 	else
 	{
 		cout << "[ERROR] The path given isn't valid !" << endl;
+		cout << _path << endl;
 	}
+	return NULL;
 }
 
 //Name
@@ -132,39 +142,46 @@ string Map::getTexture()
 }
 
 //Position
-bool Map::setPosition(core::vector3d<s32> position)
+bool Map::setPosition(core::vector3df position)
 {
 	_position = position;
 	return true;
 }
 	
-core::vector3d<s32> Map::getPosition()
+core::vector3df Map::getPosition()
 {
 	return _position;
 }
 
 //Rotation
-bool Map::setRotation(core::vector3d<s32> rotation)
+bool Map::setRotation(core::vector3df rotation)
 {
 	_rotation = rotation;
 	return true;
 }
 	
-core::vector3d<s32> Map::getRotation()
+core::vector3df Map::getRotation()
 {
 	return _rotation;
 }
 
 //Scale
-bool Map::setScale(core::vector3d<s32> scale)
+bool Map::setScale(core::vector3df scale)
 {
 	_scale = scale;
 	return true;
 }
 	
-core::vector3d<s32> Map::getScale()
+core::vector3df Map::getScale()
 {
 	return _scale;
+}
+
+//Terrain
+
+scene::ITerrainSceneNode* Map::getTerrain()
+{
+	return _terrain;
 }
 
 void Map::dump()
