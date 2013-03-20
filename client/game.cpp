@@ -63,8 +63,8 @@ void game::play(std::string mapname)
 
 	//Need to add an event receiver here
 
-    camera->setPosition(core::vector3df(2700*2,255*2,2600*2));
-    camera->setTarget(core::vector3df(2397*2,343*2,2700*2));
+    camera->setPosition(core::vector3df(50000,20000,50000));
+    //camera->setTarget(core::vector3df(5001, 1000, 5001));
     camera->setFarValue(420000.0f); //Distance d'affichage
 
     // disable mouse cursor

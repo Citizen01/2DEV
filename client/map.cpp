@@ -48,6 +48,9 @@ bool Map::loadTerrain()
 					4                   // smoothFactor
 					);
 
+				/*core::vector3df size = _terrain->getScale();
+				core::vector3df pos = _terrain->getPosition();
+				_terrain->setPosition(core::vector3df(pos.X-(size.X/2), pos.Z-(size.Z/2), pos.Y-(size.Y/2)));*/
 				//Auto-éclairage de la map (pour les test)
 				_terrain->setMaterialFlag(video::EMF_LIGHTING, false);
 
