@@ -5,27 +5,31 @@
 
 using namespace std;
 
-Map::Map(game* g, string name, string path, string heightmap, string texture, core::vector3df position, core::vector3df rotation, core::vector3df scale)
+Map::Map(game* g, string name, core::vector3df position, core::vector3df rotation, core::vector3df scale)
 {
 	_game = g;
 	_name = name;
-	_path = path;
-	_heightmap = heightmap;
-	_texture = texture;
+	_path = PATH_TO_MEDIA;
+	_heightmap = MAP_HEIGHTMAP_NAME;
+	_texture = MAP_TEXTURE_NAME;
 	_position = position;
 	_rotation = rotation;
 	_scale = scale;
+	//Chargement du sol
 	loadTerrain();
+	loadSkybox();
+	//Chargement des objets à placer sur le sol (soon)
+	//loadObjects();
 }
 
 bool Map::loadTerrain()
 {
 	if (isValidPath(_path))
 	{
-		string heightmap = _path + "/" + _name + "/" + _heightmap;
+		string heightmap = _path + "/maps/" + _name + "/" + _heightmap;
 		if (isFile(heightmap))
 		{
-			string texture = _path + "/" + _name + "/" + _texture;
+			string texture = _path + "/maps/" + _name + "/" + _texture;
 			if (isFile(texture))
 			{
 				// add terrain scene node
@@ -74,6 +78,31 @@ bool Map::loadTerrain()
 		cout << _path << endl;
 	}
 	return NULL;
+}
+
+bool Map::loadSkybox()
+{
+	video::IVideoDriver* driver = _game->getGraphicEngine()->getDriver();
+	scene::ISceneManager* smgr = _game->getGraphicEngine()->getSceneManager();
+	// create skybox
+    driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, false);
+
+    scene::ISceneNode* skybox=smgr->addSkyBoxSceneNode(
+        driver->getTexture("../Media/skies/skyboxes/irrlicht2_up.jpg"),
+        driver->getTexture("../Media/skies/skyboxes/irrlicht2_dn.jpg"),
+        driver->getTexture("../Media/skies/skyboxes/irrlicht2_lf.jpg"),
+        driver->getTexture("../Media/skies/skyboxes/irrlicht2_rt.jpg"),
+        driver->getTexture("../Media/skies/skyboxes/irrlicht2_ft.jpg"),
+        driver->getTexture("../Media/skies/skyboxes/irrlicht2_bk.jpg"));
+
+    driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, true);
+	return true;
+}
+
+bool Map::loadObjects()
+{
+	//Todo
+	return true;
 }
 
 //Name

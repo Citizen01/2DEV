@@ -46,35 +46,29 @@ game::~game()
 void game::play(std::string mapname)
 {
 	Map theMap = gfx->loadMap(mapname);
+	Plane thePlane = gfx->loadPlane("SU 25");
 	
-	//Cette partie reste là le temps des tests
+	/// Cette partie reste là le temps des tests ///
 	IrrlichtDevice* device = getGraphicEngine()->getDevice();
 	video::IVideoDriver* driver = getGraphicEngine()->getDriver();
 	scene::ISceneManager* smgr = getGraphicEngine()->getSceneManager();
 
 	// add camera
-    scene::ICameraSceneNode* camera =
-        smgr->addCameraSceneNodeFPS(0,100.0f,5.2f);
+    scene::ICameraSceneNode* camera = smgr->addCameraSceneNodeFPS(0,100.0f,5.2f);
+
+	//On attache l'avion à la camera
+	scene::IAnimatedMeshSceneNode* planeNode = smgr->addAnimatedMeshSceneNode(thePlane.getMesh());
+	planeNode->setPosition(core::vector3df(0,-3,15));
+	planeNode->setParent(camera);
+
+	//Need to add an event receiver here
 
     camera->setPosition(core::vector3df(2700*2,255*2,2600*2));
     camera->setTarget(core::vector3df(2397*2,343*2,2700*2));
-    camera->setFarValue(420000.0f);
+    camera->setFarValue(420000.0f); //Distance d'affichage
 
     // disable mouse cursor
     device->getCursorControl()->setVisible(false);
-
-	// create skybox
-    driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, false);
-
-    scene::ISceneNode* skybox=smgr->addSkyBoxSceneNode(
-        driver->getTexture("../Media/skies/skyboxes/irrlicht2_up.jpg"),
-        driver->getTexture("../Media/skies/skyboxes/irrlicht2_dn.jpg"),
-        driver->getTexture("../Media/skies/skyboxes/irrlicht2_lf.jpg"),
-        driver->getTexture("../Media/skies/skyboxes/irrlicht2_rt.jpg"),
-        driver->getTexture("../Media/skies/skyboxes/irrlicht2_ft.jpg"),
-        driver->getTexture("../Media/skies/skyboxes/irrlicht2_bk.jpg"));
-
-    driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, true);
 
 	int lastFPS = -1;
 	while(device->run())

@@ -25,13 +25,14 @@ private:
 	//Objet terrain chargé d'après les infos d'au-dessus
 	scene::ITerrainSceneNode* _terrain;
 
-	bool loadTerrain();
+	bool loadTerrain(); //Permet de charger le terrain
+	bool loadSkybox(); //Permet de charger la skybox
+	bool loadObjects(); //Permet de charger les objets (soon)
 
 public:
 
-	Map(game* g, string name, string path, string heightmap = "heightmap.png", string texture = "texture.png",
-		 core::vector3df position = core::vector3df(0, 0, 0), core::vector3df rotation = core::vector3df(0, 0, 0),
-		 core::vector3df scale = core::vector3df(120, 60, 120));
+	Map(game* g, string name, core::vector3df position = core::vector3df(0, 0, 0), core::vector3df rotation = core::vector3df(0, 0, 0),
+		core::vector3df scale = core::vector3df(120, 60, 120));
 
 
 	/// Getters and Setters ///

@@ -1,6 +1,7 @@
 //#include "graphics_engine.h"
 
 #include "game.h"
+#include "plane.h"
 
 graphics_engine::graphics_engine(game* g) : engine(g)
 {
@@ -32,7 +33,7 @@ graphics_engine::graphics_engine(game* g) : engine(g)
 	//Gui environnement (soon)
     //env = device->getGUIEnvironment();
 
-	//Force le driver a créer les textures aux format 32bits
+	//Force le driver a créer les textures au format 32bits
     driver->setTextureCreationFlag(video::ETCF_ALWAYS_32_BIT, true);
 }
 
@@ -51,6 +52,12 @@ void graphics_engine::frame()
 
 Map graphics_engine::loadMap(std::string mapname)
 {
-	Map map(parent, "mountain", "../Media/maps/");
+	Map map(parent, mapname);
 	return map;
+}
+
+Plane graphics_engine::loadPlane(std::string modelname)
+{
+	Plane plane(parent, modelname);
+	return plane;
 }

@@ -6,6 +6,12 @@
 #include "network_engine.h"
 #include "sound_engine.h"
 
+const std::string PATH_TO_MEDIA = "../media/";
+//Need to be replaced with a conf file such as an XML 
+//TODO: XML_Manager class to easily read and write in xml files
+const std::string MAP_HEIGHTMAP_NAME = "heightmap.png";
+const std::string MAP_TEXTURE_NAME = "texture.png";
+
 using namespace irr;
 
 class game_engine;

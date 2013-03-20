@@ -2,7 +2,10 @@
 
 #include "engine.h"
 #include "map.h"
+#include "plane.h"
 
+class Map;
+class Plane;
 class game;
 
 class graphics_engine : public engine
@@ -16,7 +19,8 @@ public:
 	graphics_engine(game*);
 	~graphics_engine(void);
 
-	Map loadMap(std::string mapname);
+	Map loadMap(std::string);
+	Plane loadPlane(std::string);
 
 	void frame();
 
@@ -28,4 +32,3 @@ public:
 	//// SETTERS ////
 		//Todo
 };
-
