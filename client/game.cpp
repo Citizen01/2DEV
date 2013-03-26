@@ -91,12 +91,14 @@ void game::play(std::string mapname)
             str += driver->getName();
             str += "] FPS:";
             str += fps;
-            // Also print terrain height of current camera position
-            // We can use camera position because terrain is located at coordinate origin
+            // Also print the current camera position
 			scene::ITerrainSceneNode* terrain = theMap.getTerrain();
-            str += " Height: ";
-            str += terrain->getHeight(camera->getAbsolutePosition().X,
-                    camera->getAbsolutePosition().Z);
+            str += " Position: ";
+            str += camera->getAbsolutePosition().X;
+			str += ", ";
+			str += camera->getAbsolutePosition().Y;
+			str += ", ";
+			str += camera->getAbsolutePosition().Z;
 
             device->setWindowCaption(str.c_str());
             lastFPS = fps;
