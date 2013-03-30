@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="events.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_engine.cpp" />
     <ClCompile Include="graphics_engine.cpp" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h" />
+    <ClInclude Include="events.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_engine.h" />
     <ClInclude Include="graphics_engine.h" />

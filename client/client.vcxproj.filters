@@ -78,6 +78,9 @@
     <ClCompile Include="sound_engine.cpp">
       <Filter>Source Files\sound</Filter>
     </ClCompile>
+    <ClCompile Include="events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="sound_engine.h">
       <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="events.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,8 @@
 #include <irrlicht.h>
 #include <irrKlang.h>
 #include "game.h"
+#include "events.h"
+#include "utils.h"
 
 
 game::game()
@@ -52,17 +54,24 @@ void game::play(std::string mapname)
 	IrrlichtDevice* device = getGraphicEngine()->getDevice();
 	video::IVideoDriver* driver = getGraphicEngine()->getDriver();
 	scene::ISceneManager* smgr = getGraphicEngine()->getSceneManager();
+	
+	scene::IAnimatedMeshSceneNode* planeNode = thePlane.getMesh();
+	planeNode->setPosition(core::vector3df(50000,19997,50015));
 
 	// add camera
-    scene::ICameraSceneNode* camera = smgr->addCameraSceneNodeFPS(0,100.0f,5.2f);
-
+    scene::ICameraSceneNode* camera = smgr->addCameraSceneNode(0, core::vector3df(0,0,0), core::vector3df(1,0,0));
+	//camera->setParent(planeNode); 
+	//camera->setPosition(planeNode->getPosition()); 
+	//camera->bindTargetAndRotation(true); 
+	
 	//On attache l'avion à la camera
-	scene::IAnimatedMeshSceneNode* planeNode = smgr->addAnimatedMeshSceneNode(thePlane.getMesh());
-	planeNode->setPosition(core::vector3df(0,-3,15));
-	planeNode->setParent(camera);
+	/*planeNode->setParent(camera);*/
 
 	//Need to add an event receiver here
-
+	//On cree le capteur d'event et on l'associe au device.
+    CtrlPlaneReceiver receiver(thePlane.getMesh());
+    device->setEventReceiver(&receiver);
+	
     camera->setPosition(core::vector3df(50000,20000,50000));
     //camera->setTarget(core::vector3df(5001, 1000, 5001));
     camera->setFarValue(420000.0f); //Distance d'affichage
@@ -75,6 +84,11 @@ void game::play(std::string mapname)
     if (device->isWindowActive())
     {
         driver->beginScene(true, true, 0 );
+
+		//On met a jour la pos de l'avion
+		receiver.updateMesh();
+		//On met à jour la pos et la rot de la caméra
+		makeCockpit(camera, planeNode, core::vector3df(0, 3, -15));
 
         smgr->drawAll();
 

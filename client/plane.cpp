@@ -25,7 +25,7 @@ void Plane::loadMesh()
 	video::IVideoDriver* driver = _game->getGraphicEngine()->getDriver();
 	scene::ISceneManager* smgr = _game->getGraphicEngine()->getSceneManager();
 	std::string modefile = PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
-    _model = smgr->getMesh(modefile.c_str());
+    _model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
     
 	/*irr::scene::IAnimatedMeshSceneNode* Nmodele =
     smgr->addAnimatedMeshSceneNode(_model);*/
