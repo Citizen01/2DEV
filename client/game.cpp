@@ -79,6 +79,8 @@ void game::play(std::string mapname)
     // disable mouse cursor
     device->getCursorControl()->setVisible(false);
 
+	
+
 	int lastFPS = -1;
 	while(device->run())
     if (device->isWindowActive())
@@ -87,8 +89,9 @@ void game::play(std::string mapname)
 
 		//On met a jour la pos de l'avion
 		receiver.updateMesh();
+		
 		//On met à jour la pos et la rot de la caméra
-		makeCockpit(camera, planeNode, core::vector3df(0, 3, -15));
+		makeCockpit(camera, planeNode, core::vector3df(0, 0, -2));
 
         smgr->drawAll();
 

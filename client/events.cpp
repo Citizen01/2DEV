@@ -30,28 +30,28 @@ void CtrlPlaneReceiver::updateMesh()
 		if (IsKeyDown(irr::KEY_UP))
 		{
 			//Plonger vers le bas
-			rotateNodeInLocalSpace(m_Nmodele, 0.1f, irr::core::vector3df(1,0,0));
+			rotateNodeInLocalSpace(m_Nmodele, 1.f, irr::core::vector3df(1,0,0));
 		}
 
 		//Qu'il s'agit de la flèche du bas
 		if (IsKeyDown(irr::KEY_DOWN))
 		{
 			//Redresser
-			rotateNodeInLocalSpace(m_Nmodele, -0.1f, irr::core::vector3df(1,0,0));
+			rotateNodeInLocalSpace(m_Nmodele, -1.f, irr::core::vector3df(1,0,0));
 		}
 
 		//Qu'il s'agit de la flèche de gauche
 		if (IsKeyDown(irr::KEY_LEFT))
 		{
 			//Tonneau à gauche
-			rotateNodeInLocalSpace(m_Nmodele, 0.1f, irr::core::vector3df(0,0,1));
+			rotateNodeInLocalSpace(m_Nmodele, 1.f, irr::core::vector3df(0,0,1));
 		}
 
 		//Qu'il s'agit de la flèche de droite
 		if (IsKeyDown(irr::KEY_RIGHT))
 		{
 			//Tonneau à droite
-			rotateNodeInLocalSpace(m_Nmodele, -0.1f, irr::core::vector3df(0,0,1));
+			rotateNodeInLocalSpace(m_Nmodele, -1.f, irr::core::vector3df(0,0,1));
 		}
 
 		//Qu'il s'agit de la touche Z

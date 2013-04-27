@@ -3,6 +3,9 @@
 #include "engine.h"
 #include "map.h"
 #include "plane.h"
+//Test de CEGUI
+#include <CEGUI.h>
+#include <RendererModules\Irrlicht\CEGUIIrrlichtRenderer.h>
 
 class Map;
 class Plane;
@@ -14,13 +17,14 @@ private:
 	IrrlichtDevice* device;
 	video::IVideoDriver* driver;
 	scene::ISceneManager* smgr; //Scene manager
+	CEGUI::IrrlichtRenderer* mRenderer; //CEGUI
 
 public:
 	graphics_engine(game*);
 	~graphics_engine(void);
 
-	Map loadMap(std::string);
-	Plane loadPlane(std::string);
+	Map loadMap(std::string); //A bouger dans game engine
+	Plane loadPlane(std::string); //A bouger dans game engine
 
 	void frame();
 

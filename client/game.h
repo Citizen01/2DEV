@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include "game_engine.h"
@@ -22,7 +22,7 @@ class sound_engine;
 class game
 {
 private:
-	//Les diff�rents modules qui compose le jeu
+	//Les différents modules qui compose le jeu
 	game_engine* g;
 	graphics_engine* gfx;
 	network_engine* n;
@@ -32,7 +32,7 @@ public:
 	game();
 	~game();
 
-	//D�marre une partie sur <mapname>
+	//Démarre une partie sur <mapname>
 	void play(std::string mapname);
 
 	//// GETTERS ////

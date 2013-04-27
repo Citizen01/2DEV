@@ -2,6 +2,7 @@
 
 #include "game.h"
 #include "plane.h"
+#include <CEGUIDefaultResourceProvider.h>
 
 graphics_engine::graphics_engine(game* g) : engine(g)
 {
@@ -35,6 +36,46 @@ graphics_engine::graphics_engine(game* g) : engine(g)
 
 	//Force le driver a créer les textures au format 32bits
     driver->setTextureCreationFlag(video::ETCF_ALWAYS_32_BIT, true);
+
+	///////// Initialisation de CEGUI /////////
+	mRenderer = &CEGUI::IrrlichtRenderer::bootstrapSystem(*device);
+
+	//initialise resource group directories
+	CEGUI::DefaultResourceProvider* rp =
+        static_cast<CEGUI::DefaultResourceProvider*>
+            (CEGUI::System::getSingleton().getResourceProvider());
+    
+	string theme = "default"; //Nom du thème
+    string CEGUIpath = PATH_TO_MEDIA + "/CEGUI/" + theme ;
+	printf("CEGUIpath: %s\n", CEGUIpath);
+    // for each resource type, set a resource group directory
+    rp->setResourceGroupDirectory("schemes", CEGUIpath + "/schemes/");
+	printf("1");
+    rp->setResourceGroupDirectory("imagesets", CEGUIpath + "/imagesets/");
+	printf("2");
+    rp->setResourceGroupDirectory("fonts", CEGUIpath + "/fonts/");
+	printf("3");
+    rp->setResourceGroupDirectory("layouts", CEGUIpath + "/layouts/");
+	printf("4");
+    rp->setResourceGroupDirectory("looknfeels", CEGUIpath + "/looknfeel/");
+	printf("5");
+    //rp->setResourceGroupDirectory("schemas", CEGUIpath + "/xml_schemas/");
+    //rp->setResourceGroupDirectory("animations", CEGUIpath + "/animations/");
+
+	printf("GroupDirs loaded ! \n");
+
+	//initialise default resource groups
+	CEGUI::Scheme::setDefaultResourceGroup("schemes");
+	CEGUI::Imageset::setDefaultResourceGroup("imagesets");
+	CEGUI::Font::setDefaultResourceGroup("fonts");
+	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
+
+	printf("Default groups seted ! \n");
+
+	CEGUI::SchemeManager::getSingleton().create("OgreTray.scheme");
+	CEGUI::System::getSingleton().setDefaultMouseCursor("OgreTrayImages", "MouseArrow");
+	CEGUI::MouseCursor::getSingleton().setImage( CEGUI::System::getSingleton().getDefaultMouseCursor());
 }
 
 
@@ -45,9 +86,8 @@ graphics_engine::~graphics_engine(void)
 //Implémentation de la méthode virtuelle pure héritée de la classe engine
 void graphics_engine::frame()
 {
-	//Do stuff
-
-	
+	//Rendering all CEGUI elements
+		
 }
 
 Map graphics_engine::loadMap(std::string mapname)
