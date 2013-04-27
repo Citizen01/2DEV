@@ -6,7 +6,7 @@
 #include "network_engine.h"
 #include "sound_engine.h"
 
-const std::string PATH_TO_MEDIA = "../media/";
+const std::string PATH_TO_MEDIA = "../Media";
 //Need to be replaced with a conf file such as an XML 
 //TODO: XML_Manager class to easily read and write in xml files
 const std::string MAP_HEIGHTMAP_NAME = "heightmap.png";
@@ -22,7 +22,7 @@ class sound_engine;
 class game
 {
 private:
-	//Les différents modules qui compose le jeu
+	//Les diffï¿½rents modules qui compose le jeu
 	game_engine* g;
 	graphics_engine* gfx;
 	network_engine* n;
@@ -32,7 +32,7 @@ public:
 	game();
 	~game();
 
-	//Démarre une partie sur <mapname>
+	//Dï¿½marre une partie sur <mapname>
 	void play(std::string mapname);
 
 	//// GETTERS ////
