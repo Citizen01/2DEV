@@ -1,0 +1,55 @@
+<mainconfig>
+    <settings>
+        <nick>Civilian</nick>
+		<console_pos>0;0</console_pos>
+        <console_size>768 568</console_size>
+        <chat_font>2</chat_font>
+        <chat_lines>10</chat_lines>
+        <chat_color>0 0 0 0</chat_color>
+        <chat_text_color>172 213 254 255</chat_text_color>
+        <chat_input_color>0 0 0 0</chat_input_color>
+        <chat_input_prefix_color>172 213 254 255</chat_input_prefix_color>
+        <chat_input_text_color>172 213 254 255</chat_input_text_color>
+        <chat_scale>1 1</chat_scale>
+        <chat_width>1.500000</chat_width>
+        <chat_line_life>12000</chat_line_life>
+        <chat_line_fade_out>3000</chat_line_fade_out>
+        <text_scale>1.000000</text_scale>
+        <invert_mouse>0</invert_mouse>
+        <fly_with_mouse>0</fly_with_mouse>
+        <steer_with_mouse>0</steer_with_mouse>
+        <classic_controls>0</classic_controls>
+        <gamevolume>0.230000</gamevolume>
+        <voicevolume>0.510000</voicevolume>
+        <async_loading>1</async_loading>
+        <volumetric_shadows>0</volumetric_shadows>
+        <aspect_ratio>0</aspect_ratio>
+        <anisotropic>0</anisotropic>
+        <grass>1</grass>
+        <allow_screen_upload>1</allow_screen_upload>
+        <max_clientscript_log_kb>5000</max_clientscript_log_kb>
+        <display_windowed>1</display_windowed>
+        <screenshot_path>C:\Program Files (x86)\MTA San Andreas 1.3\screenshots</screenshot_path>
+        <current_skin>default</current_skin>
+    </settings>
+    <binds>
+        <bind key="z" control="forward"></bind>
+        <bind key="q" control="left"></bind>
+        <bind key="s" control="backward"></bind>
+        <bind key="d" control="right"></bind>
+        <bind key="arrow_up" control="dive"></bind>
+        <bind key="arrow_down" control="straighten"></bind>
+        <bind key="arrow_left" control="roll_left"></bind>
+        <bind key="arrow_right" control="roll_right"></bind>
+        <bind key="t" control="say"></bind>
+        <bind key="y" control="say_team"></bind>
+        <bind key="escape" control="togglemenu"></bind>
+        <bind key="click_left" control="primaryfire"></bind>
+        <bind key="click_right" control="secondaryfire"></bind>
+        <bind key="a" control="equipment"></bind>
+    </binds>
+    <updater>
+        <current_version>1</current_version>
+        <version_lastchecktime>2013-03-26 19:59:51</version_lastchecktime>
+    </updater>
+</mainconfig>

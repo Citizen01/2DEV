@@ -14,3 +14,5 @@ void network_engine::frame()
 {
 	//Do stuff
 }
+
+void network_engine::on_engines_linked() {}

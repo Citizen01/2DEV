@@ -23,6 +23,9 @@ public:
 	//Elle contiendra les actions propres à chaque moteur
 	virtual void frame() = 0;
 
+	virtual void on_engines_linked() = 0;
+
+
 protected:
 	//Contiendra l'objet game instancié
 	game* parent;

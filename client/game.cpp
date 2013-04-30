@@ -9,8 +9,8 @@
 game::game()
 {
 	//Crée et store les différents modules
-	g = new game_engine(this);
 	gfx = new graphics_engine(this);
+	g = new game_engine(this);	
 	n = new network_engine(this);
 	s = new sound_engine(this);
 
@@ -34,6 +34,11 @@ game::game()
 	s->link_game_engine(g);
 	s->link_graphics_engine(gfx);
 	s->link_network_engine(n);
+
+	g->on_engines_linked();
+	gfx->on_engines_linked();
+	n->on_engines_linked();
+	s->on_engines_linked();
 }
 
 
@@ -65,38 +70,35 @@ void game::play(std::string mapname)
 	//camera->bindTargetAndRotation(true); 
 	
 	//On attache l'avion à la camera
-	/*planeNode->setParent(camera);*/
-
-	//Need to add an event receiver here
-	//On cree le capteur d'event et on l'associe au device.
-    CtrlPlaneReceiver receiver(thePlane.getMesh());
-    device->setEventReceiver(&receiver);
+	/*planeNode->setParent(camera);*/ 
 	
     camera->setPosition(core::vector3df(50000,20000,50000));
     //camera->setTarget(core::vector3df(5001, 1000, 5001));
     camera->setFarValue(420000.0f); //Distance d'affichage
 
     // disable mouse cursor
-    device->getCursorControl()->setVisible(false);
-
-	
+    device->getCursorControl()->setVisible(false);	
 
 	int lastFPS = -1;
 	while(device->run())
     if (device->isWindowActive())
     {
+
         driver->beginScene(true, true, 0 );
 
+		//Chaque moteur doit faire son boulot
+		getNetworkEngine()->frame();
+		getGameEngine()->frame();
+		getSoundEngine()->frame();
+
 		//On met a jour la pos de l'avion
-		receiver.updateMesh();
+		//receiver.updateMesh();
 		
 		//On met à jour la pos et la rot de la caméra
 		makeCockpit(camera, planeNode, core::vector3df(0, 0, -2));
+		smgr->drawAll();
 
-        smgr->drawAll();
-
-		//Gui (soon)
-        //env->drawAll();
+		getGraphicEngine()->frame();
 
         driver->endScene();
 

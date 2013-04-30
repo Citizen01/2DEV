@@ -12,8 +12,6 @@ const std::string PATH_TO_MEDIA = "../Media";
 const std::string MAP_HEIGHTMAP_NAME = "heightmap.png";
 const std::string MAP_TEXTURE_NAME = "texture.png";
 
-using namespace irr;
-
 class game_engine;
 class graphics_engine;
 class network_engine;

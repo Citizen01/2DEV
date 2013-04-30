@@ -11,5 +11,7 @@ public:
 	~network_engine(void);
 
 	void frame();
+
+	void on_engines_linked();
 };
 
