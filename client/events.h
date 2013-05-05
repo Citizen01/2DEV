@@ -10,7 +10,6 @@ public :
     //Le constructeur.
     CtrlPlaneReceiver(irr::scene::IAnimatedMeshSceneNode* Nmodele);
 
-    //Capte automatiquement les events.
     virtual bool OnEvent(const irr::SEvent &event);
     
 	inline bool IsKeyDown(irr::EKEY_CODE keyCode) { return KeyIsDown[keyCode]; }
