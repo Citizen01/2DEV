@@ -23,7 +23,5 @@ bool game_engine::OnEvent(const irr::SEvent& event)
 {
 	//Handle events here:
 
-	cout << "ga ";//preuve de la réception des events
-
 	return false;
 }

@@ -24,7 +24,5 @@ bool sound_engine::OnEvent(const irr::SEvent& event)
 {
 	//Handle events here:
 
-	cout << "s ";//preuve de la réception des events
-
 	return false;
 }

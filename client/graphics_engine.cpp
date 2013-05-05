@@ -67,8 +67,6 @@ bool graphics_engine::OnEvent(const irr::SEvent& event)
 
 	//Handle events here:
 
-	cout << "gr ";//preuve de la réception des events
-
 	return false;
 }
 

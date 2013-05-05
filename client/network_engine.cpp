@@ -22,7 +22,5 @@ bool network_engine::OnEvent(const irr::SEvent& event)
 {
 	//Handle events here:
 
-	cout << "n ";//preuve de la réception des events
-
 	return false;
 }
