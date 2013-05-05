@@ -29,27 +29,27 @@
         <allow_screen_upload>1</allow_screen_upload>
         <max_clientscript_log_kb>5000</max_clientscript_log_kb>
         <display_windowed>1</display_windowed>
-        <screenshot_path>C:\Program Files (x86)\MTA San Andreas 1.3\screenshots</screenshot_path>
+        <screenshot_path>C:\screenshots</screenshot_path>
         <current_skin>default</current_skin>
     </settings>
     <binds>
-        <bind key="z" control="forward"></bind>
-        <bind key="q" control="left"></bind>
-        <bind key="s" control="backward"></bind>
-        <bind key="d" control="right"></bind>
-        <bind key="arrow_up" control="dive"></bind>
-        <bind key="arrow_down" control="straighten"></bind>
-        <bind key="arrow_left" control="roll_left"></bind>
-        <bind key="arrow_right" control="roll_right"></bind>
-        <bind key="t" control="say"></bind>
-        <bind key="y" control="say_team"></bind>
-        <bind key="escape" control="togglemenu"></bind>
-        <bind key="click_left" control="primaryfire"></bind>
-        <bind key="click_right" control="secondaryfire"></bind>
-        <bind key="a" control="equipment"></bind>
+        <bind control="forward">z</bind>
+        <bind control="left">q</bind>
+        <bind control="backward">s</bind>
+        <bind control="right">d</bind>
+		<bind control="equipment">a</bind>
+		<bind control="say">t</bind>
+        <bind control="say_team">y</bind>
+        <bind control="dive">arrow_up</bind>
+        <bind control="straighten">arrow_down</bind>
+        <bind control="roll_left">arrow_left</bind>
+        <bind control="roll_right">arrow_right</bind>
+        <bind control="togglemenu">escape</bind>
+        <bind control="primaryfire">click_left</bind>
+        <bind control="secondaryfire">click_right</bind>
     </binds>
     <updater>
         <current_version>1</current_version>
-        <version_lastchecktime>2013-03-26 19:59:51</version_lastchecktime>
+        <version_lastchecktime>26-03-2013 19:59:51</version_lastchecktime>
     </updater>
 </mainconfig>
