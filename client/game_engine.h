@@ -17,6 +17,8 @@ public:
 
 	void frame();
 
-	void on_engines_linked();
+	// Fonction qui récupère tous les events
+	bool OnEvent(const irr::SEvent& event);
+
 };
 

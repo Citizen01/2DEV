@@ -1,4 +1,7 @@
 #include "game.h"
+#include <iostream>
+
+using namespace std;
 
 network_engine::network_engine(game* g) : engine(g)
 {
@@ -15,4 +18,11 @@ void network_engine::frame()
 	//Do stuff
 }
 
-void network_engine::on_engines_linked() {}
+bool network_engine::OnEvent(const irr::SEvent& event)
+{
+	//Handle events here:
+
+	cout << "n ";//preuve de la réception des events
+
+	return false;
+}

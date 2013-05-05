@@ -1,5 +1,8 @@
 #include "game_engine.h"
 #include "graphics_engine.h" //pour gfxe
+#include <iostream>
+
+using namespace std;
 
 game_engine::game_engine(game* g) : engine(g)
 {
@@ -16,8 +19,11 @@ void game_engine::frame()
 	//Do stuff
 }
 
-void game_engine::on_engines_linked() 
+bool game_engine::OnEvent(const irr::SEvent& event)
 {
-	gamercvr = new GameEventListener();
-	gfxe->getEventListener()->subscribeGameEngine(gamercvr);
+	//Handle events here:
+
+	cout << "ga ";//preuve de la réception des events
+
+	return false;
 }

@@ -1,5 +1,8 @@
 #include "sound_engine.h"
 #include "graphics_engine.h"
+#include <iostream>
+
+using namespace std;
 
 sound_engine::sound_engine(game* g) : engine(g)
 {
@@ -17,8 +20,11 @@ void sound_engine::frame()
 	//Do stuff
 }
 
-void sound_engine::on_engines_linked()
+bool sound_engine::OnEvent(const irr::SEvent& event)
 {
-	soundrcvr = new SoundEventListener();
-	gfxe->getEventListener()->subscribeSoundEngine(soundrcvr);
+	//Handle events here:
+
+	cout << "s ";//preuve de la réception des events
+
+	return false;
 }

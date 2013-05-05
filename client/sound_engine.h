@@ -1,14 +1,11 @@
 #pragma once
 
 #include "engine.h"
-#include "SoundEventListener.h"
 
 class engine;
 
 class sound_engine : public engine
 {
-private:
-	SoundEventListener* soundrcvr;
 
 public:
 	sound_engine(game*);
@@ -16,6 +13,7 @@ public:
 
 	void frame();
 
-	void on_engines_linked();
+	// Fonction qui récupère tous les events
+	bool OnEvent(const irr::SEvent& event);
 };
 

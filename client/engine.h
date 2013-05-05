@@ -1,12 +1,14 @@
 #pragma once
 
+#include <irrlicht.h>
+
 class game_engine;
 class graphics_engine;
 class network_engine;
 class sound_engine;
 class game;
 
-class engine
+class engine : public irr::IEventReceiver
 {
 public:
 	//Partie du constructeur commune à tous les moteurs
@@ -23,7 +25,8 @@ public:
 	//Elle contiendra les actions propres à chaque moteur
 	virtual void frame() = 0;
 
-	virtual void on_engines_linked() = 0;
+	//Hérité de la classe IEventReceiver
+	virtual bool OnEvent(const irr::SEvent& event) = 0;
 
 
 protected:

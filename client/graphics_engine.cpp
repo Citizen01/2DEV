@@ -39,8 +39,8 @@ graphics_engine::graphics_engine(game* g) : engine(g)
 	///////// Création de CEGUI avec le skin default /////////
 	cegui = new Cgui(device, "default");
 
-	mainrcvr = new MainEventListener();	
-	mainrcvr->subscribeCEGUI(&(cegui->getRenderer()));
+	mainrcvr = new MainEventListener(g);
+	//mainrcvr->subscribeCEGUI(&(cegui->getRenderer()));
 
 	device->setEventReceiver(&(*mainrcvr));
 	cout << "[GraphicsE] Referenced MainEventListener as default event listener !" << endl;
@@ -60,7 +60,17 @@ void graphics_engine::frame()
 	System::getSingleton().renderGUI();
 }
 
-void graphics_engine::on_engines_linked() { }
+bool graphics_engine::OnEvent(const irr::SEvent& event)
+{
+	//Injection de l'event au moteur de CEGUI
+	cegui->getRenderer().injectEvent(event);
+
+	//Handle events here:
+
+	cout << "gr ";//preuve de la réception des events
+
+	return false;
+}
 
 Map graphics_engine::loadMap(std::string mapname)
 {

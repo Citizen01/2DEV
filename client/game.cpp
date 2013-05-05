@@ -34,11 +34,6 @@ game::game()
 	s->link_game_engine(g);
 	s->link_graphics_engine(gfx);
 	s->link_network_engine(n);
-
-	g->on_engines_linked();
-	gfx->on_engines_linked();
-	n->on_engines_linked();
-	s->on_engines_linked();
 }
 
 

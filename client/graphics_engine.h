@@ -10,6 +10,7 @@
 class Map;
 class Plane;
 class game;
+class MainEventListener;
 
 class graphics_engine : public engine
 {
@@ -30,7 +31,8 @@ public:
 
 	void frame();
 
-	void on_engines_linked();
+	// Fonction qui récupère tous les events
+	bool OnEvent(const irr::SEvent& event);
 
 	//// GETTERS ////
 	inline irr::IrrlichtDevice* getDevice() { return device; }
