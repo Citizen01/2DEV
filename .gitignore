@@ -1,11 +1,14 @@
 ######### Custom #########
-#Libraries
+# Libraries
 Libraries/
-Libraries.zip
 
-#Medias
+# Medias
 Media/
-Media.zip
+
+# Archives
+*.zip
+*.rar
+*.7z
 
 ######### C++ #########
 # Compiled Object files
