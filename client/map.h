@@ -22,6 +22,7 @@ private:
 	core::vector3df _position; //Position (X; Z; Y)
 	core::vector3df _rotation; //Rotation (X; Z; Y)
 	core::vector3df _scale; //Taille (X; Z; Y)
+
 	//Objet terrain chargé d'après les infos d'au-dessus
 	scene::ITerrainSceneNode* _terrain;
 
@@ -72,10 +73,7 @@ public:
 	core::vector3df getScale();
 
 	//Terrain
-
 	scene::ITerrainSceneNode* getTerrain();
-
-
 
 	/// Dump ///
 	void dump();
