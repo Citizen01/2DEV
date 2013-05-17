@@ -7,6 +7,7 @@
 
 class Cgui
 {
+
 private:
 	std::string skin;
 	irr::IrrlichtDevice* device;
