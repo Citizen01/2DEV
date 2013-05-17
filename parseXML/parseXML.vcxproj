@@ -76,11 +76,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="parseXML.h" />
+    <ClInclude Include="XMLParser.h" />
     <ClInclude Include="rapidxml.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="parseXML.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

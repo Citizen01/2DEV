@@ -15,15 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="parseXML.h">
+    <ClInclude Include="rapidxml.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rapidxml.hpp">
+    <ClInclude Include="XMLParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="parseXML.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParser.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
