@@ -88,6 +88,8 @@ int Application::run()
 			makeCockpit(camera, planeNode, core::vector3df(0, 0, -2)); // GAME
 
 			getGraphicEngine()->frame();
+		} else {
+			device->yield();
 		}
 	}
 	cout << "Quitting ..." << endl;
