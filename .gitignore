@@ -10,6 +10,10 @@ Media/
 *.rar
 *.7z
 
+# Word
+*.doc
+*.docx
+
 ######### C++ #########
 # Compiled Object files
 *.slo
