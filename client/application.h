@@ -17,7 +17,7 @@ class graphics_engine;
 class network_engine;
 class sound_engine;
 
-class game
+class Application
 {
 private:
 	//Les différents modules qui compose le jeu
@@ -25,13 +25,16 @@ private:
 	graphics_engine* gfx;
 	network_engine* n;
 	sound_engine* s;
+
+	//Boolean du controle du jeu (mettre à false pour quitter)
+	bool running;
 	
 public:
-	game();
-	~game();
+	Application();
+	~Application();
 
 	//Démarre une partie sur <mapname>
-	void play(std::string mapname);
+	int run();
 
 	//// GETTERS ////
 	inline game_engine* getGameEngine() { return g; }

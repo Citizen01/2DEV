@@ -4,7 +4,7 @@
 
 using namespace std;
 
-sound_engine::sound_engine(game* g) : engine(g)
+sound_engine::sound_engine(Application* ap) : engine(ap)
 {
 }
 

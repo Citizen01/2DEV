@@ -1,19 +1,18 @@
 #pragma once
 
 #include "engine.h"
-#include "GameEventListener.h"
 
 class engine;
-class game;
+class Application;
+class Plane;
 
 class game_engine : public engine
 {
-private:
-	GameEventListener* gamercvr;
-
 public:
-	game_engine(game*);
+	game_engine(Application*);
 	~game_engine(void);
+
+	Plane* joueur;
 
 	void frame();
 

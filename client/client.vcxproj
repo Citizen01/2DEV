@@ -85,8 +85,7 @@
     <ClCompile Include="cgui.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="events.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="GameEventListener.cpp" />
+    <ClCompile Include="application.cpp" />
     <ClCompile Include="game_engine.cpp" />
     <ClCompile Include="graphics_engine.cpp" />
     <ClCompile Include="main.cpp" />
@@ -95,7 +94,6 @@
     <ClCompile Include="network_engine.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="SoundEventListener.cpp" />
     <ClCompile Include="sound_engine.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
@@ -104,8 +102,7 @@
     <ClInclude Include="cgui.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="events.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="GameEventListener.h" />
+    <ClInclude Include="application.h" />
     <ClInclude Include="game_engine.h" />
     <ClInclude Include="graphics_engine.h" />
     <ClInclude Include="MainEventListener.h" />
@@ -113,7 +110,6 @@
     <ClInclude Include="network_engine.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="SoundEventListener.h" />
     <ClInclude Include="sound_engine.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>

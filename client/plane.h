@@ -2,7 +2,7 @@
 
 #include <string>
 #include <irrlicht.h>
-#include "game.h"
+#include "application.h"
 
 using namespace irr;
 
@@ -10,14 +10,14 @@ class Plane
 {
 
 private:
-	game* _game; //Objet game auquel il fait partit
+	Application* _app; //Objet game auquel il fait partit
 	std::string _name; //nom du model de l'avion
 	scene::IAnimatedMeshSceneNode* _model;
 	core::vector3df _position;
 	core::vector3df _rotation;
 	
 public:
-	Plane(game* g, std::string);
+	Plane(Application* app, std::string);
 	~Plane(void);
 
 	void loadMesh();

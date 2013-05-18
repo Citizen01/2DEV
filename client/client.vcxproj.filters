@@ -54,9 +54,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="utils.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
@@ -93,20 +90,14 @@
     <ClCompile Include="cgui.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="GameEventListener.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundEventListener.cpp">
-      <Filter>Source Files\sound</Filter>
-    </ClCompile>
     <ClCompile Include="MainEventListener.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
@@ -143,14 +134,11 @@
     <ClInclude Include="cgui.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="GameEventListener.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundEventListener.h">
-      <Filter>Header Files\sound</Filter>
-    </ClInclude>
     <ClInclude Include="MainEventListener.h">
       <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

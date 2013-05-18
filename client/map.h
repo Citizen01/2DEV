@@ -4,17 +4,17 @@
 #include <stdio.h>
 #include <string>
 #include <io.h>
-#include "game.h"
+#include "application.h"
 using namespace std;
 using namespace irr;
 
-class game;
+class Application;
 
 class Map
 {
 
 private:
-	game* _game; //Objet game auquel il fait partit
+	Application* _app; //Objet game auquel il fait partit
 	string _name; //Nom de la map
 	string _path; //Chemin vers le dossier de la map (inclut)
 	string _heightmap; //Nom du fichier de la heightmap
@@ -32,7 +32,9 @@ private:
 
 public:
 
-	Map(game* g, string name, core::vector3df position = core::vector3df(0, 0, 0), core::vector3df rotation = core::vector3df(0, 0, 0),
+	Map(Application* ap, string name,
+		core::vector3df position = core::vector3df(0, 0, 0),
+		core::vector3df rotation = core::vector3df(0, 0, 0),
 		core::vector3df scale = core::vector3df(120, 60, 120));
 
 

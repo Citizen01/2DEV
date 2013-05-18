@@ -3,9 +3,9 @@
 
 using namespace std;
 
-MainEventListener::MainEventListener(game* ga)
+MainEventListener::MainEventListener(Application* ap)
 {
-	g = ga;
+	app = ap;
 }
 
 
@@ -15,11 +15,10 @@ MainEventListener::~MainEventListener(void)
 
 bool MainEventListener::OnEvent(const irr::SEvent& e)
 {
-
-	g->getGameEngine()->OnEvent(e);
-	g->getGraphicEngine()->OnEvent(e);
-	g->getSoundEngine()->OnEvent(e);
-	g->getNetworkEngine()->OnEvent(e);
+	app->getGameEngine()->OnEvent(e);
+	app->getGraphicEngine()->OnEvent(e);
+	app->getSoundEngine()->OnEvent(e);
+	app->getNetworkEngine()->OnEvent(e);
 
 	return false;
 }

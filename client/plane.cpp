@@ -1,10 +1,10 @@
 #include "plane.h"
-#include "game.h"
+#include "application.h"
 
 
-Plane::Plane(game* g, std::string name)
+Plane::Plane(Application* ap, std::string name)
 {
-	_game = g;
+	_app = ap;
 	//Crée un avion en fonction du nom de ce dernier
 	_name = name;
 	//Les 2 attributs suivants devront être assigné par le game engine
@@ -22,14 +22,14 @@ Plane::~Plane(void)
 
 void Plane::loadMesh()
 {
-	video::IVideoDriver* driver = _game->getGraphicEngine()->getDriver();
-	scene::ISceneManager* smgr = _game->getGraphicEngine()->getSceneManager();
+	video::IVideoDriver* driver = _app->getGraphicEngine()->getDriver();
+	scene::ISceneManager* smgr = _app->getGraphicEngine()->getSceneManager();
 	std::string modefile = PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
-    _model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
-    
+	_model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
+	
 	/*irr::scene::IAnimatedMeshSceneNode* Nmodele =
-    smgr->addAnimatedMeshSceneNode(_model);*/
+	smgr->addAnimatedMeshSceneNode(_model);*/
   
-    //On met l'auto-éclairage (debug)
+	//On met l'auto-éclairage (debug)
 	_model->setMaterialFlag(irr::video::EMF_LIGHTING, false);	
 }
