@@ -2,14 +2,14 @@
 
 #include <irrlicht.h>
 #include "Cgui.h"
-#include "application.h"
+#include "app.h"
 #include "map.h"
 #include "plane.h"
 #include "MainEventListener.h"
 
 class Map;
 class Plane;
-class Application;
+class App;
 class MainEventListener;
 
 class graphics_engine : public engine
@@ -23,7 +23,7 @@ private:
 
 
 public:
-	graphics_engine(Application* ap);
+	graphics_engine(App* ap);
 	~graphics_engine(void);
 
 	Map loadMap(std::string); //TODO: A bouger dans game engine

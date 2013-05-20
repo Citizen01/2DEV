@@ -1,11 +1,11 @@
-#include "application.h"
+#include "app.h"
 #include "map.h"
 #include "utils.h"
 #include <iostream>
 
 using namespace std;
 
-Map::Map(Application* ap, string name, core::vector3df position, core::vector3df rotation, core::vector3df scale)
+Map::Map(App* ap, string name, core::vector3df position, core::vector3df rotation, core::vector3df scale)
 {
 	_app = ap;
 	_name = name;

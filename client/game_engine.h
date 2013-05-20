@@ -3,13 +3,13 @@
 #include "engine.h"
 
 class engine;
-class Application;
+class App;
 class Plane;
 
 class game_engine : public engine
 {
 public:
-	game_engine(Application*);
+	game_engine(App*);
 	~game_engine(void);
 
 	Plane* joueur;

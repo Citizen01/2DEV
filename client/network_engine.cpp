@@ -1,9 +1,9 @@
-#include "application.h"
+#include "app.h"
 #include <iostream>
 
 using namespace std;
 
-network_engine::network_engine(Application* ap) : engine(ap)
+network_engine::network_engine(App* ap) : engine(ap)
 {
 
 }

@@ -1,8 +1,8 @@
 #include "plane.h"
-#include "application.h"
+#include "app.h"
 
 
-Plane::Plane(Application* ap, std::string name)
+Plane::Plane(App* ap, std::string name)
 {
 	_app = ap;
 	//Crée un avion en fonction du nom de ce dernier

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-MainEventListener::MainEventListener(Application* ap)
+MainEventListener::MainEventListener(App* ap)
 {
 	app = ap;
 }

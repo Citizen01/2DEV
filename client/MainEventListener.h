@@ -1,15 +1,15 @@
 #pragma once
 
-#include "application.h"
+#include "app.h"
 #include <irrlicht.h>
 
 class MainEventListener : public irr::IEventReceiver
 {
 private:
-	Application* app;
+	App* app;
 
 public:
-	MainEventListener(Application* ap);
+	MainEventListener(App* ap);
 	~MainEventListener(void);
 
 	/* Méthode qui réceptionne tous les events (clavier/souris)

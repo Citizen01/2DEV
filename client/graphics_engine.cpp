@@ -6,7 +6,7 @@ using namespace std;
 using namespace CEGUI;
 using namespace irr;
 
-graphics_engine::graphics_engine(Application* ap) : engine(ap)
+graphics_engine::graphics_engine(App* ap) : engine(ap)
 {
 	video::E_DRIVER_TYPE driverType = video::EDT_DIRECT3D9;
 	if (driverType==video::EDT_COUNT)

@@ -7,7 +7,7 @@ class engine;
 class sound_engine : public engine
 {
 public:
-	sound_engine(Application* ap);
+	sound_engine(App* ap);
 	~sound_engine(void);
 
 	void frame();

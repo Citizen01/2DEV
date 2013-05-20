@@ -2,14 +2,14 @@
 #include <irrlicht.h>
 #include <irrKlang.h>
 #include <iostream>
-#include "application.h"
+#include "app.h"
 #include "events.h"
 #include "utils.h"
 
 using namespace std;
 using namespace irr;
 
-Application::Application()
+App::App()
 {
 	//Crée et store les différents modules
 	gfx = new graphics_engine(this);
@@ -42,7 +42,7 @@ Application::Application()
 }
 
 
-Application::~Application()
+App::~App()
 {
 	delete g;
 	delete gfx;
@@ -50,7 +50,7 @@ Application::~Application()
 	delete s;
 }
 
-int Application::run()
+int App::run()
 {
 	Map theMap = gfx->loadMap("mountain"); // GAME
 	Plane thePlane = gfx->loadPlane("SU 25"); // GAME

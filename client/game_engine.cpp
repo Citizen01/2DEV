@@ -4,7 +4,7 @@
 
 using namespace std;
 
-game_engine::game_engine(Application* ap) : engine(ap)
+game_engine::game_engine(App* ap) : engine(ap)
 {
 }
 

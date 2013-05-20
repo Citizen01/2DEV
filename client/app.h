@@ -17,7 +17,7 @@ class graphics_engine;
 class network_engine;
 class sound_engine;
 
-class Application
+class App
 {
 private:
 	//Les différents modules qui compose le jeu
@@ -30,8 +30,8 @@ private:
 	bool running;
 	
 public:
-	Application();
-	~Application();
+	App();
+	~App();
 
 	//Démarre une partie sur <mapname>
 	int run();
