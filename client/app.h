@@ -20,6 +20,8 @@ class sound_engine;
 class App
 {
 private:
+	static App* instance; //Contiendra la seule instance de App
+
 	//Les différents modules qui compose le jeu
 	game_engine* g;
 	graphics_engine* gfx;
@@ -29,8 +31,11 @@ private:
 	//Boolean du controle du jeu (mettre à false pour quitter)
 	bool running;
 	
+	App(); //Seul getSingleton() doit appeler ce constructeur.
+
 public:
-	App();
+	//Instancie (si non instancié) et retourne un pointeur d'App
+	static App* getSingleton();
 	~App();
 
 	//Démarre une partie sur <mapname>

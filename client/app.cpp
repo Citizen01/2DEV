@@ -9,6 +9,8 @@
 using namespace std;
 using namespace irr;
 
+App* App::instance = NULL;
+
 App::App()
 {
 	//Crée et store les différents modules
@@ -39,6 +41,13 @@ App::App()
 	s->link_network_engine(n);
 
 	running = true;
+}
+
+App* App::getSingleton()
+{
+	if (!instance)
+		instance = new App();
+	return instance;
 }
 
 
