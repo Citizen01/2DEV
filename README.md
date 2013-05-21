@@ -17,7 +17,7 @@ Une fois téléchargé, décompressez-les à la racine de votre dossier dossier 
 Vous pouvez compilez.
 
 (Si, vous avez des erreurs lors du lancement du programme concernant des dll manquantes,
- vous devez allez les cherchez dans /Libraries/<nom_de_dll>/dll/ et les mettres dans le dossier
+ vous devez allez les cherchez dans /Libraries/\<nom_de_dll>/dll/ et les mettres dans le dossier
  Debug si vous compilez en Debug, ou dans le Dossier Release si vous compilez en Release)
 
 Terminé !!
