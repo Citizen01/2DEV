@@ -6,7 +6,7 @@ using namespace std;
 using namespace CEGUI;
 using namespace irr;
 
-graphics_engine::graphics_engine(App* ap) : engine(ap)
+graphics_engine::graphics_engine()
 {
 	video::E_DRIVER_TYPE driverType = video::EDT_DIRECT3D9;
 	if (driverType==video::EDT_COUNT)
@@ -39,7 +39,7 @@ graphics_engine::graphics_engine(App* ap) : engine(ap)
 	///////// Création de CEGUI avec le skin default /////////
 	cegui = new Cgui(device, "default");
 
-	mainrcvr = new MainEventListener(parent);
+	mainrcvr = new MainEventListener();
 	device->setEventReceiver(&(*mainrcvr));
 	cout << "[GraphicsE] Referenced MainEventListener as default event listener !" << endl;
 
@@ -99,12 +99,12 @@ bool graphics_engine::OnEvent(const irr::SEvent& event)
 
 Map graphics_engine::loadMap(std::string mapname)
 {
-	Map map(parent, mapname);
+	Map map(mapname);
 	return map;
 }
 
 Plane graphics_engine::loadPlane(std::string modelname)
 {
-	Plane plane(parent, modelname);
+	Plane plane(modelname);
 	return plane;
 }

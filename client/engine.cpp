@@ -6,9 +6,8 @@
 #include "network_engine.h"
 #include "sound_engine.h"
 
-engine::engine(App* ap)
+engine::engine()
 {
-	parent = ap;
 	ge = NULL;
 	ne = NULL;
 	gfxe = NULL;

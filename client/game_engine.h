@@ -9,7 +9,7 @@ class Plane;
 class game_engine : public engine
 {
 public:
-	game_engine(App*);
+	game_engine();
 	~game_engine(void);
 
 	Plane* joueur;

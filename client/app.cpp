@@ -14,10 +14,10 @@ App* App::instance = NULL;
 App::App()
 {
 	//Crée et store les différents modules
-	gfx = new graphics_engine(this);
-	g = new game_engine(this);	
-	n = new network_engine(this);
-	s = new sound_engine(this);
+	gfx = new graphics_engine();
+	g = new game_engine();	
+	n = new network_engine();
+	s = new sound_engine();
 
 	/// Linkage des modules entre eux ///
 	//game_engine aux autres//

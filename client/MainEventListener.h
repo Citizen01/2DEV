@@ -5,11 +5,8 @@
 
 class MainEventListener : public irr::IEventReceiver
 {
-private:
-	App* app;
-
 public:
-	MainEventListener(App* ap);
+	MainEventListener();
 	~MainEventListener(void);
 
 	/* Méthode qui réceptionne tous les events (clavier/souris)

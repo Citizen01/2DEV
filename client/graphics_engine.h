@@ -23,7 +23,7 @@ private:
 
 
 public:
-	graphics_engine(App* ap);
+	graphics_engine();
 	~graphics_engine(void);
 
 	Map loadMap(std::string); //TODO: A bouger dans game engine

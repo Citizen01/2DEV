@@ -10,14 +10,13 @@ class Plane
 {
 
 private:
-	App* _app; //Objet game auquel il fait partit
 	std::string _name; //nom du model de l'avion
 	scene::IAnimatedMeshSceneNode* _model;
 	core::vector3df _position;
 	core::vector3df _rotation;
 	
 public:
-	Plane(App* app, std::string);
+	Plane(std::string);
 	~Plane(void);
 
 	void loadMesh();

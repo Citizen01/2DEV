@@ -2,9 +2,8 @@
 #include "app.h"
 
 
-Plane::Plane(App* ap, std::string name)
+Plane::Plane(std::string name)
 {
-	_app = ap;
 	//Crée un avion en fonction du nom de ce dernier
 	_name = name;
 	//Les 2 attributs suivants devront être assigné par le game engine
@@ -22,8 +21,8 @@ Plane::~Plane(void)
 
 void Plane::loadMesh()
 {
-	video::IVideoDriver* driver = _app->getGraphicEngine()->getDriver();
-	scene::ISceneManager* smgr = _app->getGraphicEngine()->getSceneManager();
+	video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
+	scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
 	std::string modefile = PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
 	_model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
 	

@@ -5,9 +5,8 @@
 
 using namespace std;
 
-Map::Map(App* ap, string name, core::vector3df position, core::vector3df rotation, core::vector3df scale)
+Map::Map(string name, core::vector3df position, core::vector3df rotation, core::vector3df scale)
 {
-	_app = ap;
 	_name = name;
 	_path = PATH_TO_MEDIA;
 	_heightmap = MAP_HEIGHTMAP_NAME;
@@ -33,8 +32,8 @@ bool Map::loadTerrain()
 			if (isFile(texture))
 			{
 				// add terrain scene node
-				video::IVideoDriver* driver = _app->getGraphicEngine()->getDriver();
-				scene::ISceneManager* smgr = _app->getGraphicEngine()->getSceneManager();
+				video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
+				scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
 				_terrain = smgr->addTerrainSceneNode(
 					heightmap.c_str(),
 					0,                  // parent node
@@ -85,8 +84,8 @@ bool Map::loadTerrain()
 
 bool Map::loadSkybox()
 {
-	video::IVideoDriver* driver = _app->getGraphicEngine()->getDriver();
-	scene::ISceneManager* smgr = _app->getGraphicEngine()->getSceneManager();
+	video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
+	scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
 	// create skybox
 	driver->setTextureCreationFlag(video::ETCF_CREATE_MIP_MAPS, false);
 

@@ -12,7 +12,7 @@ class engine : public irr::IEventReceiver
 {
 public:
 	//Partie du constructeur commune à tous les moteurs
-	engine(App* ap);
+	engine();
 	virtual ~engine();
 
 	//Méthodes permettant le linkage avec les autres modules
@@ -30,9 +30,6 @@ public:
 
 
 protected:
-	//Contiendra l'objet App instancié
-	App* parent;
-
 	//Référencement de tous les moteurs
 	game_engine *ge;
 	network_engine *ne;

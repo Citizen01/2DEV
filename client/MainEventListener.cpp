@@ -3,9 +3,8 @@
 
 using namespace std;
 
-MainEventListener::MainEventListener(App* ap)
+MainEventListener::MainEventListener()
 {
-	app = ap;
 }
 
 
@@ -15,10 +14,10 @@ MainEventListener::~MainEventListener(void)
 
 bool MainEventListener::OnEvent(const irr::SEvent& e)
 {
-	app->getGameEngine()->OnEvent(e);
-	app->getGraphicEngine()->OnEvent(e);
-	app->getSoundEngine()->OnEvent(e);
-	app->getNetworkEngine()->OnEvent(e);
+	App::getSingleton()->getGameEngine()->OnEvent(e);
+	App::getSingleton()->getGraphicEngine()->OnEvent(e);
+	App::getSingleton()->getSoundEngine()->OnEvent(e);
+	App::getSingleton()->getNetworkEngine()->OnEvent(e);
 
 	return false;
 }

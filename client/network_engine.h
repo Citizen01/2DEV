@@ -7,7 +7,7 @@ class engine;
 class network_engine : public engine
 {
 public:
-	network_engine(App* ap);
+	network_engine();
 	~network_engine(void);
 
 	void frame();

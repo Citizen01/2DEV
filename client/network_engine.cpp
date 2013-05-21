@@ -3,7 +3,7 @@
 
 using namespace std;
 
-network_engine::network_engine(App* ap) : engine(ap)
+network_engine::network_engine()
 {
 
 }
