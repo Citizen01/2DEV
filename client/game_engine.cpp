@@ -1,5 +1,4 @@
 #include "game_engine.h"
-#include "graphics_engine.h" //pour gfxe
 #include <iostream>
 
 using namespace std;

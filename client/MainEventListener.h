@@ -1,6 +1,5 @@
 #pragma once
 
-#include "app.h"
 #include <irrlicht.h>
 
 class MainEventListener : public irr::IEventReceiver

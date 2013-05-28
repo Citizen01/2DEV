@@ -1,16 +1,19 @@
-#include "app.h"
 #include "map.h"
+#include "GLOBALS.h"
+#include "app.h"
 #include "utils.h"
+
 #include <iostream>
+
 
 using namespace std;
 
 Map::Map(string name, core::vector3df position, core::vector3df rotation, core::vector3df scale)
 {
 	_name = name;
-	_path = PATH_TO_MEDIA;
-	_heightmap = MAP_HEIGHTMAP_NAME;
-	_texture = MAP_TEXTURE_NAME;
+	_path = constants::PATH_TO_MEDIA;
+	_heightmap = constants::MAP_HEIGHTMAP_NAME;
+	_texture = constants::MAP_TEXTURE_NAME;
 	_position = position;
 	_rotation = rotation;
 	_scale = scale;
@@ -47,9 +50,6 @@ bool Map::loadTerrain()
 					4                   // smoothFactor
 					);
 
-				/*core::vector3df size = _terrain->getScale();
-				core::vector3df pos = _terrain->getPosition();
-				_terrain->setPosition(core::vector3df(pos.X-(size.X/2), pos.Z-(size.Z/2), pos.Y-(size.Y/2)));*/
 				//Auto-éclairage de la map (pour les test)
 				_terrain->setMaterialFlag(video::EMF_LIGHTING, false);
 

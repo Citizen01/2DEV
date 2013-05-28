@@ -2,7 +2,6 @@
 
 #include <string>
 #include <irrlicht.h>
-#include "app.h"
 
 using namespace irr;
 

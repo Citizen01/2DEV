@@ -1,4 +1,5 @@
 #include "plane.h"
+#include "GLOBALS.h"
 #include "app.h"
 
 
@@ -23,7 +24,7 @@ void Plane::loadMesh()
 {
 	video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
 	scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
-	std::string modefile = PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
+	std::string modefile = constants::PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
 	_model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
 	
 	/*irr::scene::IAnimatedMeshSceneNode* Nmodele =

@@ -1,15 +1,14 @@
 #pragma once
 
 #include <irrlicht.h>
+#include "engine.h"
 #include "Cgui.h"
-#include "app.h"
 #include "map.h"
 #include "plane.h"
 #include "MainEventListener.h"
 
 class Map;
 class Plane;
-class App;
 class MainEventListener;
 
 class graphics_engine : public engine

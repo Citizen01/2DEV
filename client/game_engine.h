@@ -3,7 +3,6 @@
 #include "engine.h"
 
 class engine;
-class App;
 class Plane;
 
 class game_engine : public engine

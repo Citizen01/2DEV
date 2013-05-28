@@ -6,7 +6,6 @@ class game_engine;
 class graphics_engine;
 class network_engine;
 class sound_engine;
-class App;
 
 class engine : public irr::IEventReceiver
 {

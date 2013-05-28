@@ -104,6 +104,7 @@
     <ClInclude Include="events.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="game_engine.h" />
+    <ClInclude Include="GLOBALS.h" />
     <ClInclude Include="graphics_engine.h" />
     <ClInclude Include="MainEventListener.h" />
     <ClInclude Include="map.h" />

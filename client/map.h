@@ -4,11 +4,9 @@
 #include <stdio.h>
 #include <string>
 #include <io.h>
-#include "app.h"
+
 using namespace std;
 using namespace irr;
-
-class App;
 
 class Map
 {
