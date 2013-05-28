@@ -11,7 +11,7 @@ void create_main_menu()
 	///////////////////////////////////////////////////////
 
 	FrameWindow* fWnd = static_cast<FrameWindow*>(
-    wmgr.createWindow( "TaharezLook/FrameWindow", "testWindow" ));
+	wmgr.createWindow( "TaharezLook/FrameWindow", "testWindow" ));
 
 	root->addChildWindow( fWnd );
 

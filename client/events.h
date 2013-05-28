@@ -7,21 +7,21 @@ class CtrlPlaneReceiver : public irr::IEventReceiver
   
 public :
   
-    //Le constructeur.
-    CtrlPlaneReceiver(irr::scene::IAnimatedMeshSceneNode* Nmodele);
+	//Le constructeur.
+	CtrlPlaneReceiver(irr::scene::IAnimatedMeshSceneNode* Nmodele);
 
-    virtual bool OnEvent(const irr::SEvent &event);
-    
+	virtual bool OnEvent(const irr::SEvent &event);
+	
 	inline bool IsKeyDown(irr::EKEY_CODE keyCode) { return KeyIsDown[keyCode]; }
 
 	//Met à jour la position et la rotation du mesh en fonction des touches pressées.
-    void updateMesh();
+	void updateMesh();
   
 private :
   
-    //Le modele qu'on va controler.
-    irr::scene::IAnimatedMeshSceneNode* m_Nmodele;
+	//Le modele qu'on va controler.
+	irr::scene::IAnimatedMeshSceneNode* m_Nmodele;
 
 	// We use this array to store the current state of each key
-    bool KeyIsDown[irr::KEY_KEY_CODES_COUNT];
+	bool KeyIsDown[irr::KEY_KEY_CODES_COUNT];
 };

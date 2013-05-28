@@ -3,28 +3,28 @@
   
 CtrlPlaneReceiver::CtrlPlaneReceiver(irr::scene::IAnimatedMeshSceneNode* Nmodele)
 {
-    //On pointe le mesh passe en parametre.
-    m_Nmodele = Nmodele;
+	//On pointe le mesh passe en parametre.
+	m_Nmodele = Nmodele;
 
 	for (irr::u32 i=0; i<irr::KEY_KEY_CODES_COUNT; ++i)
-            KeyIsDown[i] = false;
+			KeyIsDown[i] = false;
 }
 
 
 bool CtrlPlaneReceiver::OnEvent(const irr::SEvent &event)
 {
-    // Remember whether each key is down or up
-    if (event.EventType == irr::EET_KEY_INPUT_EVENT)
-        KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
+	// Remember whether each key is down or up
+	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
+		KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 
-    return false;
+	return false;
 }
   
   
 void CtrlPlaneReceiver::updateMesh()
 {
-    //On verifie que le pointeur est ok
-    if(m_Nmodele != 0)
+	//On verifie que le pointeur est ok
+	if(m_Nmodele != 0)
 	{
 		//Qu'il s'agit de la flèche du haut
 		if (IsKeyDown(irr::KEY_UP))
