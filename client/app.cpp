@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace irr;
+using namespace constants;
 
 App* App::instance = NULL;
 
@@ -40,6 +41,8 @@ App::App()
 	s->link_graphics_engine(gfx);
 	s->link_network_engine(n);
 
+	loadBinds();
+
 	running = true;
 }
 
@@ -63,7 +66,9 @@ int App::run()
 {
 	Map theMap = gfx->loadMap("mountain"); // GAME
 	Plane thePlane = gfx->loadPlane("SU 25"); // GAME
-	
+
+	getGameEngine()->setPlane(&thePlane);//TODO: a supprimer
+
 	/// Cette partie reste là le temps des tests ///
 	IrrlichtDevice* device = getGraphicEngine()->getDevice();
 	video::IVideoDriver* driver = getGraphicEngine()->getDriver();
@@ -107,4 +112,36 @@ int App::run()
 	//TODO: quitter le jeu proprement (destructeurs des engines ?)
 
 	return 0;
+}
+
+////////////// SETTINGS ////////////////
+void App::loadSettings(){
+	//TODO
+}
+
+void App::loadDefaultSettings(){
+	//TODO
+}
+
+////////////// BINDS ////////////////
+void App::loadBinds(){
+	//TODO
+	loadDefaultBinds(); //A remplacer par la lecture de coreconfig.xml
+}
+
+void App::loadDefaultBinds(){
+	///////// DEFAULT BINDS /////////
+	binds[ACCELERATE] = KEY_KEY_Z;
+	binds[DECELERATE] = KEY_KEY_S;
+	binds[LEFT] = KEY_KEY_Q;
+	binds[RIGHT] = KEY_KEY_D;
+	binds[DIVE] = KEY_UP;
+	binds[STRAIGHTEN] = KEY_DOWN;
+	binds[ROLL_LEFT] = KEY_LEFT;
+	binds[ROLL_RIGHT] = KEY_RIGHT;
+	binds[PRIMARYFIRE] = KEY_LBUTTON;
+	binds[SECONDARYFIRE] = KEY_RBUTTON;
+	binds[EQUIPMENT] = KEY_SPACE;
+	binds[TOGGLEMENU] = KEY_ESCAPE;
+	////////////////////////////////
 }

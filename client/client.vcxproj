@@ -87,6 +87,7 @@
     <ClCompile Include="events.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="game_engine.cpp" />
+    <ClCompile Include="GLOBALS.cpp" />
     <ClCompile Include="graphics_engine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainEventListener.cpp" />

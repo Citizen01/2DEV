@@ -16,9 +16,9 @@ void create_main_menu()
 	root->addChildWindow( fWnd );
 
 	// position a quarter of the way in from the top-left of parent.
-	fWnd->setPosition( UVector2( UDim( 0.25f, 0 ), UDim( 0.25f, 0 ) ) );
+	fWnd->setPosition( UVector2( UDim( 0.0f, 0 ), UDim( 0.0f, 0 ) ) );
 	// set size to be half the size of the parent
-	fWnd->setSize( UVector2( UDim( 0.5f, 0 ), UDim( 0.5f, 0 ) ) );
+	fWnd->setSize( UVector2( UDim( 0.2f, 0 ), UDim( 0.2f, 0 ) ) );
 
 	fWnd->setText( "Hello World!" );
 }

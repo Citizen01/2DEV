@@ -5,6 +5,7 @@
 #include "graphics_engine.h"
 #include "network_engine.h"
 #include "sound_engine.h"
+#include "GLOBALS.h"
 
 class game_engine;
 class graphics_engine;
@@ -28,6 +29,16 @@ private:
 	App(); //Seul getSingleton() doit appeler ce constructeur.
 
 public:
+
+	//Settings
+	std::map<std::string,std::string> settings;
+	void loadSettings();
+	void loadDefaultSettings();
+	//Binds
+	std::map<constants::ACTION_CODE, irr::EKEY_CODE> binds;
+	void loadBinds();
+	void loadDefaultBinds();
+
 	//Instancie (si non instancié) et retourne un pointeur d'App
 	static App* getSingleton();
 	~App();

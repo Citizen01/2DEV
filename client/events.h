@@ -1,3 +1,4 @@
+#pragma once
 
 #include <irrlicht.h>
 
@@ -20,7 +21,7 @@ public :
 private :
   
 	//Le modele qu'on va controler.
-	irr::scene::IAnimatedMeshSceneNode* m_Nmodele;
+	irr::scene::IAnimatedMeshSceneNode* plane;
 
 	// We use this array to store the current state of each key
 	bool KeyIsDown[irr::KEY_KEY_CODES_COUNT];

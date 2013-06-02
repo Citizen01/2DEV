@@ -20,7 +20,7 @@ graphics_engine::graphics_engine()
 	params.DriverType = driverType; //Doit être récup depuis le fichier de config
 	params.WindowSize = core::dimension2d<u32>(1024, 768);//Doit être récup depuis le fichier de config
 	//Paramètres supplémentaires ici:
-
+	params.Fullscreen = false;
 	//////////////////////////////////////////////
 
 	//Création de l'objet device (Base d'Irrlicht)
