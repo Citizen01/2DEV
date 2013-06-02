@@ -1,22 +1,22 @@
 <mainconfig>
-    <settings>
-        <nickname>Civilian</nickname>
-        <anti_aliasing>0</anti_aliasing>
-        <display_windowed>1</display_windowed>
-        <current_skin>default</current_skin>
-    </settings>
-    <binds>
-        <bind control="accelerate">z</bind>
-        <bind control="decelerate">s</bind>
+	<settings>
+		<nickname>Civilian</nickname>
+		<anti_aliasing>0</anti_aliasing>
+		<display_windowed>1</display_windowed>
+		<current_skin>default</current_skin>
+	</settings>
+	<binds>
+		<bind control="accelerate">z</bind>
+		<bind control="decelerate">s</bind>
 		<bind control="left">q</bind>
-        <bind control="right">d</bind>
-        <bind control="dive">arrow_up</bind>
-        <bind control="straighten">arrow_down</bind>
-        <bind control="roll_left">arrow_left</bind>
-        <bind control="roll_right">arrow_right</bind>
-        <bind control="primaryfire">click_left</bind>
-        <bind control="secondaryfire">click_right</bind>
+		<bind control="right">d</bind>
+		<bind control="dive">arrow_up</bind>
+		<bind control="straighten">arrow_down</bind>
+		<bind control="roll_left">arrow_left</bind>
+		<bind control="roll_right">arrow_right</bind>
+		<bind control="primary_fire">click_left</bind>
+		<bind control="secondary_fire">click_right</bind>
 		<bind control="equipment">a</bind>
-		<bind control="togglemenu">escape</bind>
-    </binds>
+		<bind control="toggle_menu">escape</bind>
+	</binds>
 </mainconfig>
