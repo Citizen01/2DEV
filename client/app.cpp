@@ -139,8 +139,8 @@ void App::loadDefaultBinds(){
 	binds[STRAIGHTEN] = KEY_DOWN;
 	binds[ROLL_LEFT] = KEY_LEFT;
 	binds[ROLL_RIGHT] = KEY_RIGHT;
-	binds[PRIMARYFIRE] = KEY_LBUTTON;
-	binds[SECONDARYFIRE] = KEY_RBUTTON;
+	binds[PRIMARY_FIRE] = KEY_LBUTTON;
+	binds[SECONDARY_FIRE] = KEY_RBUTTON;
 	binds[EQUIPMENT] = KEY_SPACE;
 	binds[TOGGLEMENU] = KEY_ESCAPE;
 	////////////////////////////////

@@ -6,6 +6,7 @@ using namespace irr;
 
 
 std::map<std::string,irr::EKEY_CODE> KEYMAP;
+std::map<std::string,constants::ACTION_CODE> ACTIONMAP;
 
 /* 
  * Certaines variables ne peuvent pas être initialisées au moment 
@@ -13,7 +14,7 @@ std::map<std::string,irr::EKEY_CODE> KEYMAP;
  */
 void initialiseGlobals()
 {
-	
+	/////////////////////////// EKEY_CODE ///////////////////////////
 	KEYMAP["a"] = KEY_KEY_A;
 	KEYMAP["b"] = KEY_KEY_B;
 	KEYMAP["c"] = KEY_KEY_C;
@@ -40,7 +41,6 @@ void initialiseGlobals()
 	KEYMAP["x"] = KEY_KEY_X;
 	KEYMAP["y"] = KEY_KEY_Y;
 	KEYMAP["z"] = KEY_KEY_Z;
-
 
 	KEYMAP["arrow_up"] = KEY_UP;
 	KEYMAP["arrow_down"] = KEY_DOWN;
@@ -93,6 +93,27 @@ void initialiseGlobals()
 	KEYMAP["alt_r"] = KEY_RMENU;
 	KEYMAP["alt_l"] = KEY_LMENU;
 
-	//Retourné par translateToEkeyCode(string str) si str n'est pas dans KEYMAP
+	//Retourné par strToEkeyCode(string str) si str n'est pas dans KEYMAP
 	KEYMAP["INVALID_KEY"] = KEY_KEY_CODES_COUNT;
+	//////////////////////////////////////////////////////////////////
+
+	////////////////////////// ACTION CODES //////////////////////////
+	ACTIONMAP["accelerate"] = ACCELERATE;
+	ACTIONMAP["decelerate"] = DECELERATE;
+	ACTIONMAP["left"] = LEFT;
+	ACTIONMAP["right"] = RIGHT;
+	ACTIONMAP["dive"] = DIVE;
+	ACTIONMAP["straighten"] = STRAIGHTEN;
+	ACTIONMAP["roll_left"] = ROLL_LEFT;
+	ACTIONMAP["roll_right"] = ROLL_RIGHT;
+
+	ACTIONMAP["primary_fire"] = PRIMARY_FIRE;
+	ACTIONMAP["secondary_fire"] = SECONDARY_FIRE;
+	ACTIONMAP["equipment"] = EQUIPMENT;
+
+	ACTIONMAP["toggle_menu"] = TOGGLEMENU;
+
+	//Retourné par strToActionCode(string str) si str n'est pas dans ACTIONMAP
+	ACTIONMAP["INVALID_ACTION"] = ACTION_CODES_COUNT;
+	//////////////////////////////////////////////////////////////////
 }

@@ -2,6 +2,7 @@
 
 #include <irrlicht.h>
 #include <string>
+#include "GLOBALS.h"
 
 /* Fonction qui permet de vérifier si un dossier donné existe.
  * @return bool - true si le dossier existe, false sinon.
@@ -31,9 +32,20 @@ void makeCockpit(irr::scene::ICameraSceneNode *camera, irr::scene::ISceneNode *n
  * @return EKEY_CODE - Retourne le EKEY_CODE correspondant, EKEY_CODE::KEY_KEY_CODES_COUNT
  * si le code n'éxiste pas.
  */
-irr::EKEY_CODE translateToEkeyCode(std::string str);
+irr::EKEY_CODE strToEkeyCode(std::string str);
 
 /* Permet de traduire une touche sous forme de EKEY_CODE en string.
  * @return string - Le nom de la touche, NULL si la touche n'éxiste pas.
  */
-std::string translateToString(irr::EKEY_CODE code);
+std::string ekeyCodeToStr(irr::EKEY_CODE code);
+
+
+/*
+ * 
+ */
+constants::ACTION_CODE strToActionCode(std::string str);
+
+/*
+ * 
+ */
+std::string actionCodeToStr(constants::ACTION_CODE);

@@ -89,19 +89,38 @@ void makeCockpit(scene::ICameraSceneNode *camera, //camera
 
 extern std::map<std::string,irr::EKEY_CODE> KEYMAP;
 
-EKEY_CODE translateToEkeyCode(string str)
+EKEY_CODE strToEkeyCode(string str)
 {
-	//TODO
-	/*if (KEYMAP.find(str) != KEYMAP.end)
+	if (KEYMAP.find(str) != KEYMAP.end())
 		return KEYMAP.at(str);
-	else*/
+	else
 		return KEYMAP.at("INVALID_KEY");
 	
 }
 
-string translateToString(EKEY_CODE code)
+string ekeyCodeToStr(EKEY_CODE code)
 {
 	for (std::map<std::string,irr::EKEY_CODE>::iterator it=KEYMAP.begin(); it!=KEYMAP.end(); ++it)
+	{
+		if (it->second == code)
+			return it->first;
+	}
+	return NULL;
+}
+
+extern std::map<std::string,ACTION_CODE> ACTIONMAP;
+
+constants::ACTION_CODE strToActionCode(std::string str)
+{
+	if (ACTIONMAP.find(str) != ACTIONMAP.end())
+		return ACTIONMAP.at(str);
+	else
+		return ACTIONMAP.at("INVALID_ACTION");
+}
+
+std::string actionCodeToStr(constants::ACTION_CODE code)
+{
+	for (std::map<std::string,constants::ACTION_CODE>::iterator it=ACTIONMAP.begin(); it!=ACTIONMAP.end(); ++it)
 	{
 		if (it->second == code)
 			return it->first;
