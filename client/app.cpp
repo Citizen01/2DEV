@@ -117,10 +117,16 @@ int App::run()
 ////////////// SETTINGS ////////////////
 void App::loadSettings(){
 	//TODO
+	loadDefaultSettings();
 }
 
 void App::loadDefaultSettings(){
-	//TODO
+	/////////// DEFAULT SETTINGS ///////////
+	settings["nickname"] = "Unknown_Pilot";
+	settings["anti_aliasing"] = "0";
+	settings["display_windowed"] = "1";
+	settings["current_skin"] = "default";
+	////////////////////////////////////////
 }
 
 ////////////// BINDS ////////////////
