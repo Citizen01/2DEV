@@ -55,8 +55,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				//TODO
 				break;
 			case constants::LEFT:
-				//TODO
-				
+				//TODO				
 				break;
 			case constants::RIGHT:
 				//TODO
@@ -77,7 +76,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				//TODO
 				rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
 				break;
-			case constants::PRIMAR_YFIRE:
+			case constants::PRIMARY_FIRE:
 				//TODO
 				break;
 			case constants::SECONDARY_FIRE:
