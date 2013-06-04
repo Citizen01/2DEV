@@ -1,28 +1,21 @@
 #pragma once
 
-#include <irrlicht.h>
+#include "Event_OnBindedKeyHited.h"
 
-//Permet de controler un avion (mouvements, actions, ...)
-class CtrlPlaneReceiver : public irr::IEventReceiver
+enum EVENT_TYPE
 {
-  
-public :
-  
-	//Le constructeur.
-	CtrlPlaneReceiver(irr::scene::IAnimatedMeshSceneNode* Nmodele);
+	onBindedKeyHited,
 
-	virtual bool OnEvent(const irr::SEvent &event);
+	onPlayerJoin,
+	onPlayerQuit,
+	onPlayerFire,
+	onPlayerLockedSomeone,
+
+	onProjectileHit,
 	
-	inline bool IsKeyDown(irr::EKEY_CODE keyCode) { return KeyIsDown[keyCode]; }
+	onPlaneExplode,
+	onEngineStop,
+	onEngineStart,
 
-	//Met à jour la position et la rotation du mesh en fonction des touches pressées.
-	void updateMesh();
-  
-private :
-  
-	//Le modele qu'on va controler.
-	irr::scene::IAnimatedMeshSceneNode* plane;
-
-	// We use this array to store the current state of each key
-	bool KeyIsDown[irr::KEY_KEY_CODES_COUNT];
+	EVENTS_TYPE_COUNT
 };

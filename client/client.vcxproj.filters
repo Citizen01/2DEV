@@ -49,6 +49,12 @@
     <Filter Include="Header Files\entities">
       <UniqueIdentifier>{a3dc5892-870c-4107-b9f2-69e12fecacf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\events">
+      <UniqueIdentifier>{54d03efc-94f8-4f23-a775-4ec7a089b50b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\events">
+      <UniqueIdentifier>{1f94ef5e-4606-47eb-971b-6d35cedd368e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="sound_engine.cpp">
       <Filter>Source Files\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="events.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="plane.cpp">
       <Filter>Source Files\entities</Filter>
@@ -99,6 +102,9 @@
     <ClCompile Include="GLOBALS.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -118,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="sound_engine.h">
       <Filter>Header Files\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="events.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>Header Files\entities</Filter>
@@ -145,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="GLOBALS.h">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="events.h">
+      <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="Event_OnBindedKeyHited.h">
+      <Filter>Header Files\events</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

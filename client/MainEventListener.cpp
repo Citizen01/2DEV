@@ -1,6 +1,7 @@
 #include "MainEventListener.h"
 #include "app.h"
 #include "GLOBALS.h"
+#include "events.h"
 #include <iostream>
 
 using namespace std;
@@ -28,7 +29,7 @@ bool MainEventListener::OnEvent(const irr::SEvent& e)
 
 void MainEventListener::listenForBindedKeys(const irr::SEvent& e)
 {
-	if (e.EventType != irr::EET_KEY_INPUT_EVENT || !e.KeyInput.PressedDown)
+	if (e.EventType != irr::EET_KEY_INPUT_EVENT)
 		return;
 
 	irr::EKEY_CODE kcode = e.KeyInput.Key;
