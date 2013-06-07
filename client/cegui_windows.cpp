@@ -1,9 +1,21 @@
 #include "cegui_windows.h"
 #include <CEGUI.h>
 #include "GLOBALS.h"
+#include <iostream>
 
 using namespace CEGUI;
 using namespace constants;
+using namespace std;
+
+bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	Window* QuickCoWin = wmgr.getWindow("QuickCo_Quick_connect");
+	QuickCoWin->setVisible (true);
+
+	return true;
+}
 
 void create_main_menu()
 {
@@ -43,6 +55,8 @@ void create_main_menu()
 	QuickConnect->setPosition( UVector2( UDim( 0.5f, 0.0f), UDim( 0.2f, 0.0f ) ) );
 	QuickConnect->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.08f, 0.0f ) ) );
 	QuickConnect->setText("Quick Conect");
+	//Pop Quick Connect
+	QuickConnect->subscribeEvent(PushButton::EventClicked, handleQuickConnectBtnWin);
 
 	// ServerList 
 	PushButton* ServerList = (PushButton*)wmgr.createWindow("TaharezLook/Button", "Server list");
@@ -65,53 +79,43 @@ void create_main_menu()
 	Exit->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.08f, 0.0f ) ) );
 	Exit->setText("Exit");
 
-	//Fenetre Quick Connect
-	FrameWindow* Wquick = static_cast<FrameWindow*>(
-	wmgr.createWindow( "TaharezLook/FrameWindow", "QuickWin" ));
-
-	root->addChildWindow( Wquick );
-
-
-	//// position a quarter of the way in from the top-left of parent.
-	Wquick->setPosition( UVector2( UDim( 0.25f, 0 ), UDim( 0.25f, 0 ) ) );
-	//// set size to be half the size of the parent
-	Wquick->setSize( UVector2( UDim( 0.5f, 0 ), UDim( 0.2f, 0 ) ) );
-
-	Wquick->setProperty("SizingEnabled", "False");
-
-	Wquick->setText( "Quick Connect" );
-
-	/* Editbox ip */
-	Editbox* Ip = (Editbox*)wmgr.createWindow("TaharezLook/Editbox", "Editbox");
-	Wquick->addChildWindow( Ip );
-	//Editbox* editbox = static_cast<Editbox*>(wmgr.getWindow("Editbox"));
-	Ip->setText("IP Address");
-	//Ip->setMaxTextLength(13); // The trailing 's' will not be displayed
-	Ip->setReadOnly(false);
-	Ip->setPosition( UVector2( UDim( 0.1f, 0.0f), UDim( 0.2f, 0.0f ) ) );
-	Ip->setSize( UVector2( UDim( 0.6f, 0.0f ), UDim( 0.25f, 0.0f ) ) );
-	//Editbox->setTextMasked(false);
-	//Editbox->setMaskCodePoint(0x002A); // *
-	//String valueEditbox = Editbox->getText("Editbox"); // Retrieve the text
-
-	/* Editbox port */
-	Editbox* Port = (Editbox*)wmgr.createWindow("TaharezLook/Editbox", "Port");
-	Wquick->addChildWindow( Port );
-	Port->setText("Port");
-	Port->setReadOnly(false);
-	Port->setPosition( UVector2( UDim( 0.7f, 0.0f), UDim( 0.2f, 0.0f ) ) );
-	Port->setSize( UVector2( UDim( 0.2f, 0.0f ), UDim( 0.25f, 0.0f ) ) );
+	// Load a Quick COnnect
+	Window* QuickWin = wmgr.loadWindowLayout("Quicked.layout", "QuickCo_");
+	MenuBackground->addChildWindow(QuickWin);
+	QuickWin->setVisible (false);
+	QuickWin->setProperty("AlwaysOnTop", "True");
 	
-	// Btn Connect 
-	PushButton* BtnCon = (PushButton*)wmgr.createWindow("TaharezLook/Button", "BtnCon");
-	Wquick->addChildWindow( BtnCon );
-	BtnCon->setPosition( UVector2( UDim( 0.3f, 0.0f), UDim( 0.6f, 0.0f ) ) );
-	BtnCon->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.25f, 0.0f ) ) );
-	BtnCon->setText("Connect");
+	
+	// Load a Server_list
+	Window* Srvl = wmgr.loadWindowLayout("Server_list.layout", "Srvl_");
+	MenuBackground->addChildWindow( Srvl );
+	Srvl->setVisible (false);
+	Srvl->setProperty("AlwaysOnTop", "True");
 
-	// Load a layout
-	//Window* guiLayout = wmgr.loadWindowLayout("Quicked.layout");
-	//MenuBackground->addChildWindow(guiLayout);
+	//Add Colone
+	MultiColumnList* SrvlTableau = (MultiColumnList*)wmgr.getWindow("Srvl_ServerList/Server_list");
+	SrvlTableau->addColumn("Server name", 0, UDim(0.60f, 0));
+	SrvlTableau->addColumn("Address", 1, UDim(0.38f, 0));
+	SrvlTableau->setProperty("ForceHorzScrollbar", "False");
+
+	// Load About
+	Window* AboutWidget = wmgr.loadWindowLayout("About.layout", "Ab_");
+	MenuBackground->addChildWindow( AboutWidget );
+	MultiLineEditbox* AboutText = (MultiLineEditbox*)wmgr.getWindow("Ab_AboutWin/TextArea");
+	AboutText->setProperty("Disabled", "True");
+	AboutWidget->setVisible (false);
+
+	AboutWidget->setProperty("AlwaysOnTop", "True");
+
+
+	
+
+	
+
+
+	
+
+
  
 
 
