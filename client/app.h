@@ -29,7 +29,6 @@ private:
 	App(); //Seul getSingleton() doit appeler ce constructeur.
 
 public:
-
 	//Settings
 	std::map<std::string,std::string> settings;
 	void loadSettings();
@@ -41,6 +40,7 @@ public:
 
 	//Instancie (si non instancié) et retourne un pointeur d'App
 	static App* getSingleton();
+	void stop();
 	~App();
 
 	//Démarre une partie sur <mapname>

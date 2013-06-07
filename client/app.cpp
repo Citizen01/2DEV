@@ -114,6 +114,11 @@ int App::run()
 	return 0;
 }
 
+void App::stop()
+{
+	running = false;
+}
+
 ////////////// SETTINGS ////////////////
 void App::loadSettings(){
 	//TODO
