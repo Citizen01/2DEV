@@ -71,6 +71,26 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 	return true;
 }
 
+bool handleQuickConnectBtnClose (const EventArgs&e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	wmgr.getWindow("QuickCo_Quick_connect")->setVisible(false);
+	return true;
+}
+
+bool handleSrvlBtnClose (const EventArgs&e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	wmgr.getWindow("Srvl_ServerList")->setVisible(false);
+	return true;
+}
+
+bool handleAboutBtnClose (const EventArgs&e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	wmgr.getWindow("Ab_AboutWin")->setVisible(false);
+	return true;
+}
 
 
 
@@ -148,6 +168,9 @@ void create_main_menu()
 	//Action Boutton Connect
 	PushButton* ConnectBtn = (PushButton*)wmgr.getWindow("QuickCo_Quick_connect/ConnectBtn");
 	ConnectBtn->subscribeEvent(PushButton::EventClicked, handleQuickConnectBtnCo);
+	//Close
+	PushButton* QuickClose = (PushButton*)wmgr.getWindow("QuickCo_Quick_connect__auto_closebutton__");
+	QuickClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleQuickConnectBtnClose));
 	
 	
 	// Load a Server_list
@@ -164,6 +187,9 @@ void create_main_menu()
 	//Action boutton Connect
 	PushButton* ConnectBtnSrvl = (PushButton*)wmgr.getWindow("Srvl_ServerList/ConnectBtn");
 	ConnectBtnSrvl->subscribeEvent(PushButton::EventClicked, handleSrvlBtnCo);
+	//Close
+	PushButton* SrvlClose = (PushButton*)wmgr.getWindow("Srvl_ServerList__auto_closebutton__");
+	SrvlClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleSrvlBtnClose));
 	
 
 	//Add Colone
@@ -184,6 +210,9 @@ void create_main_menu()
 	//Close About
 	PushButton* AboutBack = (PushButton*)wmgr.getWindow("Ab_AboutWin/Button");
 	AboutBack->subscribeEvent(PushButton::EventClicked, handleAboutBtnWinClose);
+	//Close btn
+	PushButton* AboutClose = (PushButton*)wmgr.getWindow("Ab_AboutWin__auto_closebutton__");
+	AboutClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleAboutBtnClose));
 
 
 
