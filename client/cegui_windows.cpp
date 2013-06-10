@@ -17,6 +17,63 @@ bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 	return true;
 }
 
+bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	Window* SrvlWin = wmgr.getWindow("Srvl_ServerList");
+	SrvlWin->setVisible (true);
+
+	return true;
+}
+
+bool handleAboutBtnWin (const CEGUI::EventArgs &e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
+	AboutWin->setVisible (true);
+
+	return true;
+}
+
+bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
+	AboutWin->setVisible (false);
+
+	return true;
+}
+
+bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
+{
+	cout << "T'est Co Gros !" << endl;
+	return true;
+}
+
+bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
+{
+	cout << "Ta Ajoute un PONEY Gros !" << endl;
+	return true;
+}
+
+bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
+{
+	cout << "Ah bah non ta tout efface Gros !" << endl;
+	return true;
+}
+
+bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
+{
+	cout << "T'est Co Gros !" << endl;
+	return true;
+}
+
+
+
+
 void create_main_menu()
 {
 	//// Getting the WindowManager and the root Window ////
@@ -54,7 +111,7 @@ void create_main_menu()
 	MenuBackground->addChildWindow( QuickConnect );
 	QuickConnect->setPosition( UVector2( UDim( 0.5f, 0.0f), UDim( 0.2f, 0.0f ) ) );
 	QuickConnect->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.08f, 0.0f ) ) );
-	QuickConnect->setText("Quick Conect");
+	QuickConnect->setText("Quick Connect");
 	//Pop Quick Connect
 	QuickConnect->subscribeEvent(PushButton::EventClicked, handleQuickConnectBtnWin);
 
@@ -64,6 +121,8 @@ void create_main_menu()
 	ServerList->setPosition( UVector2( UDim( 0.5f, 0.0f), UDim( 0.4f, 0.0f ) ) );
 	ServerList->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.08f, 0.0f ) ) );
 	ServerList->setText("Server List");
+	//Pop Server list
+	ServerList->subscribeEvent(PushButton::EventClicked, handleSrvlBtnWin);
 
 	// About 
 	PushButton* About = (PushButton*)wmgr.createWindow("TaharezLook/Button", "About");
@@ -71,7 +130,9 @@ void create_main_menu()
 	About->setPosition( UVector2( UDim( 0.5f, 0.0f), UDim( 0.6f, 0.0f ) ) );
 	About->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.08f, 0.0f ) ) );
 	About->setText("About");
-
+	//Pop About
+	About->subscribeEvent(PushButton::EventClicked, handleAboutBtnWin);
+	
 	// Exit
 	PushButton* Exit = (PushButton*)wmgr.createWindow("TaharezLook/Button", "Exit");
 	MenuBackground->addChildWindow( Exit );
@@ -84,6 +145,9 @@ void create_main_menu()
 	MenuBackground->addChildWindow(QuickWin);
 	QuickWin->setVisible (false);
 	QuickWin->setProperty("AlwaysOnTop", "True");
+	//Action Boutton Connect
+	PushButton* ConnectBtn = (PushButton*)wmgr.getWindow("QuickCo_Quick_connect/ConnectBtn");
+	ConnectBtn->subscribeEvent(PushButton::EventClicked, handleQuickConnectBtnCo);
 	
 	
 	// Load a Server_list
@@ -91,6 +155,16 @@ void create_main_menu()
 	MenuBackground->addChildWindow( Srvl );
 	Srvl->setVisible (false);
 	Srvl->setProperty("AlwaysOnTop", "True");
+	//Action Boutton Add
+	PushButton* AddBtnSrvl = (PushButton*)wmgr.getWindow("Srvl_ServerList/Add");
+	AddBtnSrvl->subscribeEvent(PushButton::EventClicked, handleSrvlBtnAdd);
+	//Action Boutton Delete
+	PushButton* DeleteBtnSrvl = (PushButton*)wmgr.getWindow("Srvl_ServerList/Delete");
+	DeleteBtnSrvl->subscribeEvent(PushButton::EventClicked, handleSrvlBtnDelete);
+	//Action boutton Connect
+	PushButton* ConnectBtnSrvl = (PushButton*)wmgr.getWindow("Srvl_ServerList/ConnectBtn");
+	ConnectBtnSrvl->subscribeEvent(PushButton::EventClicked, handleSrvlBtnCo);
+	
 
 	//Add Colone
 	MultiColumnList* SrvlTableau = (MultiColumnList*)wmgr.getWindow("Srvl_ServerList/Server_list");
@@ -106,6 +180,11 @@ void create_main_menu()
 	AboutWidget->setVisible (false);
 
 	AboutWidget->setProperty("AlwaysOnTop", "True");
+
+	//Close About
+	PushButton* AboutBack = (PushButton*)wmgr.getWindow("Ab_AboutWin/Button");
+	AboutBack->subscribeEvent(PushButton::EventClicked, handleAboutBtnWinClose);
+
 
 
 	
