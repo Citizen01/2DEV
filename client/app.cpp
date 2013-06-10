@@ -85,6 +85,10 @@ int App::run()
 	camera->setPosition(core::vector3df(50000,20000,50000));
 	camera->setFarValue(420000.0f); //Distance d'affichage
 
+	//TODO: A supprimer Sound Debug
+	s->play3D("ophelia.mp3",camera->getPosition(),10.0f,250.0f);
+	s->attach3DSound("godlike.mp3",planeNode,10.0f,250.0f);
+
 	int lastFPS = -1;
 	while(device->run() && running)
 	{
@@ -94,6 +98,9 @@ int App::run()
 			getNetworkEngine()->frame();
 			getGameEngine()->frame();
 			getSoundEngine()->frame();
+
+			//TODO: Sound Debug 2
+			s->updateListenerPosition(camera->getPosition(), camera->getTarget() - camera->getAbsolutePosition());
 
 			//On met a jour la pos de l'avion
 			//receiver.updateMesh(); // GAME
