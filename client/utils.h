@@ -49,3 +49,5 @@ constants::ACTION_CODE strToActionCode(std::string str);
  * 
  */
 std::string actionCodeToStr(constants::ACTION_CODE);
+
+void createExplosion(irr::core::vector3df position);
