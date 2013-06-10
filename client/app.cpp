@@ -5,6 +5,8 @@
 #include "app.h"
 #include "events.h"
 #include "utils.h"
+#include "XMLParser.h"
+#include "GLOBALS.h"
 
 using namespace std;
 using namespace irr;
@@ -41,6 +43,8 @@ App::App()
 	s->link_graphics_engine(gfx);
 	s->link_network_engine(n);
 
+	initialiseGlobals();
+	loadSettings();
 	loadBinds();
 
 	running = true;
@@ -128,27 +132,30 @@ void App::stop()
 
 ////////////// SETTINGS ////////////////
 void App::loadSettings(){
-	//TODO
-	loadDefaultSettings();
+	XMLParser settingsParser("../config/coreconfig.xml");
+	if (!settingsParser.populateSettings(settings))
+	{
+		loadDefaultSettings();
+	}
 }
 
 void App::loadDefaultSettings(){
-	/////////// DEFAULT SETTINGS ///////////
 	settings["nickname"] = "Unknown_Pilot";
 	settings["anti_aliasing"] = "0";
 	settings["display_windowed"] = "1";
 	settings["current_skin"] = "default";
-	////////////////////////////////////////
 }
 
 ////////////// BINDS ////////////////
 void App::loadBinds(){
-	//TODO
-	loadDefaultBinds(); //A remplacer par la lecture de coreconfig.xml
+	XMLParser coreParser("../config/coreconfig.xml");
+	if (!coreParser.populateBind(binds))
+	{
+		loadDefaultBinds();
+	}
 }
 
 void App::loadDefaultBinds(){
-	///////// DEFAULT BINDS /////////
 	binds[ACCELERATE] = KEY_KEY_Z;
 	binds[DECELERATE] = KEY_KEY_S;
 	binds[LEFT] = KEY_KEY_Q;
@@ -161,5 +168,4 @@ void App::loadDefaultBinds(){
 	binds[SECONDARY_FIRE] = KEY_RBUTTON;
 	binds[EQUIPMENT] = KEY_SPACE;
 	binds[TOGGLEMENU] = KEY_ESCAPE;
-	////////////////////////////////
 }

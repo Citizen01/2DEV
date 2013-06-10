@@ -1,4 +1,5 @@
 <mainconfig>
+<<<<<<< HEAD
     <settings>
         <nick>Civilian</nick>
 		<console_pos>0;0</console_pos>
@@ -52,4 +53,26 @@
         <current_version>1</current_version>
         <version_lastchecktime>26-03-2013 19:59:51</version_lastchecktime>
     </updater>
+=======
+	<settings>
+		<nickname>Civilian</nickname>
+		<anti_aliasing>0</anti_aliasing>
+		<display_windowed>1</display_windowed>
+		<current_skin>default</current_skin>
+	</settings>
+	<binds>
+		<bind control="accelerate">z</bind>
+		<bind control="decelerate">s</bind>
+		<bind control="left">q</bind>
+		<bind control="right">d</bind>
+		<bind control="dive">arrow_up</bind>
+		<bind control="straighten">arrow_down</bind>
+		<bind control="roll_left">arrow_left</bind>
+		<bind control="roll_right">arrow_right</bind>
+		<bind control="primary_fire">click_left</bind>
+		<bind control="secondary_fire">click_right</bind>
+		<bind control="equipment">a</bind>
+		<bind control="toggle_menu">escape</bind>
+	</binds>
+>>>>>>> origin/fatma
 </mainconfig>

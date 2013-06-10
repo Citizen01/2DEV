@@ -32,7 +32,6 @@ namespace constants {
 	};
 }
 
-
 struct GameRules
 {
 	int AmmoCost;
@@ -56,6 +55,7 @@ struct GameRules
 	//std::vector<bool[PlanesCount]> Planes; //Impossible à utiliser sans PlanesCount
 };
 
+void initialiseGlobals();
 
 ///// Proposition /////
 struct faction

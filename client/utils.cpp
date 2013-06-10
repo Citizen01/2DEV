@@ -95,7 +95,6 @@ EKEY_CODE strToEkeyCode(string str)
 		return KEYMAP.at(str);
 	else
 		return KEYMAP.at("INVALID_KEY");
-	
 }
 
 string ekeyCodeToStr(EKEY_CODE code)

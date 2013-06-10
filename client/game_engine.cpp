@@ -47,45 +47,45 @@ bool game_engine::OnEvent(const SEvent& event)
 			scene::IAnimatedMeshSceneNode* plane = joueur->getMesh();
 			switch (act)
 			{
-			case constants::ACCELERATE:
+			case ACCELERATE:
 				//TODO
 				moveNodeInLocalSpace(plane, irr::core::vector3df(0,0,1), 17.0f);
 				break;
-			case constants::DECELERATE:
+			case DECELERATE:
 				//TODO
 				break;
-			case constants::LEFT:
-				//TODO				
-				break;
-			case constants::RIGHT:
+			case LEFT:
 				//TODO
 				break;
-			case constants::DIVE:
+			case RIGHT:
+				//TODO
+				break;
+			case DIVE:
 				//TODO
 				rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(1,0,0));
 				break;
-			case constants::STRAIGHTEN:
+			case STRAIGHTEN:
 				//TODO
 				rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(1,0,0));
 				break;
-			case constants::ROLL_LEFT:
+			case ROLL_LEFT:
 				//TODO
 				rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(0,0,1));
 				break;
-			case constants::ROLL_RIGHT:
+			case ROLL_RIGHT:
 				//TODO
 				rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
 				break;
-			case constants::PRIMARY_FIRE:
+			case PRIMARY_FIRE:
 				//TODO
 				break;
-			case constants::SECONDARY_FIRE:
+			case SECONDARY_FIRE:
 				//TODO
 				break;
-			case constants::EQUIPMENT:
+			case EQUIPMENT:
 				//TODO
 				break;
-			case constants::TOGGLEMENU:
+			case TOGGLEMENU:
 				//TODO
 				break;
 			default:
@@ -95,6 +95,5 @@ bool game_engine::OnEvent(const SEvent& event)
 		}
 
 	}
-
 	return false;
 }

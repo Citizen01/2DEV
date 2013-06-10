@@ -24,7 +24,7 @@ bool XMLParser::OpenXML(string fileName)
 
 void XMLParser::CoreConfig(/*Local_Player Player */)
 {
-	OpenXML("coreconfig.xml");
+	OpenXML("../config/coreconfig.xml");
 
 	xml_node<> *root_node = m_Doc.first_node();
 	cout << root_node->name() << endl;
@@ -33,13 +33,8 @@ void XMLParser::CoreConfig(/*Local_Player Player */)
 	{
 		
 		cout << "Setting : "  << settings_nodes->name() << " : " << settings_nodes->value() << endl;
-	}	
-	
-	for(xml_node<> *updater_nodes = root_node->first_node("updater")->first_node(); updater_nodes; updater_nodes = updater_nodes->next_sibling())
-	{
-		cout << "Updater : "  << updater_nodes->name() << " : " << updater_nodes->value() << endl;
-	}	
-	
+	}
+
 	for(xml_node<> *binds_nodes = root_node->first_node("binds")->first_node(); binds_nodes; binds_nodes = binds_nodes->next_sibling())
 	{
 		cout << "Bind : " << binds_nodes->first_attribute()->value() << " : " << binds_nodes->value() << endl;

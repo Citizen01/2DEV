@@ -50,10 +50,10 @@
       <UniqueIdentifier>{a3dc5892-870c-4107-b9f2-69e12fecacf8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\events">
-      <UniqueIdentifier>{54d03efc-94f8-4f23-a775-4ec7a089b50b}</UniqueIdentifier>
+      <UniqueIdentifier>{1b9e1cc9-1961-4701-a1c6-31183c24b27c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\events">
-      <UniqueIdentifier>{1f94ef5e-4606-47eb-971b-6d35cedd368e}</UniqueIdentifier>
+      <UniqueIdentifier>{6f64819e-578b-435e-ae36-f2fa996e7f8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +103,10 @@
       <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
-      <Filter>Source Files\game</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XMLParser.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,14 +152,20 @@
     <ClInclude Include="GLOBALS.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="events.h">
-      <Filter>Header Files\events</Filter>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParser.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="Event_OnBindedKeyHited.h">
       <Filter>Header Files\events</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files\game</Filter>
+    <ClInclude Include="events.h">
+      <Filter>Header Files\events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
