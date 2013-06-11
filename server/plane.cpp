@@ -2,7 +2,7 @@
 
 #include "GLOBALS.h"
 #include "utils.h"
-#include "App.h"
+#include "server.h"
 
 #include "faction.h"
 #include "player.h"
@@ -10,13 +10,13 @@
 using namespace irr;
 using namespace RakNet;
 
-Plane::Plane(Player* pilot, std::string name)
+Plane::Plane(Player* pilot, std::string name, scene::ISceneManager* sceneManager)
 {
 	m_Pilot = pilot;
 	//Crée un avion en fonction du nom de ce dernier
 	_name = name;
 
-	loadMesh(); //Chargement du modèle 3d
+	loadMesh(sceneManager); //Chargement du modèle 3d
 
 	EnginePower = 0;
 	MaxEnginePower = 10;
@@ -26,14 +26,11 @@ Plane::~Plane(void)
 {
 }
 
-void Plane::loadMesh()
-{
-	scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
+
+void Plane::loadMesh(scene::ISceneManager* sceneManager)
+{	
 	std::string modefile = constants::PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
-	_model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
-  
-	//On met l'auto-éclairage (debug)
-	_model->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_model = sceneManager->addAnimatedMeshSceneNode(sceneManager->getMesh(modefile.c_str()));
 	
 	_model->setPosition(m_Pilot->GetFaction()->GetPosition());
 	_model->setRotation(m_Pilot->GetFaction()->GetRotation());
@@ -42,7 +39,6 @@ void Plane::loadMesh()
 RakString Plane::GetRakName()
 {
 	return RakString(_name.c_str());
-
 }
 
 int Plane::GetEnginePower()
@@ -65,22 +61,5 @@ void Plane::DecrementEnginePower()
 	if(EnginePower < 0)
 	{
 		EnginePower = 0;
-	}
-}
-void Plane::SetPosition(irr::core::vector3df position)
-{
-	_model->setPosition(position);
-	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == m_Pilot)
-	{
-		m_Pilot->updateThirdView();
-	}
-}
-
-void Plane::SetRotation(irr::core::vector3df rotation)
-{
-	_model->setRotation(rotation);
-	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == m_Pilot)
-	{
-		m_Pilot->updateThirdView();
 	}
 }

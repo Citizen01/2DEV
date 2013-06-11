@@ -35,59 +35,6 @@ bool isFile(const string file)
 	return (bool)ifile;
 }
 
-void rotateNodeInLocalSpace(scene::ISceneNode* node, f32 degs, const core::vector3df& axis)
-{
-	node->updateAbsolutePosition();
-	core::matrix4 m2 = node->getAbsoluteTransformation();
-	core::vector3df a = axis;
-	m2.rotateVect(a);
-	a.normalize();
- 
-	core::quaternion q;
-	q.fromAngleAxis(degs*core::DEGTORAD, a);
-	core::matrix4 m1 = q.getMatrix();
- 
-	core::matrix4 m = m1*m2;
-	node->setRotation(m.getRotationDegrees());
-}
-
-void moveNodeInLocalSpace(scene::ISceneNode* node, const core::vector3df& dir, f32 dist)
-{
-	node->updateAbsolutePosition();
-	core::matrix4 m = node->getAbsoluteTransformation();
-	core::vector3df d = dir;
-	m.rotateVect(d);
-	d.normalize();
-	
-	core::vector3df pos = node->getAbsolutePosition() + d * dist;
-	node->setPosition(pos);
-}
-
-void makeCockpit(scene::ICameraSceneNode *camera, //camera
-				scene::ISceneNode *node, //scene node (plane)
-				core::vector3df offset) //relative position of camera to node
-{
-	//get rotation matrix of node
-   core::matrix4 m;
-   m.setRotationDegrees(node->getRotation());
-   
-	// transform forward vector of camera
-	core::vector3df frv = core::vector3df (0.0f, 0.0f, 1.0f);
-	m.transformVect(frv);
-   
-	// transform upvector of camera
-	core::vector3df upv = core::vector3df (0.0f, 1.0f, 0.0f);
-	m.transformVect(upv);
-
-	// transform camera offset
-	m.transformVect(offset);
-   
-	// set camera
-	camera->setPosition(node->getPosition() + offset); //position camera in front of the ship
-	camera->setUpVector(upv); //set up vector of camera
-	camera->setTarget(node->getPosition() + frv); //set target of camera (look at point)
-}
-
 extern std::map<std::string,irr::EKEY_CODE> KEYMAP;
 
 EKEY_CODE strToEkeyCode(string str)

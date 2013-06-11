@@ -3,7 +3,6 @@
 #include <string>
 
 #include <irrlicht.h>
-
 #include "RakString.h"
 
 class Faction;
@@ -29,10 +28,10 @@ private:
 	
 public:
 
-	Plane(Player* pilot, std::string name);
+	Plane(Player* pilot, std::string name, irr::scene::ISceneManager* sceneManager);
 	~Plane(void);
 
-	void loadMesh();
+	void loadMesh(irr::scene::ISceneManager* sceneManager);
 
 	inline std::string getName() { return _name; }
 	RakNet::RakString GetRakName();
@@ -45,10 +44,7 @@ public:
 
 	inline irr::scene::IAnimatedMeshSceneNode* getMesh() { return _model; }
 
-	void SetPosition(irr::core::vector3df position);
 	inline irr::core::vector3df getPosition() { return _model->getPosition(); }
-
-	void SetRotation(irr::core::vector3df rotation);
 	inline irr::core::vector3df getRotation() { return _model->getRotation(); }
 
 	int GetSpeed();
@@ -62,6 +58,5 @@ public:
 	void SetFuelLoad(int fuel);
 
 	int GetMaxFuelLoad();
-	
 };
 

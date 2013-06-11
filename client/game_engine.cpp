@@ -1,7 +1,10 @@
 #include "game_engine.h"
+
+#include <iostream>
+
 #include "GLOBALS.h"
 #include "utils.h"
-#include <iostream>
+#include "app.h"
 
 using namespace std;
 using namespace irr;
@@ -9,24 +12,32 @@ using namespace constants;
 
 game_engine::game_engine()
 {
+	m_Game = NULL;
 }
-
 
 game_engine::~game_engine(void)
 {
+}
+
+void game_engine::LaunchGame(string mapName)
+{
+	m_Game = new game(mapName);
+}
+
+game* game_engine::GetGame()
+{
+	return m_Game;
+}
+
+void game_engine::StopGame()
+{
+	delete m_Game;
 }
 
 //Implémentation de la méthode virtuelle pure héritée de la classe engine
 void game_engine::frame()
 {
 
-}
-
-//TODO: A supprimer àprès le passage de Plane* joueur dans game
-void game_engine::setPlane(Plane* pl)
-{
-	if (pl != NULL)
-		joueur = pl;
 }
 
 bool game_engine::OnEvent(const SEvent& event)
@@ -43,15 +54,15 @@ bool game_engine::OnEvent(const SEvent& event)
 			ACTION_CODE act = (ACTION_CODE)event.UserEvent.UserData2;
 			//cout << "Valeur de l'action: " << act << endl;
 
-			//TODO: A bouger dans game:
-			scene::IAnimatedMeshSceneNode* plane = joueur->getMesh();
 			switch (act)
 			{
 			case ACCELERATE:
 				//TODO
-				moveNodeInLocalSpace(plane, irr::core::vector3df(0,0,1), 17.0f);
+				ne->askToAccelerate();
+				//moveNodeInLocalSpace(plane, irr::core::vector3df(0,0,1), 17.0f);
 				break;
 			case DECELERATE:
+				ne->askToDecelerate();
 				//TODO
 				break;
 			case LEFT:
@@ -62,19 +73,19 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case DIVE:
 				//TODO
-				rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(1,0,0));
+				//rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(1,0,0));
 				break;
 			case STRAIGHTEN:
 				//TODO
-				rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(1,0,0));
+				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(1,0,0));
 				break;
 			case ROLL_LEFT:
 				//TODO
-				rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(0,0,1));
+				//rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(0,0,1));
 				break;
 			case ROLL_RIGHT:
 				//TODO
-				rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
+				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
 				break;
 			case PRIMARY_FIRE:
 				//TODO
@@ -84,6 +95,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case EQUIPMENT:
 				//TODO
+				ne->GetReady();
 				break;
 			case TOGGLEMENU:
 				//TODO

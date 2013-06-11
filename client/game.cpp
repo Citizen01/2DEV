@@ -2,64 +2,27 @@
 #include "app.h"
 
 using namespace std;
+using namespace RakNet;
 
-game::game(void)
+game::game(string mapName)
 {
-	map = NULL;
+	map = new Map(mapName);
 	local_player = NULL;
 }
 
-
 game::~game(void)
 {
+	delete map;
 }
 
-
-Player* game::addLocalPlayer()
+void game::addPlayer(RakString playerName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
 {
-	Player* p_ptr = new Player(App::getSingleton()->settings["nickname"], true);
-	player_list.push_back(p_ptr);
-	return p_ptr;
-}
-
-Player* game::addPlayer(string nickname)
-{
-	Player* p_ptr = new Player(App::getSingleton()->settings["nickname"]);
-	player_list.push_back(p_ptr);
-	return p_ptr;
-}
-
-Player* game::getLocalPlayer()
-{
-	if (local_player != NULL)
+	player_list.push_back(new Player(playerName, networkIDManager, networkID));
+	if(playerName.C_String() == App::getSingleton()->settings["nickname"])
 	{
-		return local_player;
+		local_player = getPlayerByName(playerName.C_String());
+		local_player->SetCamera();
 	}
-	else
-	{
-		for each (Player* player in player_list)
-		{
-			if (player->isLocalPlayer())
-				local_player = player;
-				return player;
-		}
-		return NULL;
-	}
-}
-
-Player* game::getPlayerByName(string nickname)
-{
-	for each (Player* player in player_list)
-	{
-		if (player->getNickname() == nickname)
-			return player;
-	}
-	return NULL;
-}
-
-std::vector<Player*> game::getPlayerList()
-{
-	return player_list;
 }
 
 bool game::removePlayer(Player* p)
@@ -83,4 +46,34 @@ bool game::removePlayer(Player* p)
 	{
 		return false;
 	}
+}
+
+void game::addFaction(std::string factionName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
+{
+	faction_list.push_back(new Faction(factionName, networkIDManager, networkID));
+}
+
+Player* game::getLocalPlayer()
+{
+	return local_player;
+}
+
+Player* game::getPlayerByName(string nickname)
+{
+	for each (Player* player in player_list)
+	{
+		if (player->getNickname() == nickname)
+			return player;
+	}
+	return NULL;
+}
+
+std::vector<Player*> game::getPlayerList()
+{
+	return player_list;
+}
+
+std::vector<Faction*> game::getFactionList()
+{
+	return faction_list;
 }

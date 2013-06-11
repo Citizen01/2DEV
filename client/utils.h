@@ -19,15 +19,6 @@ bool isValidPath(const std::string);
  */
 bool isFile(const std::string);
 
-//Permet de faire tourner, sur 3 axes, un node (~objet) selon un degré donné et selon le repère local du node.
-void rotateNodeInLocalSpace(irr::scene::ISceneNode* node, irr::f32 degs, const irr::core::vector3df& axis);
-
-//Permet de faire bouger, sur 3 axes, un node (~objet) selon une direction et selon le repère local du node.
-void moveNodeInLocalSpace(irr::scene::ISceneNode* node, const irr::core::vector3df& dir, irr::f32 dist);
-
-//Permet de positionner la caméra par rapport à un node (~objet) selon un offset donné.
-void makeCockpit(irr::scene::ICameraSceneNode *camera, irr::scene::ISceneNode *node, irr::core::vector3df offset);
-
 /* Permet de traduire une touche sous forme de string en code EKEY_CODE d'irrlicht.
  * @return EKEY_CODE - Retourne le EKEY_CODE correspondant, EKEY_CODE::KEY_KEY_CODES_COUNT
  * si le code n'éxiste pas.

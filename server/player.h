@@ -31,23 +31,21 @@ private:
 
 public:
 	
-	Player(RakNet::RakString nick, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID);
+	Player(RakNet::RakString nick, RakNet::NetworkIDManager* networkIDManager);
 	~Player();
 	
 	Faction* GetFaction();
 	void SetFaction(Faction* faction);
 
 	Plane* GetPlane();
-	void SetPlane(RakNet::RakString name);
-
-	void SetCamera();
+	void SetPlane(RakNet::RakString name, irr::scene::ISceneManager* sceneManager);
 
 	void updateThirdView();
 
 	//// GETTERS AND SETTERS //// 
 	
-	void setNickname(std::string name);
 	std::string getNickname();
+	RakNet::RakString GetRakName();
 
 	void setScore(int score);
 	int getScore();

@@ -25,9 +25,6 @@ public:
 	graphics_engine();
 	~graphics_engine(void);
 
-	Map loadMap(std::string); //TODO: A bouger dans game engine
-	Plane loadPlane(std::string); //TODO: A bouger dans game engine
-
 	void frame();
 
 	// Fonction qui récupère tous les events

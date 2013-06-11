@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUITest", "CEGUITest\CEGU
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parseXML", "parseXML\parseXML.vcxproj", "{9455E1AA-7CC5-4227-AF0E-DF982AD86FE3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "server\server.vcxproj", "{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -31,6 +33,10 @@ Global
 		{9455E1AA-7CC5-4227-AF0E-DF982AD86FE3}.Debug|Win32.Build.0 = Debug|Win32
 		{9455E1AA-7CC5-4227-AF0E-DF982AD86FE3}.Release|Win32.ActiveCfg = Release|Win32
 		{9455E1AA-7CC5-4227-AF0E-DF982AD86FE3}.Release|Win32.Build.0 = Release|Win32
+		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Debug|Win32.Build.0 = Debug|Win32
+		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Release|Win32.ActiveCfg = Release|Win32
+		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

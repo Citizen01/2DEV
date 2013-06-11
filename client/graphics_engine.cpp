@@ -96,15 +96,3 @@ bool graphics_engine::OnEvent(const irr::SEvent& event)
 
 	return false;
 }
-
-Map graphics_engine::loadMap(std::string mapname)
-{
-	Map map(mapname);
-	return map;
-}
-
-Plane graphics_engine::loadPlane(std::string modelname)
-{
-	Plane plane(modelname);
-	return plane;
-}

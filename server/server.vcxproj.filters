@@ -1,116 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="Fichiers sources">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Fichiers d%27en-tête">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Fichiers de ressources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\game">
-      <UniqueIdentifier>{9710c523-21bf-4710-89ee-918cffe36c13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\graphics">
-      <UniqueIdentifier>{e8efb70f-45e6-4023-8cd4-db6e5b59cc40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\network">
-      <UniqueIdentifier>{5f09105c-eaec-474a-a66d-3e8a1b2fcf3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\game">
-      <UniqueIdentifier>{a8cb8535-fc3b-44d7-8fe5-023f02556278}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\graphics">
-      <UniqueIdentifier>{8163ba4c-01f0-4763-b341-a068bda67372}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\network">
-      <UniqueIdentifier>{b91ecf64-4a70-43d5-ae9f-a218e18e1d6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{2c3919dd-3b4a-407e-996c-71b875716dd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\sound">
-      <UniqueIdentifier>{7dc955c1-c578-4789-9d5f-523c378534c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\utils">
-      <UniqueIdentifier>{3505302a-d152-49a2-b199-fe0e0eb5d773}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\sound">
-      <UniqueIdentifier>{7a38cb54-405c-4db7-8621-e270d69b8b9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\entities">
-      <UniqueIdentifier>{bbcf209e-e15f-4fc4-a8d3-e302914f7628}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\entities">
-      <UniqueIdentifier>{a3dc5892-870c-4107-b9f2-69e12fecacf8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\events">
-      <UniqueIdentifier>{1b9e1cc9-1961-4701-a1c6-31183c24b27c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\events">
-      <UniqueIdentifier>{6f64819e-578b-435e-ae36-f2fa996e7f8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Raknet">
-      <UniqueIdentifier>{6d3c6f26-1c1a-43a6-86d1-3a3f5c6f55d2}</UniqueIdentifier>
+      <UniqueIdentifier>{c5728984-f392-4185-9564-73350f5729a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="engine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_engine.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="graphics_engine.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="network_engine.cpp">
-      <Filter>Source Files\network</Filter>
-    </ClCompile>
-    <ClCompile Include="sound_engine.cpp">
-      <Filter>Source Files\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="plane.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="cegui_windows.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="cgui.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="MainEventListener.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GLOBALS.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="XMLParser.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\Libraries\Raknet\include\_FindFirst.cpp">
       <Filter>Raknet</Filter>
     </ClCompile>
@@ -432,68 +339,29 @@
     <ClCompile Include="..\Libraries\Raknet\include\WSAStartupSingleton.cpp">
       <Filter>Raknet</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="server.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="plane.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="faction.cpp">
-      <Filter>Source Files\entities</Filter>
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GLOBALS.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_engine.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics_engine.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="network_engine.h">
-      <Filter>Header Files\network</Filter>
-    </ClInclude>
-    <ClInclude Include="sound_engine.h">
-      <Filter>Header Files\sound</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="plane.h">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>Header Files\entities</Filter>
-    </ClInclude>
-    <ClInclude Include="cegui_windows.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="cgui.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="MainEventListener.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="app.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GLOBALS.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="XMLParser.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Event_OnBindedKeyHited.h">
-      <Filter>Header Files\events</Filter>
-    </ClInclude>
-    <ClInclude Include="events.h">
-      <Filter>Header Files\events</Filter>
-    </ClInclude>
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h">
       <Filter>Raknet</Filter>
     </ClInclude>
@@ -950,8 +818,23 @@
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h">
       <Filter>Raknet</Filter>
     </ClInclude>
+    <ClInclude Include="server.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="faction.h">
-      <Filter>Header Files\entities</Filter>
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="plane.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GLOBALS.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

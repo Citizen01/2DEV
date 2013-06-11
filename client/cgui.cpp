@@ -13,7 +13,7 @@ Cgui::Cgui(IrrlichtDevice* device, string skin) : irrRenderer(IrrlichtRenderer::
 	setSkin(skin);
 
 	init();
-	precache();
+	//precache();
 }
 
 Cgui::~Cgui(void)

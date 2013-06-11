@@ -62,7 +62,6 @@ void MainEventListener::listenForBindedKeys(const SEvent& e)
 
 			//On trigger notre event dans le système d'Irrlicht:
 			App::getSingleton()->getGraphicEngine()->getDevice()->postEventFromUser(ev);
-			break;
 		}
 	}
 }
