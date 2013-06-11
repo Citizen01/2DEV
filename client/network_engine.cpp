@@ -324,7 +324,7 @@ void network_engine::deceleratePlane()
 
 void network_engine::movePlane()
 {
-	cout << "Moving a plane." << endl;
+	//cout << "Moving a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));

@@ -304,7 +304,7 @@ void Server::MovePlanes()
 		{
 			if(m_PlayerList[i]->GetPlane() != NULL)
 			{
-				cout << "Moving planes." << endl;
+				//cout << "Moving planes." << endl;
 				float distance = m_PlayerList[i]->GetPlane()->GetEnginePower();
 				core::vector3df position = moveNodeInLocalSpace(m_PlayerList[i]->GetPlane()->getMesh(), core::vector3df(0, 0, 1), distance);
 				core::vector3df rotation = rotateNodeInLocalSpace(m_PlayerList[i]->GetPlane()->getMesh(), core::vector3df(0, 1, 0), 0.f);
