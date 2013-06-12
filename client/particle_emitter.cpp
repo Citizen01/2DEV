@@ -39,5 +39,4 @@ particle_emitter::particle_emitter(
 
 particle_emitter::~particle_emitter(void)
 {
-	I
 }
