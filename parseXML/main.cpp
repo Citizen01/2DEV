@@ -13,8 +13,11 @@ using namespace rapidxml;
 
 int main(void)
 {
+	
 	XMLParser parser;
-	parser.CoreConfig();
+	/*parser.CoreConfig();*/
+	parser.populateMap();
+	
 
 	system("PAUSE");
 

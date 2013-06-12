@@ -8,6 +8,11 @@
 #include "rapidxml.hpp"
 
 
+struct attribut{
+	char* name;
+	char* value;
+};
+
 class XMLParser {
 private:
 	std::vector<char> buffer;
@@ -18,5 +23,6 @@ public:
 	bool openXML(std::string fileName);
 	bool populateSettings(std::map<std::string,std::string> &settings);
 	bool populateBind(std::map<constants::ACTION_CODE, irr::EKEY_CODE> &binds);
+	map<char*, vector<attribut>> getMapping(string filePath);
 	~XMLParser();
 };
