@@ -111,12 +111,12 @@ void create_main_menu()
 	///////////////////////////////////////////////////////
 
 	// Menu Background
-	//ImagesetManager::getSingleton().createFromImageFile("main_menu_bg", "main_menu_bg.jpg");
+	ImagesetManager::getSingleton().createFromImageFile("main_menu_bg", "main_menu_bg.jpg");
 	Window* MenuBackground = wmgr.createWindow("TaharezLook/StaticImage", "main_menu");
 	root->addChildWindow( MenuBackground );
 	MenuBackground->setPosition( UVector2( UDim( 0.0f, 0.0f ), UDim( 0.0f, 0.0f) ) );
 	MenuBackground->setSize( UVector2( UDim( 1.0f, 0.0f ), UDim( 1.0f, 0.0f ) ) );  // full screen
-	//MenuBackground->setProperty( "Image", "set:main_menu_bg image:full_image" );
+	MenuBackground->setProperty( "Image", "set:main_menu_bg image:full_image" );
 	MenuBackground->setProperty( "FrameEnabled", "False" );
 		
 	// QuickConnect 
