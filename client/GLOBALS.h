@@ -30,7 +30,20 @@ namespace constants {
 		TOGGLEMENU,
 		ACTION_CODES_COUNT
 	};
+
+	enum PARTICLE_TYPE
+	{
+		FIRE_NORMAL, //Feu dirigé vers le haut
+		FIRE_DIRECTED, //Feu dirigé autrement (ex: propulsion)
+		EXPLOSION, //Explosion
+		SMOKE_WHITE, //Fumée blanche
+		SMOKE_BLACK, //Fumée noire
+		LIGHT_WHITE, //Lumière blanche (addLightSceneNode ?)
+		PARTICLE_TYPE_COUNT //Contient le nombre de types de particules.
+	};
+
 }
+
 
 struct GameRules
 {
