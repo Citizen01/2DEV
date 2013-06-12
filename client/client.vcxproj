@@ -190,7 +190,7 @@
     <ClCompile Include="..\Libraries\Raknet\include\VitaIncludes.cpp" />
     <ClCompile Include="..\Libraries\Raknet\include\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\Libraries\Raknet\include\_FindFirst.cpp" />
-    <ClCompile Include="cegui_windows.cpp" />
+    <ClCompile Include="ui_main_menu.cpp" />
     <ClCompile Include="cgui.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="app.cpp" />
@@ -206,6 +206,7 @@
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="sound_engine.cpp" />
+    <ClCompile Include="ui_team_join.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
@@ -362,7 +363,7 @@
     <ClInclude Include="..\Libraries\Raknet\include\WSAStartupSingleton.h" />
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h" />
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h" />
-    <ClInclude Include="cegui_windows.h" />
+    <ClInclude Include="ui_windows.h" />
     <ClInclude Include="cgui.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="events.h" />
