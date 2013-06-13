@@ -45,9 +45,8 @@ void create_team_join()
 
 	//Add Colone
 	MultiColumnList* JtTbl = (MultiColumnList*)wmgr.getWindow("Tj_JoinTeam/TeamChoise");
-	JtTbl->addColumn("Gentils", 0, UDim(0.5f, 0));
-	JtTbl->addColumn("Méchants", 1, UDim(0.5f, 0));
-	JtTbl->setProperty("ForceHorzScrollbar", "False");
+	JtTbl->addColumn("Name", 0, UDim(0.5f, 0));
+	JtTbl->addColumn("Players", 1, UDim(0.5f, 0));
 }
 
 void show_team_join(bool visible)
