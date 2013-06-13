@@ -18,6 +18,6 @@ public:
 	particle_manager(void);
 	~particle_manager(void);
 
-	void attachParticlesTo(
+	//void attachParticlesTo();
 
 };

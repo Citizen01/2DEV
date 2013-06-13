@@ -153,7 +153,7 @@ scene::IParticleSystemSceneNode* createFire(irr::core::vector3df position){
 		ps->addAffector(paf); // same goes for the affector
 		paf->drop();
 
-		core::vector3df pl_pos = App::getSingleton()->getGameEngine()->joueur->getPosition();
+		core::vector3df pl_pos = position;
 		ps->setPosition(pl_pos);
 		ps->setScale(core::vector3df(2,2,2));
 		ps->setMaterialFlag(video::EMF_LIGHTING, false);
@@ -171,14 +171,14 @@ void createExplosion(irr::core::vector3df position){
 
 		//create a particle
 		scene::IParticleEmitter* em = ps->createBoxEmitter(
-		core::aabbox3d<f32>(-7,0,-7,7,1,7), // emitter size
-		core::vector3df(0.6f,0.06f,0.6f),   // initial direction
-		200,200,                             // emit rate
+		core::aabbox3d<f32>(0.1,0.1,0.1,0.1,0.1,0.1), // emitter size
+		core::vector3df(0.01f,0.01f,0.01f),   // initial direction
+		500,500,                             // emit rate
 		video::SColor(0,255,255,255),       // darkest color
 		video::SColor(0,255,255,255),       // brightest color
-		800,2000,360,                         // min and max age, angle
-		core::dimension2df(10.f,10.f),         // min size
-		core::dimension2df(20.f,20.f));        // max size
+		1000,1000,360,                         // min and max age, angle
+		core::dimension2df(6.f,6.f),         // min size
+		core::dimension2df(6.f,6.f));        // max size
 		
 		ps->setEmitter(em); // this grabs the emitter
 		em->drop(); // so we can drop it here without deleting it
@@ -187,12 +187,12 @@ void createExplosion(irr::core::vector3df position){
 		ps->addAffector(paf); // same goes for the affector
 		paf->drop();
 
-		core::vector3df pl_pos = App::getSingleton()->getGameEngine()->joueur->getPosition();
+		core::vector3df pl_pos = position;
 		ps->setPosition(pl_pos);
-		ps->setScale(core::vector3df(2,2,2));
+		//ps->setScale(core::vector3df(2,2,2));
 		ps->setMaterialFlag(video::EMF_LIGHTING, false);
 		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
-		ps->setMaterialTexture(0, driver->getTexture("../Media/test/fire.png"));
+		ps->setMaterialTexture(0, driver->getTexture("../Media/test/fire.bmp"));
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 
 }

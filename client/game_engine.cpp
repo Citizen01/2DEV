@@ -62,7 +62,11 @@ bool game_engine::OnEvent(const SEvent& event)
 				//moveNodeInLocalSpace(plane, irr::core::vector3df(0,0,1), 17.0f);
 				break;
 			case DECELERATE:
-				ne->askToDecelerate();
+				{
+					scene::ICameraSceneNode* cam = gfxe->getSceneManager()->addCameraSceneNodeFPS(0, 100, 0.1);
+					cam->setFarValue(42000);
+					ne->askToDecelerate();
+				}
 				//TODO
 				break;
 			case LEFT:
@@ -99,6 +103,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case TOGGLEMENU:
 				//TODO
+				createExplosion(core::vector3df(0, 0, 0));
 				break;
 			default:
 				//Nothing

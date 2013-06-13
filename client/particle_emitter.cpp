@@ -4,8 +4,8 @@
 particle_emitter::particle_emitter(
 		constants::PARTICLE_TYPE type,
 		irr::core::vector3df position,
-		irr::core::vector3df rotation = irr::core::vector3df(0.f, 0.f, 0.f),
-		irr::core::vector3df scale = irr::core::vector3df(1.f, 1.f, 1.f)
+		irr::core::vector3df rotation,
+		irr::core::vector3df scale
 		)
 {
 	switch (type)
