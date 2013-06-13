@@ -54,5 +54,5 @@ void show_team_join(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 
-	wmgr.getWindow("team_join")->setVisible(visible);
+	wmgr.getWindow("Tj_JoinTeam")->setVisible(visible);
 }
