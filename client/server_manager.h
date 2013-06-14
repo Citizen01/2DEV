@@ -3,6 +3,13 @@
 #include <string>
 #include <vector>
 
+struct server
+{
+	std::string name;
+	std::string ip;
+	std::string port;
+};
+
 class server_manager
 {
 private:
@@ -10,7 +17,7 @@ private:
 	server_manager(void);
 
 	//Serverlist
-	std::vector<std::string[3]> servers;
+	std::vector<server> servers;
 	
 
 public:
@@ -25,5 +32,8 @@ public:
 
 	//Met à jour le contenu du xml en fonction de la liste actuelle
 	void updateXML();
+
+	//Permet de récupérer une référence vers la liste des servers
+	std::vector<server>& getServerList();
 };
 

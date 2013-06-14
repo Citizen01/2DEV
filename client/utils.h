@@ -32,7 +32,6 @@ irr::EKEY_CODE strToEkeyCode(std::string str);
  */
 std::string ekeyCodeToStr(irr::EKEY_CODE code);
 
-
 /*
  * 
  */

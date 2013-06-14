@@ -61,6 +61,9 @@
     <Filter Include="Source Files\graphics\ui">
       <UniqueIdentifier>{cbebe98a-6332-4505-bc85-fd4fda9caade}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\utils\rapidxml">
+      <UniqueIdentifier>{bf6086bd-c529-4fd9-8167-308ea78ada75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -486,9 +489,6 @@
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="XMLParser.h">
@@ -964,6 +964,12 @@
     </ClInclude>
     <ClInclude Include="server_manager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Header Files\utils\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Header Files\utils\rapidxml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

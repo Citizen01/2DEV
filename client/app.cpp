@@ -3,6 +3,7 @@
 #include <irrKlang.h>
 #include <iostream>
 #include "app.h"
+#include "server_manager.h"
 #include "events.h"
 #include "utils.h"
 #include "XMLParser.h"
@@ -46,6 +47,7 @@ App::App()
 	initialiseGlobals();
 	loadSettings();
 	loadBinds();
+	server_manager::getSingleton()->loadServers();
 
 	running = true;
 }

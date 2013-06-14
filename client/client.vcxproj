@@ -364,6 +364,7 @@
     <ClInclude Include="..\Libraries\Raknet\include\WSAStartupSingleton.h" />
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h" />
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h" />
+    <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="server_manager.h" />
     <ClInclude Include="ui_windows.h" />
     <ClInclude Include="cgui.h" />

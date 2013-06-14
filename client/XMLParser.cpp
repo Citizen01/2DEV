@@ -1,5 +1,6 @@
 #include "XMLParser.h"
 #include "app.h"
+#include "server_manager.h"
 #include "utils.h"
 
 using namespace rapidxml;
@@ -88,9 +89,66 @@ map<char*, vector<attribut>> XMLParser::getMapping(string filePath)
 	return mapping;
 }
 
+void XMLParser::loadServerList()
+{
+	xml_node<> *root_node = m_Doc.first_node();
+	if (root_node != 0)
+	{
+		server_manager* srvmgr = server_manager::getSingleton();
+		for(xml_node<> *server_node = root_node->first_node(); server_node; server_node = server_node->next_sibling())
+		{
+			string name = server_node->first_attribute("name")->value();
+			string ip = server_node->first_attribute("ip")->value();
+			string port = server_node->first_attribute("port")->value();
+			
+			srvmgr->addServer(name, ip, port);
+		}
+	}
+}
+
+void XMLParser::saveServerList()
+{
+	xml_node<> *root_node = m_Doc.first_node();
+	if (root_node != 0)
+		return;
+
+	//Vide le node
+	root_node->remove_all_nodes();
+
+	//Remplit le node
+	std::vector<server> serverlist = server_manager::getSingleton()->getServerList();
+	for(unsigned int i=0; i < serverlist.size(); i++)
+	{
+		//server node
+		xml_node<> *node = m_Doc.allocate_node(node_element, "server", "");
+		m_Doc.append_node(node);
+
+		server srv = serverlist[i];
+
+		//attribut name:
+		xml_attribute<> *name = m_Doc.allocate_attribute("name", srv.name.c_str());
+		node->append_attribute(name);
+
+		//attribut ip:
+		xml_attribute<> *ip = m_Doc.allocate_attribute("ip", srv.ip.c_str());
+		node->append_attribute(ip);
+
+		//attribut port:
+		xml_attribute<> *port = m_Doc.allocate_attribute("port", srv.port.c_str());
+		node->append_attribute(port);
+
+		// Save to file
+		/*std::ofstream file_stored("../config/file_stored.xml");
+		file_stored << m_Doc;
+		file_stored.close();*/
+	}
+}
+
 XMLParser::~XMLParser() 
 {
 	//xml_base::name_size();
 	//xml_base::value_size();
 
+	m_Doc.clear();
+	buffer.clear();
 }
