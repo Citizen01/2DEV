@@ -445,7 +445,7 @@
       <Filter>Source Files\graphics\ui</Filter>
     </ClCompile>
     <ClCompile Include="server_manager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -962,14 +962,14 @@
     <ClInclude Include="ui_windows.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="server_manager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rapidxml.hpp">
       <Filter>Header Files\utils\rapidxml</Filter>
     </ClInclude>
     <ClInclude Include="rapidxml_print.hpp">
       <Filter>Header Files\utils\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="server_manager.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
