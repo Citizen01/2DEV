@@ -22,7 +22,7 @@ class network_engine : public engine
 		network_engine();
 		~network_engine(void);
 
-		void connect();
+		void connect(char* ip, int port);
 		void disconnect();
 		
 		RakNet::NetworkIDManager* GetNetworkIDManager();

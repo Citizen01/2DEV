@@ -25,10 +25,10 @@ network_engine::~network_engine(void)
 	RakPeerInterface::DestroyInstance(m_Peer);
 }
 
-void network_engine::connect()
+void network_engine::connect(char* ip, int port)
 {
-	m_ServerIP = "127.0.0.1";
-	m_ServerPort = 60000;
+	m_ServerIP = ip;
+	m_ServerPort = port;
 
 	cout << "Connecting to the server." << endl;
 	m_Peer->Startup(1, &m_SocketDescriptor, 1);
