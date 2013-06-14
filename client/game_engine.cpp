@@ -89,6 +89,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
 				break;
 			case PRIMARY_FIRE:
+				App::getSingleton()->getSoundEngine()->play3D("tir.mp3",this->GetGame()->getLocalPlayer()->GetPlane()->getPosition(),10.0f,250.0f);
 				//TODO
 				break;
 			case SECONDARY_FIRE:

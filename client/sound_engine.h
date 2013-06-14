@@ -34,7 +34,7 @@ public:
 	void setPauseBackgroundMusic(bool pause);
 	void play2D(std::string name);
 	void play3D(std::string name, core::vector3df position, float minDistance, float maxDistance);
-	void attach3DSound(std::string name, irr::scene::IAnimatedMeshSceneNode* node, float minDistance, float maxDistance);
+	void attach3DSound(std::string name, irr::scene::IAnimatedMeshSceneNode* node, float minDistance, float maxDistance, bool looped = false);
 
 	void updateListenerPosition(core::vector3df position, core::vector3df direction);
 

@@ -71,16 +71,17 @@ void sound_engine::play2D(std::string name)
 void sound_engine::play3D(std::string name, core::vector3df position, float minDistance, float maxDistance)
 {
 	irrklang::vec3df vector = irrklang::vec3df();
-	irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),true,false,true);
+	irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),false,false,true);
 	sound->setMinDistance(minDistance);
 	sound->setMaxDistance(maxDistance);
+	sound->setSoundStopEventReceiver(soundEndEvent);
 }
 
 /*
 *	Attache un son 3D a un IAnimatedMeshSceneNode
 *   Prend en paramétre le nom du fichier son (machin.mp3), le SceneNode a lier, la distance maximum (Entre cette distance et la distance minimum, le son augmente) et la distance minimum (Entre 0 et cette distance, le son n'augmente pas)
 */
-void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode* modele, float minDistance, float maxDistance)
+void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode* modele, float minDistance, float maxDistance, bool looped)
 {
 	int size = soundMap3D[modele].size();
 	int counter = 0;
@@ -96,7 +97,7 @@ void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode
 
 	if(!exists) {
 		core::vector3df position = modele->getAbsolutePosition();
-		irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),true,false,true);
+		irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),looped,false,true);
 		sound->setMinDistance(minDistance);
 		sound->setMaxDistance(maxDistance);	
 		//TODO: Create an ISoundStopEventReceiver class and use id
