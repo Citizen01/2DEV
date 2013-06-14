@@ -190,6 +190,7 @@
     <ClCompile Include="..\Libraries\Raknet\include\VitaIncludes.cpp" />
     <ClCompile Include="..\Libraries\Raknet\include\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\Libraries\Raknet\include\_FindFirst.cpp" />
+    <ClCompile Include="server_manager.cpp" />
     <ClCompile Include="ui_main_menu.cpp" />
     <ClCompile Include="cgui.cpp" />
     <ClCompile Include="engine.cpp" />
@@ -363,6 +364,7 @@
     <ClInclude Include="..\Libraries\Raknet\include\WSAStartupSingleton.h" />
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h" />
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h" />
+    <ClInclude Include="server_manager.h" />
     <ClInclude Include="ui_windows.h" />
     <ClInclude Include="cgui.h" />
     <ClInclude Include="engine.h" />

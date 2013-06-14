@@ -441,6 +441,9 @@
     <ClCompile Include="ui_team_join.cpp">
       <Filter>Source Files\graphics\ui</Filter>
     </ClCompile>
+    <ClCompile Include="server_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -958,6 +961,9 @@
     </ClInclude>
     <ClInclude Include="ui_windows.h">
       <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="server_manager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
