@@ -38,6 +38,7 @@ void server_manager::addServer(string name, string ip, string port)
 	srv.ip = ip;
 	srv.port = port;
 	servers.push_back(srv);
+	updateXML();
 }
 
 void server_manager::updateXML()
@@ -49,4 +50,23 @@ void server_manager::updateXML()
 std::vector<server>& server_manager::getServerList()
 {
 	return servers;
+}
+
+void server_manager::removeServer(string name)
+{
+	int pos = -1;
+	for (unsigned int i = 0; i < servers.size(); i++)
+	{
+		if (servers[i].name == name)
+		{
+			pos = i;
+			break;
+		}
+	}
+
+	if (pos !=1)
+	{
+		servers.erase(servers.begin()+pos);
+		updateXML();
+	}
 }

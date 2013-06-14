@@ -35,5 +35,8 @@ public:
 
 	//Permet de récupérer une référence vers la liste des servers
 	std::vector<server>& getServerList();
+
+	//Permet de supprimer un serveur de la liste via son nom
+	void removeServer(std::string name);
 };
 

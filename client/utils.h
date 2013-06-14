@@ -52,3 +52,6 @@ void clearTable(CEGUI::MultiColumnList* tabl);
 
 //Permet de mettre à jour le tableau
 void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas);
+
+//Permet de supprimer la "line"ème ligne du tableau
+void removeRow(CEGUI::MultiColumnList* tabl, int line);

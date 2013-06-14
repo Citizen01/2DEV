@@ -36,7 +36,7 @@ bool isFile(const string file)
 	return (bool)ifile;
 }
 
-extern std::map<std::string,irr::EKEY_CODE> KEYMAP;
+extern map<string,irr::EKEY_CODE> KEYMAP;
 
 EKEY_CODE strToEkeyCode(string str)
 {
@@ -48,7 +48,7 @@ EKEY_CODE strToEkeyCode(string str)
 
 string ekeyCodeToStr(EKEY_CODE code)
 {
-	for (std::map<std::string,irr::EKEY_CODE>::iterator it=KEYMAP.begin(); it!=KEYMAP.end(); ++it)
+	for (map<string,irr::EKEY_CODE>::iterator it=KEYMAP.begin(); it!=KEYMAP.end(); ++it)
 	{
 		if (it->second == code)
 			return it->first;
@@ -56,9 +56,9 @@ string ekeyCodeToStr(EKEY_CODE code)
 	return NULL;
 }
 
-extern std::map<std::string,ACTION_CODE> ACTIONMAP;
+extern map<string,ACTION_CODE> ACTIONMAP;
 
-constants::ACTION_CODE strToActionCode(std::string str)
+constants::ACTION_CODE strToActionCode(string str)
 {
 	if (ACTIONMAP.find(str) != ACTIONMAP.end())
 		return ACTIONMAP.at(str);
@@ -66,9 +66,9 @@ constants::ACTION_CODE strToActionCode(std::string str)
 		return ACTIONMAP.at("INVALID_ACTION");
 }
 
-std::string actionCodeToStr(constants::ACTION_CODE code)
+string actionCodeToStr(constants::ACTION_CODE code)
 {
-	for (std::map<std::string,constants::ACTION_CODE>::iterator it=ACTIONMAP.begin(); it!=ACTIONMAP.end(); ++it)
+	for (map<string,constants::ACTION_CODE>::iterator it=ACTIONMAP.begin(); it!=ACTIONMAP.end(); ++it)
 	{
 		if (it->second == code)
 			return it->first;
@@ -124,13 +124,17 @@ void addTableRow(MultiColumnList* tabl, vector<char*> row_datas)
 
 void clearTable(MultiColumnList* tabl)
 {
-	for (unsigned int i=0; i < tabl->getRowCount(); i++)
-		tabl->removeRow(i);
+		tabl->resetList();
 }
 
-void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas)
+void updateTable(MultiColumnList* tabl, vector<vector<char*>> table_datas)
 {
 	clearTable(tabl);
 	for (unsigned int i = 0; i < table_datas.size(); i++)
 		addTableRow(tabl, table_datas[i]);
+}
+
+void removeRow(MultiColumnList* tabl, int line)
+{
+	tabl->removeRow(line);
 }
