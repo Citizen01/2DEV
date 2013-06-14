@@ -45,13 +45,13 @@ std::string actionCodeToStr(constants::ACTION_CODE);
 void createExplosion(irr::core::vector3df position);
 
 //Permet d'ajouter une ligne dans un tableau
-void addTableRow(CEGUI::MultiColumnList* tabl, std::vector<char*> row_datas);
+void addTableRow(CEGUI::MultiColumnList* tabl, std::vector<std::string> row_datas);
 
 //Permet de vider le tableau
 void clearTable(CEGUI::MultiColumnList* tabl);
 
 //Permet de mettre à jour le tableau
-void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas);
+void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<std::string>> table_datas);
 
 //Permet de supprimer la "line"ème ligne du tableau
 void removeRow(CEGUI::MultiColumnList* tabl, int line);

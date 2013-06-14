@@ -30,7 +30,7 @@ void network_engine::connect(char* ip, int port)
 	m_ServerIP = ip;
 	m_ServerPort = port;
 
-	cout << "Connecting to the server." << endl;
+	cout << "Connecting to the server '" << m_ServerIP << "':'" << m_ServerPort << "'" << endl;
 	m_Peer->Startup(1, &m_SocketDescriptor, 1);
 	m_Peer->Connect(m_ServerIP, m_ServerPort, 0,0);
 

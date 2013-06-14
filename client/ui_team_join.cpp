@@ -59,7 +59,7 @@ void show_team_join(bool visible)
 
 ////// MANIPULATION DU TABLEAU //////
 
-void updateTeams(vector<char*> values)
+void updateTeams(vector<string> values)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	MultiColumnList* JtTbl = (MultiColumnList*)wmgr.getWindow("Tj_JoinTeam/TeamChoise");

@@ -112,14 +112,16 @@ void createExplosion(irr::core::vector3df position){
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 }
 
-void addTableRow(MultiColumnList* tabl, vector<char*> row_datas)
+void addTableRow(MultiColumnList* tabl, vector<string> row_datas)
 {	
 	uint rownum = tabl->addRow();
 	for (unsigned int i=0; i < tabl->getColumnCount(); i++)
 	{
 		ListboxTextItem* list = new ListboxTextItem(row_datas[i]);
 		tabl->setItem(list, i, rownum);
-	}	
+		list->setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
+		tabl->setItemSelectState(list, true);
+	}
 }
 
 void clearTable(MultiColumnList* tabl)
@@ -127,7 +129,8 @@ void clearTable(MultiColumnList* tabl)
 		tabl->resetList();
 }
 
-void updateTable(MultiColumnList* tabl, vector<vector<char*>> table_datas)
+
+void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<string>> table_datas)
 {
 	clearTable(tabl);
 	for (unsigned int i = 0; i < table_datas.size(); i++)
