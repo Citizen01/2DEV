@@ -16,7 +16,7 @@ int main(void)
 	
 	XMLParser parser;
 	/*parser.CoreConfig();*/
-	parser.populateMap();
+	//parser.getMapping();
 	
 
 	system("PAUSE");

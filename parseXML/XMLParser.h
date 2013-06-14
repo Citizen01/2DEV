@@ -10,6 +10,11 @@
 using namespace rapidxml;
 using namespace std;
 
+struct attribut{
+	char* name;
+	char* value;
+};
+
 class XMLParser {
 private:
 	vector<char> buffer;
@@ -23,7 +28,3 @@ public:
 	 map<char*, vector<attribut>> getMapping(string filePath);
 };
 
-struct attribut{
-	char* name;
-	char* value;
-};
