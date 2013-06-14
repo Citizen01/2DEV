@@ -5,10 +5,12 @@
 using namespace std;
 using namespace constants;
 
+
 sound_engine::sound_engine()
 {
 	// start irrKlang with default parameters
 	soundEngine = irrklang::createIrrKlangDevice();
+	soundEndEvent = new MySoundEndReceiver();
 }
 
 sound_engine::~sound_engine(void)
@@ -17,15 +19,49 @@ sound_engine::~sound_engine(void)
 	soundEngine->drop(); // delete engine
 }
 
+void sound_engine::playClick() 
+{
+	play2D("click.mp3");
+}
+
+/*
+* définit la musique actuelle
+*/
+void sound_engine::playBackgroundMusic(std::string name)
+{
+	backgroundMusic = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), true, false, true);
+}
+
+/*
+* stoppe et clean la background music
+*/
+void sound_engine::stopBackgroundMusic()
+{
+	if(backgroundMusic) {
+		backgroundMusic->stop();
+		backgroundMusic->drop();
+	}
+}
+
+/*
+* pause la background music
+*/
+void sound_engine::setPauseBackgroundMusic(bool pause)
+{
+	if(pause) {
+		backgroundMusic->setIsPaused(true);
+	} else {
+		backgroundMusic->setIsPaused(false);
+	}
+}
+
 /*
 * Joue un simple son 2D
 */
 void sound_engine::play2D(std::string name)
 {
-	irrklang::ISound* sound = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), true);
-	//TODO: Create an ISoundStopEventReceiver class and use id
-	//sound->setSoundStopEventReceiver();
-	soundVector2D.push_back(sound);
+	irrklang::ISound* sound = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), false, false, true);
+	sound->setSoundStopEventReceiver(soundEndEvent);
 }
 
 /*
@@ -99,7 +135,21 @@ void sound_engine::frame()
 		core::vector3df position = modele->getAbsolutePosition();
 		std::vector<irrklang::ISound*> vector = it->second;
 		for(int counter = 0; counter < vector.size(); counter ++) {
-			vector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
+			if(vector[counter]->isFinished()) {
+				vector[counter]->drop();
+				vector.erase(vector.begin()+counter);
+			} else {
+				vector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
+			}
 		}
 	}
+}
+
+
+/*
+	Drop du isound* quand le son s'est arrêté
+*/
+void sound_engine::MySoundEndReceiver::OnSoundStopped (irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData)
+{
+	sound->drop();
 }

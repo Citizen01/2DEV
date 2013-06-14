@@ -8,6 +8,7 @@
 #include "utils.h"
 #include "XMLParser.h"
 #include "GLOBALS.h"
+#include "ui_windows.h"
 
 using namespace std;
 using namespace irr;
@@ -77,7 +78,9 @@ int App::run()
 	//s->attach3DSound("godlike.mp3",planeNode,10.0f,250.0f);
 
 	//createExplosion(core::vector3df(50000,19997,50015));
-
+	
+	//TODO: ADDED FOR DEBUG
+	show_main_menu(true);
 	int lastFPS = -1;
 	while(device->run() && running)
 	{

@@ -12,6 +12,7 @@ using namespace std;
 //Bouton Quick Connect du menu principal
 bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* QuickCoWin = wmgr.getWindow("QuickCo_Quick_connect");
@@ -23,6 +24,7 @@ bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 //Bouton Server list du menu principal
 bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* SrvlWin = wmgr.getWindow("Srvl_ServerList");
@@ -34,6 +36,7 @@ bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 //Bouton About du menu principal
 bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -45,6 +48,7 @@ bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 //Bouton Exit du menu principal
 bool handleExitBtn (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	App::getSingleton()->stop();
 	return true;
 }
@@ -52,6 +56,7 @@ bool handleExitBtn (const CEGUI::EventArgs &e)
 //Bouton Back et la croix de la fenêtre About
 bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -63,6 +68,7 @@ bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 //Bouton Connect de la fenêtre Quick Connect
 bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	cout << "T'est Co Gros !" << endl;
 	return true;
 }
@@ -70,6 +76,7 @@ bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 //Bouton Add de la fenêtre Server List
 bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	cout << "Ta Ajoute un PONEY Gros !" << endl;
 	WindowManager& wmgr = WindowManager::getSingleton();
 
@@ -89,6 +96,7 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 //Bouton Delete de la fenêtre Server List
 bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	cout << "Ah bah non ta tout efface Gros !" << endl;
 	return true;
 }
@@ -96,6 +104,7 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 //Bouton Connect de la fenêtre Quick Connect
 bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	cout << "T'est Co Gros !" << endl;
 	return true;
 }
@@ -103,6 +112,7 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 //Croix de la fenêtre Quick Connect
 bool handleQuickConnectClose (const EventArgs&e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("QuickCo_Quick_connect")->setVisible(false);
 	return true;
@@ -111,6 +121,7 @@ bool handleQuickConnectClose (const EventArgs&e)
 //Croix de la fenêtre Server List
 bool handleSrvlBtnClose (const EventArgs&e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("Srvl_ServerList")->setVisible(false);
 	return true;
@@ -132,7 +143,7 @@ void create_main_menu()
 	MenuBackground->setProperty( "Image", "set:main_menu_bg image:full_image" );
 	MenuBackground->setProperty( "FrameEnabled", "False" );
 
-	//MenuBackground->setVisible(false);
+	MenuBackground->setVisible(false);
 		
 	// QuickConnect 
 	PushButton* QuickConnect = (PushButton*)wmgr.createWindow("TaharezLook/Button", "Quick connect");
@@ -226,6 +237,10 @@ void create_main_menu()
 void show_main_menu(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
-
+	if(visible) {
+		App::getSingleton()->getSoundEngine()->playBackgroundMusic("menu.mp3");
+	} else {
+		App::getSingleton()->getSoundEngine()->stopBackgroundMusic();
+	}
 	wmgr.getWindow("main_menu")->setVisible(visible);
 }

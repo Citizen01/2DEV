@@ -5,6 +5,7 @@
 #include "GLOBALS.h"
 #include "utils.h"
 #include "app.h"
+#include "ui_windows.h"
 
 using namespace std;
 using namespace irr;
@@ -98,6 +99,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				ne->GetReady();
 				break;
 			case TOGGLEMENU:
+				show_main_menu(false);
 				//TODO
 				break;
 			default:
