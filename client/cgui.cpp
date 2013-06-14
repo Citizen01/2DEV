@@ -1,5 +1,5 @@
 #include "Cgui.h"
-#include "cegui_windows.h"
+#include "ui_windows.h"
 #include <iostream>
 #include <windows.h>
 
@@ -13,7 +13,7 @@ Cgui::Cgui(IrrlichtDevice* device, string skin) : irrRenderer(IrrlichtRenderer::
 	setSkin(skin);
 
 	init();
-	//precache();
+	precache();
 }
 
 Cgui::~Cgui(void)
@@ -72,13 +72,10 @@ bool Cgui::init()
 
 bool Cgui::precache()
 {
-	/* créer vos fonctions qui permettent de
-	 * créer une fenêtre ou un ensemble de fenêtre
-	 * dans cegui_windows.cpp, puis appellez les
-	 * ci-dessous: */
 	cout << "[CEGUI] Precaching all windows for the game ..." << endl;
 
 	create_main_menu(); //Menu principal du jeu
+	create_team_join(); //Fenêtre de selection d'une team
 
 	cout << "[CEGUI] Successfully precached all windows for the game !" << endl;
 	return true;

@@ -1,12 +1,14 @@
-#include "cegui_windows.h"
-#include <CEGUI.h>
+#include "ui_windows.h"
 #include "GLOBALS.h"
+#include "app.h"
+#include <CEGUI.h>
 #include <iostream>
 
 using namespace CEGUI;
 using namespace constants;
 using namespace std;
 
+//Bouton Quick Connect du menu principal
 bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
@@ -17,6 +19,7 @@ bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 	return true;
 }
 
+//Bouton Server list du menu principal
 bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
@@ -27,6 +30,7 @@ bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 	return true;
 }
 
+//Bouton About du menu principal
 bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
@@ -37,6 +41,14 @@ bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 	return true;
 }
 
+//Bouton Exit du menu principal
+bool handleExitBtn (const CEGUI::EventArgs &e)
+{
+	App::getSingleton()->stop();
+	return true;
+}
+
+//Bouton Back et la croix de la fenêtre About
 bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
@@ -47,52 +59,49 @@ bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 	return true;
 }
 
+//Bouton Connect de la fenêtre Quick Connect
 bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 {
 	cout << "T'est Co Gros !" << endl;
 	return true;
 }
 
+//Bouton Add de la fenêtre Server List
 bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 {
 	cout << "Ta Ajoute un PONEY Gros !" << endl;
 	return true;
 }
 
+//Bouton Delete de la fenêtre Server List
 bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 {
 	cout << "Ah bah non ta tout efface Gros !" << endl;
 	return true;
 }
 
+//Bouton Connect de la fenêtre Quick Connect
 bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 {
 	cout << "T'est Co Gros !" << endl;
 	return true;
 }
 
-bool handleQuickConnectBtnClose (const EventArgs&e)
+//Croix de la fenêtre Quick Connect
+bool handleQuickConnectClose (const EventArgs&e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("QuickCo_Quick_connect")->setVisible(false);
 	return true;
 }
 
+//Croix de la fenêtre Server List
 bool handleSrvlBtnClose (const EventArgs&e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("Srvl_ServerList")->setVisible(false);
 	return true;
 }
-
-bool handleAboutBtnClose (const EventArgs&e)
-{
-	WindowManager& wmgr = WindowManager::getSingleton();
-	wmgr.getWindow("Ab_AboutWin")->setVisible(false);
-	return true;
-}
-
-
 
 void create_main_menu()
 {
@@ -101,31 +110,17 @@ void create_main_menu()
 	Window* root = wmgr.getWindow("root");
 	///////////////////////////////////////////////////////
 
-	//FrameWindow* fWnd = static_cast<FrameWindow*>(
-	//wmgr.createWindow( "TaharezLook/FrameWindow", "testWindow" ));
-
-	//root->addChildWindow( fWnd );
-
-	//// position a quarter of the way in from the top-left of parent.
-	//fWnd->setPosition( UVector2( UDim( 0.25f, 0 ), UDim( 0.25f, 0 ) ) );
-	//// set size to be half the size of the parent
-	//fWnd->setSize( UVector2( UDim( 0.5f, 0 ), UDim( 0.5f, 0 ) ) );
-
-	//fWnd->setText( "Hello World!" );
-
 	// Menu Background
-	ImagesetManager::getSingleton().createFromImageFile("plane", "plane.jpg");
-	Window* MenuBackground = wmgr.createWindow("TaharezLook/StaticImage", "plane");
+	ImagesetManager::getSingleton().createFromImageFile("main_menu_bg", "main_menu_bg.jpg");
+	Window* MenuBackground = wmgr.createWindow("TaharezLook/StaticImage", "main_menu");
 	root->addChildWindow( MenuBackground );
 	MenuBackground->setPosition( UVector2( UDim( 0.0f, 0.0f ), UDim( 0.0f, 0.0f) ) );
 	MenuBackground->setSize( UVector2( UDim( 1.0f, 0.0f ), UDim( 1.0f, 0.0f ) ) );  // full screen
-	MenuBackground->setProperty( "Image", "set:plane image:full_image" );
+	MenuBackground->setProperty( "Image", "set:main_menu_bg image:full_image" );
 	MenuBackground->setProperty( "FrameEnabled", "False" );
 
-
-
-
-	
+	//MenuBackground->setVisible(false);
+		
 	// QuickConnect 
 	PushButton* QuickConnect = (PushButton*)wmgr.createWindow("TaharezLook/Button", "Quick connect");
 	MenuBackground->addChildWindow( QuickConnect );
@@ -159,8 +154,9 @@ void create_main_menu()
 	Exit->setPosition( UVector2( UDim( 0.5f, 0.0f), UDim( 0.8f, 0.0f ) ) );
 	Exit->setSize( UVector2( UDim( 0.4f, 0.0f ), UDim( 0.08f, 0.0f ) ) );
 	Exit->setText("Exit");
+	Exit->subscribeEvent(PushButton::EventClicked, handleExitBtn);
 
-	// Load a Quick COnnect
+	// Load a Quick Connect
 	Window* QuickWin = wmgr.loadWindowLayout("Quicked.layout", "QuickCo_");
 	MenuBackground->addChildWindow(QuickWin);
 	QuickWin->setVisible (false);
@@ -170,7 +166,7 @@ void create_main_menu()
 	ConnectBtn->subscribeEvent(PushButton::EventClicked, handleQuickConnectBtnCo);
 	//Close
 	PushButton* QuickClose = (PushButton*)wmgr.getWindow("QuickCo_Quick_connect__auto_closebutton__");
-	QuickClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleQuickConnectBtnClose));
+	QuickClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleQuickConnectClose));
 	
 	
 	// Load a Server_list
@@ -207,24 +203,16 @@ void create_main_menu()
 
 	AboutWidget->setProperty("AlwaysOnTop", "True");
 
-	//Close About
+	//Close About + btn Back
 	PushButton* AboutBack = (PushButton*)wmgr.getWindow("Ab_AboutWin/Button");
-	AboutBack->subscribeEvent(PushButton::EventClicked, handleAboutBtnWinClose);
-	//Close btn
 	PushButton* AboutClose = (PushButton*)wmgr.getWindow("Ab_AboutWin__auto_closebutton__");
-	AboutClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleAboutBtnClose));
+	AboutBack->subscribeEvent(PushButton::EventClicked, handleAboutBtnWinClose);
+	AboutClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleAboutBtnWinClose));
+}
 
+void show_main_menu(bool visible)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
 
-
-	
-
-	
-
-
-	
-
-
- 
-
-
+	wmgr.getWindow("main_menu")->setVisible(visible);
 }

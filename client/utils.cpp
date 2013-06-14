@@ -10,6 +10,7 @@
 using namespace std;
 using namespace irr;
 using namespace constants;
+using namespace CEGUI;
 
 bool isDir(const string sDir)
 {
@@ -109,4 +110,27 @@ void createExplosion(irr::core::vector3df position){
 		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
 		ps->setMaterialTexture(0, driver->getTexture((PATH_TO_MEDIA + "/test/fire.bmp").c_str()));
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+}
+
+void addTableRow(MultiColumnList* tabl, vector<char*> row_datas)
+{	
+	uint rownum = tabl->addRow();
+	for (unsigned int i=0; i < tabl->getColumnCount(); i++)
+	{
+		ListboxTextItem* list = new ListboxTextItem(row_datas[i]);
+		tabl->setItem(list, i, rownum);
+	}	
+}
+
+void clearTable(MultiColumnList* tabl)
+{
+	for (unsigned int i=0; i < tabl->getRowCount(); i++)
+		tabl->removeRow(i);
+}
+
+void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas)
+{
+	clearTable(tabl);
+	for (unsigned int i = 0; i < table_datas.size(); i++)
+		addTableRow(tabl, table_datas[i]);
 }
