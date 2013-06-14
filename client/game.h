@@ -25,7 +25,6 @@ private:
 	//Assigné automatiquement lors du 1er appel à getLocalPlayer()
 	Player* local_player;
 
-
 public:
 
 	game(std::string mapName);

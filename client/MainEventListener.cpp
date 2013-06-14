@@ -55,10 +55,14 @@ void MainEventListener::listenForBindedKeys(const SEvent& e)
 		{
 			string* type = new string("ACTION");
 
+			ev_onBindedKeyHited* eve = new ev_onBindedKeyHited;
+			eve->actionCode = pa.first;
+			eve->pressedDown = e.KeyInput.PressedDown;
+
 			SEvent ev;
 			ev.EventType = EET_USER_EVENT;
-			ev.UserEvent.UserData1 = s32(type); //TODO: C'est des putain d'int !!!
-			ev.UserEvent.UserData2 = s32(pa.first);
+			ev.UserEvent.UserData1 = s32(EVENT_TYPE::onBindedKeyHited);
+			ev.UserEvent.UserData2 = s32(eve);
 
 			//On trigger notre event dans le système d'Irrlicht:
 			App::getSingleton()->getGraphicEngine()->getDevice()->postEventFromUser(ev);

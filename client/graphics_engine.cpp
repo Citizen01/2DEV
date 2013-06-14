@@ -64,26 +64,6 @@ void graphics_engine::frame()
 	//Rendering all CEGUI elements
 	System::getSingleton().renderGUI();
 
-	// display frames per second in window title
-	//int fps = driver->getFPS();
-	//if (lastFPS != fps)
-	//{
-	//	core::stringw str = L"2DEV - Irrlicht Engine [";
-	//	str += driver->getName();
-	//	str += "] FPS:";
-	//	str += fps;
-	//	// Also print the current camera position
-	//	/*scene::ITerrainSceneNode* terrain = theMap.getTerrain();
-	//	str += " Position: ";
-	//	str += camera->getAbsolutePosition().X;
-	//	str += ", ";
-	//	str += camera->getAbsolutePosition().Y;
-	//	str += ", ";
-	//	str += camera->getAbsolutePosition().Z;*/
-
-	//	device->setWindowCaption(str.c_str());
-	//	lastFPS = fps;
-	//}
 	driver->endScene(); // GRAPHICS
 }
 

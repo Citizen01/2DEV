@@ -5,6 +5,7 @@
 #include "GLOBALS.h"
 #include "utils.h"
 #include "app.h"
+#include "events.h"
 
 using namespace std;
 using namespace irr;
@@ -32,12 +33,12 @@ game* game_engine::GetGame()
 void game_engine::StopGame()
 {
 	delete m_Game;
+	m_Game = NULL;
 }
 
 //Implémentation de la méthode virtuelle pure héritée de la classe engine
 void game_engine::frame()
 {
-
 }
 
 bool game_engine::OnEvent(const SEvent& event)
@@ -45,21 +46,18 @@ bool game_engine::OnEvent(const SEvent& event)
 	//Handle events here:
 	if (event.EventType == EET_USER_EVENT)
 	{
-		//cout << "Réception d'un EET_USER_EVENT ..." << endl;
+		int type = event.UserEvent.UserData1;
 
-		string* type = (string*)event.UserEvent.UserData1;
-		//cout << "Le type de l'event est :" << *type << endl;
+		if (type == EVENT_TYPE::onBindedKeyHited){
+			ev_onBindedKeyHited* args = (ev_onBindedKeyHited*)event.UserEvent.UserData2;
 
-		if (*type == "ACTION"){
-			ACTION_CODE act = (ACTION_CODE)event.UserEvent.UserData2;
-			//cout << "Valeur de l'action: " << act << endl;
+			ACTION_CODE act = args->actionCode;
 
 			switch (act)
 			{
 			case ACCELERATE:
 				//TODO
 				ne->askToAccelerate();
-				//moveNodeInLocalSpace(plane, irr::core::vector3df(0,0,1), 17.0f);
 				break;
 			case DECELERATE:
 				ne->askToDecelerate();
@@ -73,19 +71,15 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case DIVE:
 				//TODO
-				//rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(1,0,0));
 				break;
 			case STRAIGHTEN:
 				//TODO
-				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(1,0,0));
 				break;
 			case ROLL_LEFT:
 				//TODO
-				//rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(0,0,1));
 				break;
 			case ROLL_RIGHT:
 				//TODO
-				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
 				break;
 			case PRIMARY_FIRE:
 				//TODO
