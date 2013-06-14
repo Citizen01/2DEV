@@ -1,5 +1,6 @@
 #include "ui_windows.h"
 #include "GLOBALS.h"
+#include "server_manager.h"
 #include "app.h"
 #include <CEGUI.h>
 #include <iostream>
@@ -70,6 +71,18 @@ bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 {
 	cout << "Ta Ajoute un PONEY Gros !" << endl;
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	Editbox* serverchamp = (Editbox*) wmgr.getWindow("Srvl_ServerList/Server_Name");
+	string servername = serverchamp->getText().c_str();
+
+	//TODO: Récup le champ adresse + split
+
+	//server_manager::getSingleton()->addServer(servername, ip, adress);
+	vector<char*> row;
+	row.push_back("servername");
+	//row.
+	//addTableRow
 	return true;
 }
 
