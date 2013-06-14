@@ -5,6 +5,7 @@
 #include "GLOBALS.h"
 #include "utils.h"
 #include "app.h"
+#include "particle_manager.h"
 
 using namespace std;
 using namespace irr;
@@ -103,7 +104,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case TOGGLEMENU:
 				//TODO
-				createExplosion(core::vector3df(0, 0, 0));
+				particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
 				break;
 			default:
 				//Nothing

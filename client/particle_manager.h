@@ -1,23 +1,33 @@
 #pragma once
 
+#include "particle_emitter.h"
 #include <irrlicht.h>
 #include <vector>
-#include <map>
 
 class particle_manager
 {
 private:
+	static particle_manager* instance;
+	particle_manager(void);
 
 	//Référence tous les IParticleSystemSceneNode*
-	std::vector<irr::scene::IParticleSystemSceneNode*> particle_nodes;
+	std::vector<particle_emitter*> partEmitters;
 
-	//Associe un IParticleSystemSceneNode* à un IAnimatedMeshSceneNode*
-	std::map<irr::scene::IParticleSystemSceneNode*, irr::scene::IAnimatedMeshSceneNode*> relationships;
 
 public:
-	particle_manager(void);
+	static particle_manager* getSingleton();
 	~particle_manager(void);
 
-	//void attachParticlesTo();
+	void createParticleEmitter(
+		constants::PARTICLE_TYPE,
+		irr::core::vector3df position,
+		irr::core::vector3df rotation = irr::core::vector3df(0.f, 0.f, 0.f),
+		irr::core::vector3df scale = irr::core::vector3df(1.f, 1.f, 1.f)
+		);
+
+	//Met à jour tous les particle emitters
+	void updateAll();
+
+	void removeParticleEmitter(particle_emitter* pem);
 
 };

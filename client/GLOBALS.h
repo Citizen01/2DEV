@@ -33,12 +33,12 @@ namespace constants {
 
 	enum PARTICLE_TYPE
 	{
-		FIRE_NORMAL, //Feu dirigé vers le haut
-		FIRE_DIRECTED, //Feu dirigé autrement (ex: propulsion)
-		EXPLOSION, //Explosion
-		SMOKE_WHITE, //Fumée blanche
-		SMOKE_BLACK, //Fumée noire
-		LIGHT_WHITE, //Lumière blanche (addLightSceneNode ?)
+		PARTICLE_FIRE_NORMAL, //Feu dirigé vers le haut
+		PARTICLE_FIRE_DIRECTED, //Feu dirigé autrement (ex: propulsion)
+		PARTICLE_EXPLOSION, //Explosion
+		PARTICLE_SMOKE_WHITE, //Fumée blanche
+		PARTICLE_SMOKE_BLACK, //Fumée noire
+		PARTICLE_LIGHT_WHITE, //Lumière blanche (addLightSceneNode ?)
 		PARTICLE_TYPE_COUNT //Contient le nombre de types de particules.
 	};
 
