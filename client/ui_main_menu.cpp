@@ -118,6 +118,8 @@ void create_main_menu()
 	MenuBackground->setSize( UVector2( UDim( 1.0f, 0.0f ), UDim( 1.0f, 0.0f ) ) );  // full screen
 	MenuBackground->setProperty( "Image", "set:main_menu_bg image:full_image" );
 	MenuBackground->setProperty( "FrameEnabled", "False" );
+
+	//MenuBackground->setVisible(false);
 		
 	// QuickConnect 
 	PushButton* QuickConnect = (PushButton*)wmgr.createWindow("TaharezLook/Button", "Quick connect");

@@ -365,67 +365,63 @@ void network_engine::readMessage()
 void network_engine::frame()
 {
 	if(!m_Connected)
+		return;
+
+	for (m_Packet = m_Peer->Receive(); m_Packet; m_Peer->DeallocatePacket(m_Packet), m_Packet = m_Peer->Receive())
 	{
-		connect();
-	}
-	else
-	{
-		for (m_Packet = m_Peer->Receive(); m_Packet; m_Peer->DeallocatePacket(m_Packet), m_Packet = m_Peer->Receive())
+		switch (GetPacketIdentifier(m_Packet))
 		{
-			switch (GetPacketIdentifier(m_Packet))
-			{
-				case ID_DISCONNECTION_NOTIFICATION:
-					cout << "We have been disconnected." << endl;
-					m_Connected = false;
-					break;
-				case ID_CONNECTION_LOST:
-					cout << "Connection lost." << endl;
-					m_Connected = false;
-					break;
+			case ID_DISCONNECTION_NOTIFICATION:
+				cout << "We have been disconnected." << endl;
+				m_Connected = false;
+				break;
+			case ID_CONNECTION_LOST:
+				cout << "Connection lost." << endl;
+				m_Connected = false;
+				break;
 
-				case ID_REMOTE_NEW_INCOMING_CONNECTION:
-					cout << "Another client has connected." << endl;
-					break;
-				case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-					cout << "Another client has disconnected." << endl;
-					break;
-				case ID_REMOTE_CONNECTION_LOST:
-					cout << "Another client has lost the connection." << endl;
-					break;
+			case ID_REMOTE_NEW_INCOMING_CONNECTION:
+				cout << "Another client has connected." << endl;
+				break;
+			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+				cout << "Another client has disconnected." << endl;
+				break;
+			case ID_REMOTE_CONNECTION_LOST:
+				cout << "Another client has lost the connection." << endl;
+				break;
 					
-				case ID_ANSWER_TO_MAP:
-					getMap();
-					break;
-				case ID_ANSWER_TO_FACTIONS:
-					getFactions();
-					break;
-				case ID_ANSWER_TO_PLAYERS:
-					getPlayers();
-					break;
+			case ID_ANSWER_TO_MAP:
+				getMap();
+				break;
+			case ID_ANSWER_TO_FACTIONS:
+				getFactions();
+				break;
+			case ID_ANSWER_TO_PLAYERS:
+				getPlayers();
+				break;
 
-				case ID_PLAYER_ENTER_FACTION:
-					playerEnterFaction();
-					break;
-				case ID_PLAYER_DO_NOT_ENTER_FACTION:
-					readMessage();
-					break;
-				case ID_PLAYER_GET_PLANE:
-					playerGetPlane();
-					break;
+			case ID_PLAYER_ENTER_FACTION:
+				playerEnterFaction();
+				break;
+			case ID_PLAYER_DO_NOT_ENTER_FACTION:
+				readMessage();
+				break;
+			case ID_PLAYER_GET_PLANE:
+				playerGetPlane();
+				break;
 
-				case ID_ACCELERATE_PLANE:
-					acceleratePlane();
-					break;
-				case ID_DECELERATE_PLANE:
-					deceleratePlane();
-					break;
-				case ID_MOVE_PLANE:
-					movePlane();
-					break;
+			case ID_ACCELERATE_PLANE:
+				acceleratePlane();
+				break;
+			case ID_DECELERATE_PLANE:
+				deceleratePlane();
+				break;
+			case ID_MOVE_PLANE:
+				movePlane();
+				break;
 
-				default:
-					cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
-			}
+			default:
+				cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
 		}
 	}
 }

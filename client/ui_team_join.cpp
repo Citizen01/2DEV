@@ -1,13 +1,14 @@
 #include "ui_windows.h"
 #include "app.h"
+#include "utils.h"
 #include <CEGUI.h>
+#include <vector>
 
 using namespace std;
 using namespace CEGUI;
 using namespace constants;
 
-
-//TODO: faire les fonctions d'handle des events
+////////////////// CLICS HANDLERS //////////////////
 //Bouton Add de la fenêtre Server List
 bool handleTeamJoinBtnJoin (const CEGUI::EventArgs &e)
 {
@@ -22,7 +23,6 @@ bool handleTeamJoinClose (const EventArgs&e)
 	wmgr.getWindow("Tj_JoinTeam")->setVisible(false);
 	return true;
 }
-
 
 void create_team_join()
 {
@@ -43,15 +43,27 @@ void create_team_join()
 	PushButton* QuickClose = (PushButton*)wmgr.getWindow("Tj_JoinTeam__auto_closebutton__");
 	QuickClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleTeamJoinClose));
 
-	//Add Colone
+	//Add Columns
 	MultiColumnList* JtTbl = (MultiColumnList*)wmgr.getWindow("Tj_JoinTeam/TeamChoise");
 	JtTbl->addColumn("Name", 0, UDim(0.5f, 0));
-	JtTbl->addColumn("Players", 1, UDim(0.5f, 0));
+	JtTbl->addColumn("Players", 1, UDim(0.4f, 0));
+	
 }
 
 void show_team_join(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
-
 	wmgr.getWindow("Tj_JoinTeam")->setVisible(visible);
+}
+
+
+////// MANIPULATION DU TABLEAU //////
+
+void updateTeams(vector<char*> values)
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	MultiColumnList* JtTbl = (MultiColumnList*)wmgr.getWindow("Tj_JoinTeam/TeamChoise");
+
+	clearTable(JtTbl);
+	addTableRow(JtTbl, values);
 }
