@@ -1,0 +1,5 @@
+<servers>
+	<server name="localhost" ip="127.0.0.1" port="60000" />
+	<server name="Unkown" ip="185.12.35.20" port="45300" />
+	<server name="lan" ip="192.168.0.13" port="60000" />
+</servers>

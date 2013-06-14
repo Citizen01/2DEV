@@ -2,6 +2,8 @@
 
 #include <irrlicht.h>
 #include <string>
+#include <CEGUI.h>
+#include <vector>
 #include "GLOBALS.h"
 
 /* Fonction qui permet de vérifier si un dossier donné existe.
@@ -30,7 +32,6 @@ irr::EKEY_CODE strToEkeyCode(std::string str);
  */
 std::string ekeyCodeToStr(irr::EKEY_CODE code);
 
-
 /*
  * 
  */
@@ -42,3 +43,12 @@ constants::ACTION_CODE strToActionCode(std::string str);
 std::string actionCodeToStr(constants::ACTION_CODE);
 
 void createExplosion(irr::core::vector3df position);
+
+//Permet d'ajouter une ligne dans un tableau
+void addTableRow(CEGUI::MultiColumnList* tabl, std::vector<char*> row_datas);
+
+//Permet de vider le tableau
+void clearTable(CEGUI::MultiColumnList* tabl);
+
+//Permet de mettre à jour le tableau
+void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas);

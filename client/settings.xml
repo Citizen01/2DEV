@@ -1,0 +1,5 @@
+<map>
+	<skybox name="bluesky" posX="0", posY="1000", posZ="0"/>
+	<object modelname="base", objectname="base1", color="red", posX="20", posY="0", posZ="63", rotX="0", rotY="45", rotZ="0"/>
+	<object modelname="base", objectname="base2", color="blue", posX="40", posY="0", posZ="122", rotX="0", rotY="90", rotZ="0"/>
+</map>

@@ -44,7 +44,7 @@ graphics_engine::graphics_engine()
 	cout << "[GraphicsE] Referenced MainEventListener as default event listener !" << endl;
 
 	// disable mouse cursor
-	device->getCursorControl()->setVisible(false); // GRAPHICS CONSTRUCTOR
+	device->getCursorControl()->setVisible(false);
 }
 
 

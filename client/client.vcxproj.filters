@@ -58,6 +58,12 @@
     <Filter Include="Raknet">
       <UniqueIdentifier>{6d3c6f26-1c1a-43a6-86d1-3a3f5c6f55d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\graphics\ui">
+      <UniqueIdentifier>{cbebe98a-6332-4505-bc85-fd4fda9caade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils\rapidxml">
+      <UniqueIdentifier>{bf6086bd-c529-4fd9-8167-308ea78ada75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="map.cpp">
       <Filter>Source Files\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="cegui_windows.cpp">
-      <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="cgui.cpp">
       <Filter>Source Files\graphics</Filter>
@@ -435,6 +438,15 @@
     <ClCompile Include="faction.cpp">
       <Filter>Source Files\entities</Filter>
     </ClCompile>
+    <ClCompile Include="ui_main_menu.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_team_join.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="server_manager.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
@@ -464,9 +476,6 @@
     <ClInclude Include="map.h">
       <Filter>Header Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="cegui_windows.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="cgui.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
@@ -480,9 +489,6 @@
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidxml.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="XMLParser.h">
@@ -952,6 +958,18 @@
     </ClInclude>
     <ClInclude Include="faction.h">
       <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_windows.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Header Files\utils\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Header Files\utils\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="server_manager.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

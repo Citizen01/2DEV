@@ -25,10 +25,10 @@ network_engine::~network_engine(void)
 	RakPeerInterface::DestroyInstance(m_Peer);
 }
 
-void network_engine::connect()
+void network_engine::connect(char* ip, int port)
 {
-	m_ServerIP = "127.0.0.1";
-	m_ServerPort = 60000;
+	m_ServerIP = ip;
+	m_ServerPort = port;
 
 	cout << "Connecting to the server." << endl;
 	m_Peer->Startup(1, &m_SocketDescriptor, 1);
@@ -66,6 +66,9 @@ void network_engine::connect()
 
 void network_engine::disconnect()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Disconnecting from the server." << endl;
 	m_Peer->Shutdown(300);
 	m_Connected = false;
@@ -90,6 +93,9 @@ unsigned char network_engine::GetPacketIdentifier(Packet* packet)
 
 void network_engine::GetReady()
 {
+	if (!m_Connected)
+		return;
+
 	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == NULL)
 	{
 		askForLocalPlayer();
@@ -106,6 +112,9 @@ void network_engine::GetReady()
 
 void network_engine::askForMap()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server for the map." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_MAP);
@@ -114,6 +123,9 @@ void network_engine::askForMap()
 
 void network_engine::askForFactions()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server for factions." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_FACTIONS);
@@ -122,6 +134,9 @@ void network_engine::askForFactions()
 
 void network_engine::askForPlayers()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server for players." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_PLAYERS);
@@ -130,6 +145,9 @@ void network_engine::askForPlayers()
 
 void network_engine::askForLocalPlayer()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server for our own player : " + App::getSingleton()->settings["nickname"] << endl;
 
 	RakString playerName(App::getSingleton()->settings["nickname"].c_str());
@@ -142,6 +160,9 @@ void network_engine::askForLocalPlayer()
 
 void network_engine::askForLocalPlane(string planeModel)
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server for our own plane." << endl;
 
 	RakString planeName(planeModel.c_str());
@@ -155,6 +176,9 @@ void network_engine::askForLocalPlane(string planeModel)
 
 void network_engine::askForPlayersStates()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server for players in factions, and planes." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_PLAYERS_STATES);
@@ -163,6 +187,9 @@ void network_engine::askForPlayersStates()
 
 void network_engine::askToEnterFaction(Faction* faction)
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server to enter a faction." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ENTER_FACTION);
@@ -173,6 +200,9 @@ void network_engine::askToEnterFaction(Faction* faction)
 
 void network_engine::askToAccelerate()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server to accelerate." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ACCELERATE);
@@ -182,6 +212,9 @@ void network_engine::askToAccelerate()
 
 void network_engine::askToDecelerate()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Asking the server to decelerate." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_DECELERATE);
@@ -191,6 +224,9 @@ void network_engine::askToDecelerate()
 
 void network_engine::getMap()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Receiving the server's map." << endl;
 
 	RakString mapName = "";
@@ -206,6 +242,9 @@ void network_engine::getMap()
 
 void network_engine::getFactions()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Receiving the server's factions." << endl;
 
 	unsigned int factionCount = 0;
@@ -230,6 +269,9 @@ void network_engine::getFactions()
 
 void network_engine::getPlayers()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Receiving the server's players." << endl;
 
 	unsigned int playerCount = 0;
@@ -257,6 +299,9 @@ void network_engine::getPlayers()
 
 void network_engine::playerEnterFaction()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "A player entered a faction." << endl;
 	
 	NetworkID factionNetworkID;
@@ -280,6 +325,9 @@ void network_engine::playerEnterFaction()
 
 void network_engine::playerGetPlane()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "A player got her/his plane." << endl;
 	
 	NetworkID playerNetworkID;
@@ -298,6 +346,9 @@ void network_engine::playerGetPlane()
 
 void network_engine::acceleratePlane()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Accelerating a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
@@ -311,6 +362,9 @@ void network_engine::acceleratePlane()
 
 void network_engine::deceleratePlane()
 {
+	if (!m_Connected)
+		return;
+
 	cout << "Decelerating a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
@@ -324,6 +378,9 @@ void network_engine::deceleratePlane()
 
 void network_engine::movePlane()
 {
+	if (!m_Connected)
+		return;
+
 	//cout << "Moving a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
@@ -352,6 +409,9 @@ void network_engine::movePlane()
 
 void network_engine::readMessage()
 {
+	if (!m_Connected)
+		return;
+
 	RakString message;
 
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
@@ -365,67 +425,63 @@ void network_engine::readMessage()
 void network_engine::frame()
 {
 	if(!m_Connected)
+		return;
+
+	for (m_Packet = m_Peer->Receive(); m_Packet; m_Peer->DeallocatePacket(m_Packet), m_Packet = m_Peer->Receive())
 	{
-		connect();
-	}
-	else
-	{
-		for (m_Packet = m_Peer->Receive(); m_Packet; m_Peer->DeallocatePacket(m_Packet), m_Packet = m_Peer->Receive())
+		switch (GetPacketIdentifier(m_Packet))
 		{
-			switch (GetPacketIdentifier(m_Packet))
-			{
-				case ID_DISCONNECTION_NOTIFICATION:
-					cout << "We have been disconnected." << endl;
-					m_Connected = false;
-					break;
-				case ID_CONNECTION_LOST:
-					cout << "Connection lost." << endl;
-					m_Connected = false;
-					break;
+			case ID_DISCONNECTION_NOTIFICATION:
+				cout << "We have been disconnected." << endl;
+				m_Connected = false;
+				break;
+			case ID_CONNECTION_LOST:
+				cout << "Connection lost." << endl;
+				m_Connected = false;
+				break;
 
-				case ID_REMOTE_NEW_INCOMING_CONNECTION:
-					cout << "Another client has connected." << endl;
-					break;
-				case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-					cout << "Another client has disconnected." << endl;
-					break;
-				case ID_REMOTE_CONNECTION_LOST:
-					cout << "Another client has lost the connection." << endl;
-					break;
+			case ID_REMOTE_NEW_INCOMING_CONNECTION:
+				cout << "Another client has connected." << endl;
+				break;
+			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
+				cout << "Another client has disconnected." << endl;
+				break;
+			case ID_REMOTE_CONNECTION_LOST:
+				cout << "Another client has lost the connection." << endl;
+				break;
 					
-				case ID_ANSWER_TO_MAP:
-					getMap();
-					break;
-				case ID_ANSWER_TO_FACTIONS:
-					getFactions();
-					break;
-				case ID_ANSWER_TO_PLAYERS:
-					getPlayers();
-					break;
+			case ID_ANSWER_TO_MAP:
+				getMap();
+				break;
+			case ID_ANSWER_TO_FACTIONS:
+				getFactions();
+				break;
+			case ID_ANSWER_TO_PLAYERS:
+				getPlayers();
+				break;
 
-				case ID_PLAYER_ENTER_FACTION:
-					playerEnterFaction();
-					break;
-				case ID_PLAYER_DO_NOT_ENTER_FACTION:
-					readMessage();
-					break;
-				case ID_PLAYER_GET_PLANE:
-					playerGetPlane();
-					break;
+			case ID_PLAYER_ENTER_FACTION:
+				playerEnterFaction();
+				break;
+			case ID_PLAYER_DO_NOT_ENTER_FACTION:
+				readMessage();
+				break;
+			case ID_PLAYER_GET_PLANE:
+				playerGetPlane();
+				break;
 
-				case ID_ACCELERATE_PLANE:
-					acceleratePlane();
-					break;
-				case ID_DECELERATE_PLANE:
-					deceleratePlane();
-					break;
-				case ID_MOVE_PLANE:
-					movePlane();
-					break;
+			case ID_ACCELERATE_PLANE:
+				acceleratePlane();
+				break;
+			case ID_DECELERATE_PLANE:
+				deceleratePlane();
+				break;
+			case ID_MOVE_PLANE:
+				movePlane();
+				break;
 
-				default:
-					cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
-			}
+			default:
+				cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
 		}
 	}
 }

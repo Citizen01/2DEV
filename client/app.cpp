@@ -3,6 +3,7 @@
 #include <irrKlang.h>
 #include <iostream>
 #include "app.h"
+#include "server_manager.h"
 #include "events.h"
 #include "utils.h"
 #include "XMLParser.h"
@@ -46,6 +47,7 @@ App::App()
 	initialiseGlobals();
 	loadSettings();
 	loadBinds();
+	server_manager::getSingleton()->loadServers();
 
 	running = true;
 }
@@ -74,30 +76,19 @@ int App::run()
 	//s->play3D("ophelia.mp3",camera->getPosition(),10.0f,250.0f);
 	//s->attach3DSound("godlike.mp3",planeNode,10.0f,250.0f);
 
-	createExplosion(core::vector3df(50000,19997,50015));
+	//createExplosion(core::vector3df(50000,19997,50015));
 
 	int lastFPS = -1;
 	while(device->run() && running)
 	{
+		//Chaque moteur doit faire son boulot
 		getNetworkEngine()->frame();
-		/*if (device->isWindowActive())
-		{*/
-			//Chaque moteur doit faire son boulot
-			getGameEngine()->frame();
-			getSoundEngine()->frame();
+		getGameEngine()->frame();
+		getSoundEngine()->frame();
+		getGraphicEngine()->frame();
 
-			//TODO: Sound Debug 2
-			//s->updateListenerPosition(camera->getPosition(), camera->getTarget() - camera->getAbsolutePosition());
-
-			//On met a jour la pos de l'avion
-			//receiver.updateMesh(); // GAME
-
-			getGraphicEngine()->frame();
-		/*}
-		else
-		{
-			device->yield();
-		}*/
+		//TODO: Sound Debug 2
+		//s->updateListenerPosition(camera->getPosition(), camera->getTarget() - camera->getAbsolutePosition());
 	}
 	cout << "Quitting ..." << endl;
 

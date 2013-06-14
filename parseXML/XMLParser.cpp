@@ -5,11 +5,12 @@ XMLParser::XMLParser()
 	xml_document<> m_Doc;
 }
 
-bool XMLParser::OpenXML(string fileName)
+bool XMLParser::openXML(string fileName)
 {
 	ifstream file(fileName);
 	if(file.fail())
 	{
+		cout << "oups!"<<endl;
 		return false;
 	}
 
@@ -22,21 +23,30 @@ bool XMLParser::OpenXML(string fileName)
 	return true;
 }
 
-void XMLParser::CoreConfig(/*Local_Player Player */)
+ map<char*, vector<attribut>> XMLParser::getMapping(string filePath)
 {
-	OpenXML("../config/coreconfig.xml");
-
 	xml_node<> *root_node = m_Doc.first_node();
-	cout << root_node->name() << endl;
-	
-	for(xml_node<> *settings_nodes = root_node->first_node("settings")->first_node(); settings_nodes; settings_nodes = settings_nodes->next_sibling())
-	{
-		
-		cout << "Setting : "  << settings_nodes->name() << " : " << settings_nodes->value() << endl;
-	}
+	map<char*, vector<attribut>> mapping;
 
-	for(xml_node<> *binds_nodes = root_node->first_node("binds")->first_node(); binds_nodes; binds_nodes = binds_nodes->next_sibling())
+	if (root_node != 0)
 	{
-		cout << "Bind : " << binds_nodes->first_attribute()->value() << " : " << binds_nodes->value() << endl;
+		for(xml_node<> *map_node = root_node->first_node(); map_node; map_node = map_node->next_sibling())
+		{
+			vector<attribut> tmpvect;
+
+			for(xml_attribute<char> *attribute = map_node->first_attribute(); attribute; attribute = attribute->next_attribute())
+			{ 
+				attribut tmpattr;
+				tmpattr.name = attribute->name();
+				tmpattr.value = attribute->value();
+
+				tmpvect.push_back(tmpattr);
+
+				cout << "Setting : "  << attribute->name() << " : " << attribute->value() << endl;
+			}
+
+			mapping[map_node->name()] = tmpvect;
+		}
 	}
+	return mapping;
 }

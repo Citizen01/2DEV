@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <map>
 
 #include "rapidxml.hpp"
 
@@ -17,6 +18,12 @@ private:
 public:
 
 	XMLParser(void);
-	bool OpenXML(string fileName);
-	void CoreConfig(/*Local_Player Player */);
+	bool openXML(string fileName);
+	/*void CoreConfig();*/
+	 map<char*, vector<attribut>> getMapping(string filePath);
+};
+
+struct attribut{
+	char* name;
+	char* value;
 };
