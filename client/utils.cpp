@@ -114,6 +114,9 @@ void createExplosion(irr::core::vector3df position){
 
 void addTableRow(MultiColumnList* tabl, vector<string> row_datas)
 {	
+	if(!tabl || row_datas.size() <= 0)
+		return;
+
 	uint rownum = tabl->addRow();
 	for (unsigned int i=0; i < tabl->getColumnCount(); i++)
 	{
@@ -126,12 +129,18 @@ void addTableRow(MultiColumnList* tabl, vector<string> row_datas)
 
 void clearTable(MultiColumnList* tabl)
 {
-		tabl->resetList();
+	if(!tabl)
+		return;
+
+	tabl->resetList();
 }
 
 
 void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<string>> table_datas)
 {
+	if(!tabl)
+		return;
+
 	clearTable(tabl);
 	for (unsigned int i = 0; i < table_datas.size(); i++)
 		addTableRow(tabl, table_datas[i]);
@@ -139,5 +148,24 @@ void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<string>> 
 
 void removeRow(MultiColumnList* tabl, int line)
 {
-	tabl->removeRow(line);
+	if(!tabl)
+		return;
+
+	ListboxItem* selectedItem = tabl->getFirstSelectedItem();
+	int index = findIndexOfItem(tabl, selectedItem);
+	if (index != -1)
+	{
+		tabl->removeRow(line);
+	}
+}
+
+int findIndexOfItem(MultiColumnList* tabl, ListboxItem* item)
+{
+	if(!tabl || !item)
+		return -1;
+
+	for (unsigned int i=0; i < tabl->getRowCount(); i++)
+			if (tabl->isListboxItemInRow(item, i))
+				return i;
+	return -1;
 }

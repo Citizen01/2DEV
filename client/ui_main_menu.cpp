@@ -134,19 +134,40 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 	
 	string fullAddr = ip +":"+ port;
 	
-	server_manager::getSingleton()->addServer(serverName, ip, port);
-	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
-	vector<string> row;
-	row.push_back(serverName);
-	row.push_back(fullAddr);
-	addTableRow(serverList, row);
+	bool success = server_manager::getSingleton()->addServer(serverName, ip, port);
+	if(success) 
+	{
+		MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+		vector<string> row;
+		row.push_back(serverName);
+		row.push_back(fullAddr);
+		addTableRow(serverList, row);
+	}
+	
 	return true;
 }
 
 //Bouton Delete de la fenêtre Server List
 bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 {
-	cout << "Ah bah non ta tout efface Gros !" << endl;
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+    MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+	ListboxItem* item = serverList->getFirstSelectedItem();
+	if (item)
+	{
+		string serverName = item->getText().c_str();
+		
+		cout << serverName << endl;
+		bool success = server_manager::getSingleton()->removeServer(serverName);
+		if (success)
+		{
+			MultiColumnList* deleteServerList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Delete");
+			int line = findIndexOfItem(serverList, item);
+			cout << "found item at index " << line << endl;
+			removeRow(serverList, line);
+		}
+	}
 	return true;
 }
 
@@ -154,6 +175,9 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 {
 	cout << "T'est Co Gros !" << endl;
+
+	//:) oui ^^ des indica
+
 	return true;
 }
 

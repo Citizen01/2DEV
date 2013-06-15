@@ -55,3 +55,6 @@ void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<std::stri
 
 //Permet de supprimer la "line"ème ligne du tableau
 void removeRow(CEGUI::MultiColumnList* tabl, int line);
+
+//Permet de trouver l'index de l'item spécifié dans le tableau donné
+int findIndexOfItem(CEGUI::MultiColumnList* tabl, CEGUI::ListboxItem* item);

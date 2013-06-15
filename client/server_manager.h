@@ -28,7 +28,7 @@ public:
 	void loadServers();
 
 	//Permet de rajouter un server dans la liste et dans le XML
-	void addServer(std::string name, std::string ip, std::string port);
+	bool addServer(std::string name, std::string ip, std::string port);
 
 	//Met à jour le contenu du xml en fonction de la liste actuelle
 	void updateXML();
@@ -37,6 +37,6 @@ public:
 	std::vector<server>& getServerList();
 
 	//Permet de supprimer un serveur de la liste via son nom
-	void removeServer(std::string name);
+	bool removeServer(std::string name);
 };
 
