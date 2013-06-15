@@ -73,12 +73,6 @@ int App::run()
 {
 	IrrlichtDevice* device = getGraphicEngine()->getDevice();
 
-	//TODO: A supprimer Sound Debug
-	//s->play3D("ophelia.mp3",camera->getPosition(),10.0f,250.0f);
-	//s->attach3DSound("godlike.mp3",planeNode,10.0f,250.0f);
-
-	//createExplosion(core::vector3df(50000,19997,50015));
-
 	show_main_menu(true);
 
 	int lastFPS = -1;
