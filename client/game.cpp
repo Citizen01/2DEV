@@ -1,5 +1,6 @@
 #include "game.h"
 #include "app.h"
+#include "ui_windows.h"
 
 using namespace std;
 using namespace RakNet;
@@ -76,4 +77,23 @@ std::vector<Player*> game::getPlayerList()
 std::vector<Faction*> game::getFactionList()
 {
 	return faction_list;
+}
+
+void game::updateJoinFactionWindow()
+{
+	vector<vector<string>> datas;
+	for (unsigned int i=0; i < faction_list.size(); i++)
+	{
+		Faction* faction = faction_list.at(i);
+		string factionName = faction->GetName();
+		int playerCount = faction->GetPlayers().size();
+		int playerMax = rules.FactionSlots;
+
+		string population = playerCount + "/" + playerMax;
+		vector<string> tmp;
+		tmp.push_back(factionName);
+		tmp.push_back(population);
+		datas.push_back(tmp);
+	}
+	team_join_updateTeams(datas);
 }

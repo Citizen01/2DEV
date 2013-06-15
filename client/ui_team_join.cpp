@@ -12,7 +12,18 @@ using namespace constants;
 //Bouton Add de la fenêtre Server List
 bool handleTeamJoinBtnJoin (const CEGUI::EventArgs &e)
 {
-	cout << "Ta Choisi les bons Gros !" << endl;
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	MultiColumnList* tabl = (MultiColumnList*)wmgr.getWindow("Tj_JoinTeam");
+	ListboxItem* selectedItem = tabl->getFirstSelectedItem();
+
+	if (selectedItem != NULL)
+	{
+		string factionName = selectedItem->getText().c_str();
+		//TODO: 
+
+	}
+
 	return true;
 }
 
@@ -34,7 +45,7 @@ void create_team_join()
 	// Load Team Join
 	Window* TeamJoin = wmgr.loadWindowLayout("TeamJoin.layout", "Tj_");
 	root->addChildWindow( TeamJoin );
-	TeamJoin->setVisible (false);
+	//TeamJoin->setVisible (false);
 	TeamJoin->setProperty("AlwaysOnTop", "True");
 	//Btn Join
 	PushButton* JoinBtn = (PushButton*)wmgr.getWindow("Tj_JoinTeam/Join");
@@ -59,11 +70,10 @@ void show_team_join(bool visible)
 
 ////// MANIPULATION DU TABLEAU //////
 
-void updateTeams(vector<string> values)
+void team_join_updateTeams(vector<vector<string>> values)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	MultiColumnList* JtTbl = (MultiColumnList*)wmgr.getWindow("Tj_JoinTeam/TeamChoise");
 
-	clearTable(JtTbl);
-	addTableRow(JtTbl, values);
+	updateTable(JtTbl, values);
 }

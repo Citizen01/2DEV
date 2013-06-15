@@ -138,7 +138,7 @@ void clearTable(MultiColumnList* tabl)
 
 void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<string>> table_datas)
 {
-	if(!tabl)
+	if(!tabl || table_datas.size() <= 0)
 		return;
 
 	clearTable(tabl);

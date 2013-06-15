@@ -41,5 +41,7 @@ public:
 	std::vector<Player*> getPlayerList();
 	std::vector<Faction*> getFactionList();
 
+	void updateJoinFactionWindow();
+
 };
 
