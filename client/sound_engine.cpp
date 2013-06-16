@@ -54,42 +54,6 @@ void sound_engine::setPauseBackgroundMusic(bool pause)
 	}
 }
 
-void sound_engine::playClick() 
-{
-	play2D("click.mp3");
-}
-
-/*
-* définit la musique actuelle
-*/
-void sound_engine::playBackgroundMusic(std::string name)
-{
-	backgroundMusic = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), true, false, true);
-}
-
-/*
-* stoppe et clean la background music
-*/
-void sound_engine::stopBackgroundMusic()
-{
-	if(backgroundMusic) {
-		backgroundMusic->stop();
-		backgroundMusic->drop();
-	}
-}
-
-/*
-* pause la background music
-*/
-void sound_engine::setPauseBackgroundMusic(bool pause)
-{
-	if(pause) {
-		backgroundMusic->setIsPaused(true);
-	} else {
-		backgroundMusic->setIsPaused(false);
-	}
-}
-
 /*
 * Joue un simple son 2D
 */
@@ -171,7 +135,7 @@ void sound_engine::frame()
 		core::vector3df position = modele->getAbsolutePosition();
 		std::vector<irrklang::ISound*> vector = it->second;
 
-		for(int counter = 0; counter < vector.size(); counter ++) {
+		for(unsigned int counter = 0; counter < vector.size(); counter ++) {
 			if(vector[counter]->isFinished()) {
 				vector[counter]->drop();
 				vector.erase(vector.begin()+counter);
