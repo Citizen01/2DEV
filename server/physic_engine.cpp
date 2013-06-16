@@ -147,7 +147,6 @@ void physics_engine::addProjectile(Projectile* projectile)
 		btTransform transform;
 		transform.setIdentity();
 		transform.setOrigin(btVector3(position.X, position.Y, position.Z));
-		transform.setRotation(btQuaternion(rotation.Y * core::DEGTORAD, rotation.X * core::DEGTORAD, rotation.Z * core::DEGTORAD));
 
 		btDefaultMotionState* motionState = new btDefaultMotionState(transform);
 
@@ -177,7 +176,25 @@ void physics_engine::addProjectile(Projectile* projectile)
 
 		projectile->setBody(body);
 
-		body->translate(transform.getBasis().getColumn(2) * 10);
+		btMatrix3x3 matrix = body->getWorldTransform().getBasis();
+
+		btVector3 axis1 = btVector3(1, 0, 0);
+		btScalar angle1 = btScalar(rotation.X * core::DEGTORAD);
+		matrix *= btMatrix3x3(btQuaternion(axis1, angle1));
+
+		btVector3 axis2 = btVector3(0, 1, 0);
+		btScalar angle2 = btScalar(rotation.Y * core::DEGTORAD);
+		matrix *= btMatrix3x3(btQuaternion(axis2, angle2));
+
+		btVector3 axis3 = btVector3(0, 0, 1);
+		btScalar angle3 = btScalar(rotation.Z * core::DEGTORAD);
+		matrix *= btMatrix3x3(btQuaternion(axis3, angle3));
+
+		body->getWorldTransform().setBasis(matrix);
+		
+		body->translate(body->getWorldTransform().getBasis().getColumn(2) * 10);
+
+		body->setLinearVelocity(body->getWorldTransform().getBasis().getColumn(2) * projectile->getSpeed());
 
 		ContactSensorCallback callback;
 		m_DynamicsWorld->contactTest(body, callback);
@@ -185,8 +202,13 @@ void physics_engine::addProjectile(Projectile* projectile)
 	//else if à faire pour les autres types d'avion
 }
 
-void physics_engine::rotate(btRigidBody* body, btVector3& direction)
+void physics_engine::rotate(btRigidBody* body, btVector3& axis, int angle)
 {
+	btScalar scalar = angle;
 	body->activate(true);
-	body->applyTorque(body->getInvInertiaTensorWorld().inverse() * (body->getWorldTransform().getBasis() * direction));
+	btMatrix3x3 matrix = body->getWorldTransform().getBasis();
+	matrix *= btMatrix3x3(btQuaternion(axis, scalar * core::DEGTORAD));
+	body->getWorldTransform().setBasis(matrix);
+
+	//body->applyTorque(body->getInvInertiaTensorWorld().inverse() * (body->getWorldTransform().getBasis() * rotation));
 }

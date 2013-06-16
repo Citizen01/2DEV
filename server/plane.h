@@ -67,5 +67,7 @@ public:
 	inline void setFuelLoad(int fuel) { m_FuelLoad = fuel; }
 
 	inline int getMaxFuelLoad() { return m_MaxFuelLoad; }
+
+	void takeDammage(int value);
 };
 
