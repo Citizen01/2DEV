@@ -54,6 +54,11 @@ void Player::SetPlane(RakString name)
 	}
 }
 
+scene::ICameraSceneNode* Player::GetCamera()
+{
+	return m_Camera;
+}
+
 void Player::SetCamera()
 {
 	m_Camera = App::getSingleton()->getGraphicEngine()->getSceneManager()->addCameraSceneNode(0, core::vector3df(0,0,0), core::vector3df(1,0,0));

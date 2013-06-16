@@ -1,5 +1,6 @@
 #include "sound_engine.h"
 #include "GLOBALS.h"
+#include "App.h"
 #include <iostream>
 
 using namespace std;
@@ -128,6 +129,8 @@ bool sound_engine::OnEvent(const irr::SEvent& event)
 */
 void sound_engine::frame()
 {
+	scene::ICameraSceneNode* camera = App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetCamera();
+	updateListenerPosition(camera->getAbsolutePosition(),camera->getTarget());
 	int innerCounter = 0;
 	for (std::map<scene::IAnimatedMeshSceneNode*, std::vector<irrklang::ISound*>>::iterator it = soundMap3D.begin(); it != soundMap3D.end(); ++it)
 	{

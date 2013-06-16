@@ -40,6 +40,7 @@ public:
 	Plane* GetPlane();
 	void SetPlane(RakNet::RakString name);
 
+	irr::scene::ICameraSceneNode* GetCamera();
 	void SetCamera();
 
 	void updateThirdView();
