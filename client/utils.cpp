@@ -155,7 +155,6 @@ void addTableRow(MultiColumnList* tabl, vector<string> row_datas)
 		ListboxTextItem* list = new ListboxTextItem(row_datas[i]);
 		tabl->setItem(list, i, rownum);
 		list->setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
-		//tabl->setItemSelectState(list, true);
 	}
 }
 

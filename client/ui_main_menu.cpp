@@ -32,6 +32,7 @@ bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* SrvlWin = wmgr.getWindow("Srvl_ServerList");
+	update_server_list();
 	SrvlWin->setVisible (true);
 
 	return true;
@@ -372,4 +373,21 @@ void show_main_menu(bool visible)
 		App::getSingleton()->getSoundEngine()->stopBackgroundMusic();
 	}
 	wmgr.getWindow("main_menu")->setVisible(visible);
+}
+
+void update_server_list()
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+
+	server_manager* srvmgr = server_manager::getSingleton();
+	vector<server> servers = srvmgr->getServerList();
+	for (unsigned int i=0; i < servers.size(); i++)
+	{
+		server srv = servers[i];
+		vector<string> row;
+		row.push_back(srv.name);
+		row.push_back(srv.ip+":"+srv.port);
+		addTableRow(serverList, row);
+	}
 }

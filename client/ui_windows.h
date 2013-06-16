@@ -5,6 +5,7 @@
 //Menu principal
 void create_main_menu();
 void show_main_menu(bool visible);
+void update_server_list();
 
 //Fenêtre de sélection de team
 void create_team_selection();
