@@ -134,15 +134,20 @@ void sound_engine::frame()
 	{
 		scene::IAnimatedMeshSceneNode* modele = it->first;
 		core::vector3df position = modele->getAbsolutePosition();
-		std::vector<irrklang::ISound*> vector = it->second;
 
-		for(int counter = 0; counter < vector.size(); counter ++) {
-			if(vector[counter]->isFinished()) {
-				vector[counter]->drop();
-				vector.erase(vector.begin()+counter);
+		std::vector<irrklang::ISound*> tempSoundVector = it->second;
+		std::vector<int> indexes;
+		for(unsigned int counter = 0; counter < tempSoundVector.size(); counter ++) {
+			if(tempSoundVector[counter]->isFinished()) {
+				tempSoundVector[counter]->drop();
+				indexes.push_back(counter);
 			} else {
-				vector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
+				tempSoundVector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
 			}
+		}
+
+		for(unsigned int i = 0; i < indexes.size(); i ++) {
+			tempSoundVector.erase(tempSoundVector.begin() + indexes[i]);
 		}
 	}
 }

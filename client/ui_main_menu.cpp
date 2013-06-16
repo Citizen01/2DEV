@@ -96,7 +96,6 @@ bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 
 	App::getSingleton()->getNetworkEngine()->connect(cstr, port);
 	delete [] cstr;
-
 	return true;
 }
 
@@ -177,7 +176,6 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 			removeRow(serverList, line);
 		}
 	}
-
 	return true;
 }
 

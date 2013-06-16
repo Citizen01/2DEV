@@ -17,7 +17,7 @@ Plane::Plane(Player* pilot, std::string name)
 	_name = name;
 
 	loadMesh(); //Chargement du modèle 3d
-	App::getSingleton()->getSoundEngine()->attach3DSound("reactor.mp3",this->getMesh(),10.0f,250.0f);
+	App::getSingleton()->getSoundEngine()->attach3DSound("reactor.mp3",this->getMesh(),10.0f,250.0f,true);
 	EnginePower = 0;
 	MaxEnginePower = 10;
 }
