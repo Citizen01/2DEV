@@ -1,9 +1,9 @@
 #include "network_engine.h"
-
 #include <iostream>
 #include "app.h"
 #include "projectile.h"
 #include "unistd.h" //Pour la fonction sleep
+#include "ui_windows.h"
 
 using namespace std;
 using namespace RakNet;
@@ -55,6 +55,7 @@ void network_engine::connect(char* ip, int port)
 			{
 				cout << "Our connection request has been accepted." << endl;
 				m_Connected = true;
+				show_main_menu(false);
 				askForMap();
 			}
 			break;

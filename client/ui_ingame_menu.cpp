@@ -67,7 +67,7 @@ void create_ingame_menu()
 	// Load ingame menu
 	Window* ingameMenu = wmgr.loadWindowLayout("IngameMenu.layout", "IGM_");
 	root->addChildWindow( ingameMenu );
-	//planeSelecWindow->setVisible (false);
+	ingameMenu->setVisible (false);
 	ingameMenu->setProperty("AlwaysOnTop", "True");
 
 	//Btn Back to Game
