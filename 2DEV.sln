@@ -6,11 +6,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "client\client.vcx
 		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC} = {2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CEGUITest", "CEGUITest\CEGUITest.vcxproj", "{08ED271F-561D-412C-A791-B8E11DEC3B0D}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "server\server.vcxproj", "{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletTest", "BulletTest\BulletTest.vcxproj", "{2E2AB917-5101-45F7-87DB-07D420BAC438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,18 +18,10 @@ Global
 		{5300714B-46E2-4703-AC56-710826B1ECD6}.Debug|Win32.Build.0 = Debug|Win32
 		{5300714B-46E2-4703-AC56-710826B1ECD6}.Release|Win32.ActiveCfg = Release|Win32
 		{5300714B-46E2-4703-AC56-710826B1ECD6}.Release|Win32.Build.0 = Release|Win32
-		{08ED271F-561D-412C-A791-B8E11DEC3B0D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{08ED271F-561D-412C-A791-B8E11DEC3B0D}.Debug|Win32.Build.0 = Debug|Win32
-		{08ED271F-561D-412C-A791-B8E11DEC3B0D}.Release|Win32.ActiveCfg = Release|Win32
-		{08ED271F-561D-412C-A791-B8E11DEC3B0D}.Release|Win32.Build.0 = Release|Win32
 		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Debug|Win32.Build.0 = Debug|Win32
 		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Release|Win32.ActiveCfg = Release|Win32
 		{2C3C2790-D0AA-46C9-B411-B2AB62D00DBC}.Release|Win32.Build.0 = Release|Win32
-		{2E2AB917-5101-45F7-87DB-07D420BAC438}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2E2AB917-5101-45F7-87DB-07D420BAC438}.Debug|Win32.Build.0 = Debug|Win32
-		{2E2AB917-5101-45F7-87DB-07D420BAC438}.Release|Win32.ActiveCfg = Release|Win32
-		{2E2AB917-5101-45F7-87DB-07D420BAC438}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
