@@ -5,16 +5,54 @@
 using namespace std;
 using namespace constants;
 
+
 sound_engine::sound_engine(App* a) : engine(a)
 {
 	// start irrKlang with default parameters
 	soundEngine = irrklang::createIrrKlangDevice();
+	soundEndEvent = new MySoundEndReceiver();
 }
 
 sound_engine::~sound_engine(void)
 {
 	soundEngine->stopAllSounds();
-	soundEngine->drop(); // delete engine
+	soundEngine->drop(); // delete irrklang engine
+}
+
+void sound_engine::playClick() 
+{
+	play2D("click.mp3");
+}
+
+/*
+* définit la musique actuelle
+*/
+void sound_engine::playBackgroundMusic(std::string name)
+{
+	backgroundMusic = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), true, false, true);
+}
+
+/*
+* stoppe et clean la background music
+*/
+void sound_engine::stopBackgroundMusic()
+{
+	if(backgroundMusic) {
+		backgroundMusic->stop();
+		backgroundMusic->drop();
+	}
+}
+
+/*
+* pause la background music
+*/
+void sound_engine::setPauseBackgroundMusic(bool pause)
+{
+	if(pause) {
+		backgroundMusic->setIsPaused(true);
+	} else {
+		backgroundMusic->setIsPaused(false);
+	}
 }
 
 /*
@@ -22,10 +60,8 @@ sound_engine::~sound_engine(void)
 */
 void sound_engine::play2D(std::string name)
 {
-	irrklang::ISound* sound = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), true);
-	//TODO: Create an ISoundStopEventReceiver class and use id
-	//sound->setSoundStopEventReceiver();
-	soundVector2D.push_back(sound);
+	irrklang::ISound* sound = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), false, false, true);
+	sound->setSoundStopEventReceiver(soundEndEvent);
 }
 
 /*
@@ -35,16 +71,17 @@ void sound_engine::play2D(std::string name)
 void sound_engine::play3D(std::string name, core::vector3df position, float minDistance, float maxDistance)
 {
 	irrklang::vec3df vector = irrklang::vec3df();
-	irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),true,false,true);
+	irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),false,false,true);
 	sound->setMinDistance(minDistance);
 	sound->setMaxDistance(maxDistance);
+	sound->setSoundStopEventReceiver(soundEndEvent);
 }
 
 /*
 *	Attache un son 3D a un IAnimatedMeshSceneNode
 *   Prend en paramétre le nom du fichier son (machin.mp3), le SceneNode a lier, la distance maximum (Entre cette distance et la distance minimum, le son augmente) et la distance minimum (Entre 0 et cette distance, le son n'augmente pas)
 */
-void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode* modele, float minDistance, float maxDistance)
+void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode* modele, float minDistance, float maxDistance, bool looped)
 {
 	int size = soundMap3D[modele].size();
 	int counter = 0;
@@ -60,9 +97,9 @@ void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode
 
 	if(!exists) {
 		core::vector3df position = modele->getAbsolutePosition();
-		irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),true,false,true);
+		irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),looped,false,true);
 		sound->setMinDistance(minDistance);
-		sound->setMaxDistance(maxDistance);	
+		sound->setMaxDistance(maxDistance);
 		//TODO: Create an ISoundStopEventReceiver class and use id
 		//sound->setSoundStopEventReceiver();
 		soundMap3D[modele].push_back(sound);
@@ -98,8 +135,23 @@ void sound_engine::frame()
 		scene::IAnimatedMeshSceneNode* modele = it->first;
 		core::vector3df position = modele->getAbsolutePosition();
 		std::vector<irrklang::ISound*> vector = it->second;
-		for(unsigned int counter = 0; counter < vector.size(); counter ++) {
-			vector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
+
+		for(int counter = 0; counter < vector.size(); counter ++) {
+			if(vector[counter]->isFinished()) {
+				vector[counter]->drop();
+				vector.erase(vector.begin()+counter);
+			} else {
+				vector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
+			}
 		}
 	}
+}
+
+
+/*
+*	Drop du isound* quand le son s'est arrêté
+*/
+void sound_engine::MySoundEndReceiver::OnSoundStopped (irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData)
+{
+	sound->drop();
 }

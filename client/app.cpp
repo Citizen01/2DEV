@@ -1,4 +1,3 @@
-
 #include <irrlicht.h>
 #include <irrKlang.h>
 #include <iostream>
@@ -84,9 +83,6 @@ int App::run()
 		getGameEngine()->frame();
 		getSoundEngine()->frame();
 		getGraphicEngine()->frame();
-
-		//TODO: Sound Debug 2
-		//s->updateListenerPosition(camera->getPosition(), camera->getTarget() - camera->getAbsolutePosition());
 	}
 	cout << "Quitting ..." << endl;
 

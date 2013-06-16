@@ -7,6 +7,7 @@
 #include "app.h"
 #include "events.h"
 #include "particle_manager.h"
+#include "ui_windows.h"
 
 using namespace std;
 using namespace irr;
@@ -61,11 +62,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				ne->askToAccelerate();
 				break;
 			case DECELERATE:
-				{
-					scene::ICameraSceneNode* cam = gfxe->getSceneManager()->addCameraSceneNodeFPS(0, 100, 0.1);
-					cam->setFarValue(42000);
-					ne->askToDecelerate();
-				}
+				ne->askToDecelerate();
 				//TODO
 				break;
 			case LEFT:
@@ -87,6 +84,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				//TODO
 				break;
 			case PRIMARY_FIRE:
+				App::getSingleton()->getSoundEngine()->play3D("tir.mp3",this->GetGame()->getLocalPlayer()->GetPlane()->getPosition(),10.0f,250.0f);
 				//TODO
 				break;
 			case SECONDARY_FIRE:
@@ -97,6 +95,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				ne->GetReady();
 				break;
 			case TOGGLEMENU:
+				show_main_menu(false);
 				//TODO
 				particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
 				break;

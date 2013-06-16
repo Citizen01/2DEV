@@ -438,7 +438,6 @@
     <ClCompile Include="faction.cpp">
       <Filter>Source Files\entities</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="ui_main_menu.cpp">
       <Filter>Source Files\graphics\ui</Filter>
     </ClCompile>
@@ -450,13 +449,12 @@
     </ClCompile>
     <ClCompile Include="ui_team_selection.cpp">
       <Filter>Source Files\graphics\ui</Filter>
-=======
-    <ClCompile Include="particle_manager.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="particle_emitter.cpp">
-      <Filter>Source Files</Filter>
->>>>>>> origin/nabil
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="particle_manager.cpp">
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -970,7 +968,6 @@
     <ClInclude Include="faction.h">
       <Filter>Header Files\entities</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="ui_windows.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
@@ -985,13 +982,12 @@
     </ClInclude>
     <ClInclude Include="dirent.h">
       <Filter>Header Files\utils</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="particle_manager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="particle_emitter.h">
-      <Filter>Header Files</Filter>
->>>>>>> origin/nabil
+      <Filter>Header Files\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

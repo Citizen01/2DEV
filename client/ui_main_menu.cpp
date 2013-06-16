@@ -14,6 +14,7 @@ using namespace std;
 //Bouton Quick Connect du menu principal
 bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* QuickCoWin = wmgr.getWindow("QuickCo_Quick_connect");
@@ -25,6 +26,7 @@ bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 //Bouton Server list du menu principal
 bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* SrvlWin = wmgr.getWindow("Srvl_ServerList");
@@ -36,6 +38,7 @@ bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 //Bouton About du menu principal
 bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -47,6 +50,7 @@ bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 //Bouton Exit du menu principal
 bool handleExitBtn (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	App::getSingleton()->stop();
 	return true;
 }
@@ -54,6 +58,7 @@ bool handleExitBtn (const CEGUI::EventArgs &e)
 //Bouton Back et la croix de la fenêtre About
 bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -65,6 +70,8 @@ bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 //Bouton Connect de la fenêtre Quick Connect
 bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+	
 	WindowManager& wmgr = WindowManager::getSingleton();
 	
 	Editbox* champIp = (Editbox*) wmgr.getWindow("QuickCo_Quick_connect/IpAdress");
@@ -83,12 +90,15 @@ bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 
 	App::getSingleton()->getNetworkEngine()->connect(cstr, port);
 	delete [] cstr;
+
 	return true;
 }
 
 //Bouton Add de la fenêtre Server List
 bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Editbox* serverChamp = (Editbox*) wmgr.getWindow("Srvl_ServerList/Server_Name");
@@ -142,6 +152,8 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 //Bouton Delete de la fenêtre Server List
 bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
@@ -160,12 +172,15 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 			removeRow(serverList, line);
 		}
 	}
+
 	return true;
 }
 
 //Bouton Connect de la fenêtre Quick Connect
 bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
@@ -212,12 +227,14 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 
 	server_manager::getSingleton()->loadServers();
 	App::getSingleton()->getNetworkEngine()->connect(ipChar, p);
+
 	return true;
 }
 
 //Croix de la fenêtre Quick Connect
 bool handleQuickConnectClose (const EventArgs&e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("QuickCo_Quick_connect")->setVisible(false);
 	return true;
@@ -226,6 +243,7 @@ bool handleQuickConnectClose (const EventArgs&e)
 //Croix de la fenêtre Server List
 bool handleSrvlBtnClose (const EventArgs&e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("Srvl_ServerList")->setVisible(false);
 	return true;
@@ -342,6 +360,10 @@ void create_main_menu()
 void show_main_menu(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
-
+	if(visible) {
+		App::getSingleton()->getSoundEngine()->playBackgroundMusic("menu.mp3");
+	} else {
+		App::getSingleton()->getSoundEngine()->stopBackgroundMusic();
+	}
 	wmgr.getWindow("main_menu")->setVisible(visible);
 }

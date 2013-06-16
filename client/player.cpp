@@ -76,7 +76,7 @@ void Player::updateThirdView()
 	m.transformVect(upv);
 
 	// transform camera offset
-	core::vector3df offset = core::vector3df(0, 0, -2);
+	core::vector3df offset = core::vector3df(0, 2, -15);
 	m.transformVect(offset);
    
 	// set camera
