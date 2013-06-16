@@ -5,8 +5,7 @@
 using namespace std;
 using namespace constants;
 
-
-sound_engine::sound_engine()
+sound_engine::sound_engine(App* a) : engine(a)
 {
 	// start irrKlang with default parameters
 	soundEngine = irrklang::createIrrKlangDevice();
@@ -16,7 +15,43 @@ sound_engine::sound_engine()
 sound_engine::~sound_engine(void)
 {
 	soundEngine->stopAllSounds();
-	soundEngine->drop(); // delete engine
+	soundEngine->drop(); // delete irrklang engine
+}
+
+void sound_engine::playClick() 
+{
+	play2D("click.mp3");
+}
+
+/*
+* définit la musique actuelle
+*/
+void sound_engine::playBackgroundMusic(std::string name)
+{
+	backgroundMusic = soundEngine->play2D((PATH_TO_MEDIA + "/sounds/" + name).c_str(), true, false, true);
+}
+
+/*
+* stoppe et clean la background music
+*/
+void sound_engine::stopBackgroundMusic()
+{
+	if(backgroundMusic) {
+		backgroundMusic->stop();
+		backgroundMusic->drop();
+	}
+}
+
+/*
+* pause la background music
+*/
+void sound_engine::setPauseBackgroundMusic(bool pause)
+{
+	if(pause) {
+		backgroundMusic->setIsPaused(true);
+	} else {
+		backgroundMusic->setIsPaused(false);
+	}
 }
 
 void sound_engine::playClick() 
@@ -99,7 +134,7 @@ void sound_engine::attach3DSound(std::string name, scene::IAnimatedMeshSceneNode
 		core::vector3df position = modele->getAbsolutePosition();
 		irrklang::ISound* sound = soundEngine->play3D((PATH_TO_MEDIA + "/sounds/" + name).c_str(),irrklang::vec3df(position.X, position.Y, position.Z),looped,false,true);
 		sound->setMinDistance(minDistance);
-		sound->setMaxDistance(maxDistance);	
+		sound->setMaxDistance(maxDistance);
 		//TODO: Create an ISoundStopEventReceiver class and use id
 		//sound->setSoundStopEventReceiver();
 		soundMap3D[modele].push_back(sound);
@@ -135,6 +170,7 @@ void sound_engine::frame()
 		scene::IAnimatedMeshSceneNode* modele = it->first;
 		core::vector3df position = modele->getAbsolutePosition();
 		std::vector<irrklang::ISound*> vector = it->second;
+
 		for(int counter = 0; counter < vector.size(); counter ++) {
 			if(vector[counter]->isFinished()) {
 				vector[counter]->drop();
@@ -148,7 +184,7 @@ void sound_engine::frame()
 
 
 /*
-	Drop du isound* quand le son s'est arrêté
+*	Drop du isound* quand le son s'est arrêté
 */
 void sound_engine::MySoundEndReceiver::OnSoundStopped (irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData)
 {

@@ -18,7 +18,7 @@ class XMLParser {
 private:
 	std::vector<char> buffer;
 	rapidxml::xml_document<> m_Doc;
-
+	std::string filename;
 public:
 	XMLParser(std::string fileName);
 	bool openXML(std::string fileName);

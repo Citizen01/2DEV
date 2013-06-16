@@ -4,6 +4,8 @@
 #include "app.h"
 #include <CEGUI.h>
 #include <iostream>
+#include <sstream>
+#include "utils.h"
 
 using namespace CEGUI;
 using namespace constants;
@@ -13,6 +15,7 @@ using namespace std;
 bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* QuickCoWin = wmgr.getWindow("QuickCo_Quick_connect");
@@ -25,9 +28,11 @@ bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* SrvlWin = wmgr.getWindow("Srvl_ServerList");
+	update_server_list();
 	SrvlWin->setVisible (true);
 
 	return true;
@@ -37,6 +42,7 @@ bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -49,6 +55,7 @@ bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 bool handleExitBtn (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	App::getSingleton()->stop();
 	return true;
 }
@@ -57,6 +64,7 @@ bool handleExitBtn (const CEGUI::EventArgs &e)
 bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -69,7 +77,25 @@ bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
-	cout << "T'est Co Gros !" << endl;
+	
+	WindowManager& wmgr = WindowManager::getSingleton();
+	
+	Editbox* champIp = (Editbox*) wmgr.getWindow("QuickCo_Quick_connect/IpAdress");
+	string ip = champIp->getText().c_str();
+
+	Editbox* portCase = (Editbox*) wmgr.getWindow("QuickCo_Quick_connect/PortCase");
+	string portStr = portCase->getText().c_str();
+	
+	int port;
+	std::istringstream ss(portStr);
+	ss >> port;
+	
+	char *cstr = new char[ip.length() + 1];
+	strcpy(cstr, ip.c_str());
+	cout << cstr << endl;
+
+	App::getSingleton()->getNetworkEngine()->connect(cstr, port);
+	delete [] cstr;
 	return true;
 }
 
@@ -77,19 +103,54 @@ bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
-	cout << "Ta Ajoute un PONEY Gros !" << endl;
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
-	Editbox* serverchamp = (Editbox*) wmgr.getWindow("Srvl_ServerList/Server_Name");
-	string servername = serverchamp->getText().c_str();
+	Editbox* serverChamp = (Editbox*) wmgr.getWindow("Srvl_ServerList/Server_Name");
+	string serverName = serverChamp->getText().c_str();
+	
+	
+	Editbox* ipBare = (Editbox*) wmgr.getWindow("Srvl_ServerList/Ip_bare");
+	string ipAdress = ipBare->getText().c_str();	
 
-	//TODO: Récup le champ adresse + split
+	size_t pos = 0;
+	string token;
+	vector<std::string> resultat;
+	string delimiter = ":";
+	string ip;
+	string port;
 
-	//server_manager::getSingleton()->addServer(servername, ip, adress);
-	vector<char*> row;
-	row.push_back("servername");
-	//row.
-	//addTableRow
+	while((pos = ipAdress.find(delimiter)) != string::npos)
+	{
+		token = ipAdress.substr(0, pos);
+		resultat.push_back(token);
+		ipAdress.erase(0,pos + delimiter.length());
+	}
+	resultat.push_back(ipAdress);
+
+	if (resultat.size() == 1)
+	{
+		ip = ipAdress;
+		port = intToString(DEFAULT_SERVER_PORT);
+	}
+	else
+	{
+		ip = resultat[0];
+		port = resultat[1];
+	}
+	
+	string fullAddr = ip +":"+ port;
+	
+	bool success = server_manager::getSingleton()->addServer(serverName, ip, port);
+	if(success) 
+	{
+		MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+		vector<string> row;
+		row.push_back(serverName);
+		row.push_back(fullAddr);
+		addTableRow(serverList, row);
+	}
+	
 	return true;
 }
 
@@ -97,7 +158,24 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
-	cout << "Ah bah non ta tout efface Gros !" << endl;
+
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+	ListboxItem* item = serverList->getFirstSelectedItem();
+	if (item)
+	{
+		string serverName = item->getText().c_str();
+		
+		cout << serverName << endl;
+		bool success = server_manager::getSingleton()->removeServer(serverName);
+		if (success)
+		{
+			MultiColumnList* deleteServerList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Delete");
+			int line = findIndexOfItem(serverList, item);
+			removeRow(serverList, line);
+		}
+	}
 	return true;
 }
 
@@ -105,7 +183,52 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
-	cout << "T'est Co Gros !" << endl;
+
+	WindowManager& wmgr = WindowManager::getSingleton();
+
+	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+	
+	ListboxItem* serverNameItem = serverList->getFirstSelectedItem();
+	string serverNameItemText = serverNameItem->getText().c_str();
+
+	ListboxItem* adressItem = serverList->getNextSelected(serverNameItem);
+	string adressItemText = adressItem->getText().c_str();
+
+	size_t pos = 0;
+	string token;
+	vector<std::string> resultat;
+	string delimiter = ":";
+	string ip;
+	string port;
+
+	while((pos = adressItemText.find(delimiter)) != string::npos)
+	{
+		token = adressItemText.substr(0, pos);
+		resultat.push_back(token);
+		adressItemText.erase(0,pos + delimiter.length());
+	}
+	resultat.push_back(adressItemText);
+
+	if (resultat.size() == 1)
+	{
+		ip = adressItemText;
+		port = intToString(DEFAULT_SERVER_PORT);
+	}
+	else
+	{
+		ip = resultat[0];
+		port = resultat[1];
+	}
+	
+	int p;
+	std::istringstream ss(port);
+	ss >> p;
+	
+	char *ipChar = new char[ip.length() + 1];
+	strcpy(ipChar, ip.c_str());
+
+	server_manager::getSingleton()->loadServers();
+	App::getSingleton()->getNetworkEngine()->connect(ipChar, p);
 	return true;
 }
 
@@ -113,6 +236,7 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 bool handleQuickConnectClose (const EventArgs&e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("QuickCo_Quick_connect")->setVisible(false);
 	return true;
@@ -122,6 +246,7 @@ bool handleQuickConnectClose (const EventArgs&e)
 bool handleSrvlBtnClose (const EventArgs&e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("Srvl_ServerList")->setVisible(false);
 	return true;
@@ -181,7 +306,7 @@ void create_main_menu()
 	Exit->subscribeEvent(PushButton::EventClicked, handleExitBtn);
 
 	// Load a Quick Connect
-	Window* QuickWin = wmgr.loadWindowLayout("Quicked.layout", "QuickCo_");
+	Window* QuickWin = wmgr.loadWindowLayout("QuickConnect.layout", "QuickCo_");
 	MenuBackground->addChildWindow(QuickWin);
 	QuickWin->setVisible (false);
 	QuickWin->setProperty("AlwaysOnTop", "True");
@@ -194,7 +319,7 @@ void create_main_menu()
 	
 	
 	// Load a Server_list
-	Window* Srvl = wmgr.loadWindowLayout("Server_list.layout", "Srvl_");
+	Window* Srvl = wmgr.loadWindowLayout("ServerList.layout", "Srvl_");
 	MenuBackground->addChildWindow( Srvl );
 	Srvl->setVisible (false);
 	Srvl->setProperty("AlwaysOnTop", "True");
@@ -216,7 +341,8 @@ void create_main_menu()
 	MultiColumnList* SrvlTableau = (MultiColumnList*)wmgr.getWindow("Srvl_ServerList/Server_list");
 	SrvlTableau->addColumn("Server name", 0, UDim(0.60f, 0));
 	SrvlTableau->addColumn("Address", 1, UDim(0.38f, 0));
-	SrvlTableau->setProperty("ForceHorzScrollbar", "False");
+	SrvlTableau->setSelectionMode(MultiColumnList::SelectionMode::RowSingle);
+	SrvlTableau->setProperty("SelectionMode", "0");
 
 	// Load About
 	Window* AboutWidget = wmgr.loadWindowLayout("About.layout", "Ab_");
@@ -243,4 +369,20 @@ void show_main_menu(bool visible)
 		App::getSingleton()->getSoundEngine()->stopBackgroundMusic();
 	}
 	wmgr.getWindow("main_menu")->setVisible(visible);
+}
+
+void update_server_list()
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+	server_manager* srvmgr = server_manager::getSingleton();
+	vector<server> servers = srvmgr->getServerList();
+	for (unsigned int i=0; i < servers.size(); i++)
+	{
+		server srv = servers[i];
+		vector<string> row;
+		row.push_back(srv.name);
+		row.push_back(srv.ip+":"+srv.port);
+		addTableRow(serverList, row);
+	}
 }

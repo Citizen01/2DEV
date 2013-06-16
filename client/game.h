@@ -10,6 +10,7 @@
 #include "faction.h"
 #include "player.h"
 
+class Projectile;
 
 class game
 {
@@ -21,10 +22,10 @@ private:
 
 	std::vector<Faction*> faction_list;
 	std::vector<Player*> player_list;
+	std::vector<Projectile*> projectile_list;
 
 	//Assigné automatiquement lors du 1er appel à getLocalPlayer()
 	Player* local_player;
-
 
 public:
 
@@ -36,11 +37,15 @@ public:
 	
 	void addFaction(std::string factionName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID);
 
+	void addProjectile(Player* owner, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID, RakNet::RakString modelFile);
+
 	Player* getLocalPlayer();
 	Player* getPlayerByName(std::string nickname);
 
 	std::vector<Player*> getPlayerList();
 	std::vector<Faction*> getFactionList();
+
+	void updateJoinFactionWindow();
 
 };
 

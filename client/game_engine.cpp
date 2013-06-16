@@ -5,13 +5,15 @@
 #include "GLOBALS.h"
 #include "utils.h"
 #include "app.h"
+#include "events.h"
+#include "particle_manager.h"
 #include "ui_windows.h"
 
 using namespace std;
 using namespace irr;
 using namespace constants;
 
-game_engine::game_engine()
+game_engine::game_engine(App* a) : engine(a)
 {
 	m_Game = NULL;
 }
@@ -33,12 +35,12 @@ game* game_engine::GetGame()
 void game_engine::StopGame()
 {
 	delete m_Game;
+	m_Game = NULL;
 }
 
 //Implémentation de la méthode virtuelle pure héritée de la classe engine
 void game_engine::frame()
 {
-
 }
 
 bool game_engine::OnEvent(const SEvent& event)
@@ -46,25 +48,22 @@ bool game_engine::OnEvent(const SEvent& event)
 	//Handle events here:
 	if (event.EventType == EET_USER_EVENT)
 	{
-		//cout << "Réception d'un EET_USER_EVENT ..." << endl;
+		int type = event.UserEvent.UserData1;
 
-		string* type = (string*)event.UserEvent.UserData1;
-		//cout << "Le type de l'event est :" << *type << endl;
+		if (type == EVENT_TYPE::onBindedKeyHited){
+			ev_onBindedKeyHited* args = (ev_onBindedKeyHited*)event.UserEvent.UserData2;
 
-		if (*type == "ACTION"){
-			ACTION_CODE act = (ACTION_CODE)event.UserEvent.UserData2;
-			//cout << "Valeur de l'action: " << act << endl;
+			ACTION_CODE act = args->actionCode;
 
 			switch (act)
 			{
 			case ACCELERATE:
 				//TODO
 				ne->askToAccelerate();
-				//moveNodeInLocalSpace(plane, irr::core::vector3df(0,0,1), 17.0f);
 				break;
 			case DECELERATE:
-				ne->askToDecelerate();
 				//TODO
+				ne->askToDecelerate();
 				break;
 			case LEFT:
 				//TODO
@@ -74,19 +73,19 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case DIVE:
 				//TODO
-				//rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(1,0,0));
+				ne->askToDive();
 				break;
 			case STRAIGHTEN:
 				//TODO
-				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(1,0,0));
+				ne->askToStraighten();
 				break;
 			case ROLL_LEFT:
 				//TODO
-				//rotateNodeInLocalSpace(plane, 3.f, irr::core::vector3df(0,0,1));
+				ne->askToRollLeft();
 				break;
 			case ROLL_RIGHT:
 				//TODO
-				//rotateNodeInLocalSpace(plane, -3.f, irr::core::vector3df(0,0,1));
+				ne->askToRollRight();
 				break;
 			case PRIMARY_FIRE:
 				App::getSingleton()->getSoundEngine()->play3D("tir.mp3",this->GetGame()->getLocalPlayer()->GetPlane()->getPosition(),10.0f,250.0f);
@@ -94,14 +93,19 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case SECONDARY_FIRE:
 				//TODO
+				ne->askToShootMissile();
 				break;
 			case EQUIPMENT:
 				//TODO
 				ne->GetReady();
 				break;
 			case TOGGLEMENU:
-				show_main_menu(false);
-				//TODO
+				{
+					toggle_ingame_menu();
+					particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
+					scene::ICameraSceneNode* cam = gfxe->getSceneManager()->addCameraSceneNodeFPS(0, 50, 0.005);
+					cam->setPosition(core::vector3df(0, 2, 0));
+				}
 				break;
 			default:
 				//Nothing

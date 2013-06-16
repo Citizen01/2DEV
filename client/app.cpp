@@ -1,4 +1,3 @@
-
 #include <irrlicht.h>
 #include <irrKlang.h>
 #include <iostream>
@@ -18,11 +17,15 @@ App* App::instance = NULL;
 
 App::App()
 {
+	initialiseGlobals();
+	loadSettings();
+	loadBinds();
+
 	//Crée et store les différents modules
-	gfx = new graphics_engine();
-	g = new game_engine();
-	n = new network_engine();
-	s = new sound_engine();
+	gfx = new graphics_engine(this);
+	g = new game_engine(this);
+	n = new network_engine(this);
+	s = new sound_engine(this);
 
 	/// Linkage des modules entre eux ///
 	//game_engine aux autres//
@@ -45,9 +48,6 @@ App::App()
 	s->link_graphics_engine(gfx);
 	s->link_network_engine(n);
 
-	initialiseGlobals();
-	loadSettings();
-	loadBinds();
 	server_manager::getSingleton()->loadServers();
 
 	running = true;
@@ -73,14 +73,8 @@ int App::run()
 {
 	IrrlichtDevice* device = getGraphicEngine()->getDevice();
 
-	//TODO: A supprimer Sound Debug
-	//s->play3D("ophelia.mp3",camera->getPosition(),10.0f,250.0f);
-	//s->attach3DSound("godlike.mp3",planeNode,10.0f,250.0f);
-
-	//createExplosion(core::vector3df(50000,19997,50015));
-	
-	//TODO: ADDED FOR DEBUG
 	show_main_menu(true);
+
 	int lastFPS = -1;
 	while(device->run() && running)
 	{
@@ -89,9 +83,6 @@ int App::run()
 		getGameEngine()->frame();
 		getSoundEngine()->frame();
 		getGraphicEngine()->frame();
-
-		//TODO: Sound Debug 2
-		//s->updateListenerPosition(camera->getPosition(), camera->getTarget() - camera->getAbsolutePosition());
 	}
 	cout << "Quitting ..." << endl;
 

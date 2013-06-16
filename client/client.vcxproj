@@ -191,6 +191,7 @@
     <ClCompile Include="..\Libraries\Raknet\include\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\Libraries\Raknet\include\_FindFirst.cpp" />
     <ClCompile Include="server_manager.cpp" />
+    <ClCompile Include="ui_ingame_menu.cpp" />
     <ClCompile Include="ui_main_menu.cpp" />
     <ClCompile Include="cgui.cpp" />
     <ClCompile Include="engine.cpp" />
@@ -204,10 +205,14 @@
     <ClCompile Include="MainEventListener.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="network_engine.cpp" />
+    <ClCompile Include="particle_emitter.cpp" />
+    <ClCompile Include="particle_manager.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="projectile.cpp" />
     <ClCompile Include="sound_engine.cpp" />
-    <ClCompile Include="ui_team_join.cpp" />
+    <ClCompile Include="ui_plane_selection.cpp" />
+    <ClCompile Include="ui_team_selection.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="XMLParser.cpp" />
   </ItemGroup>
@@ -364,6 +369,8 @@
     <ClInclude Include="..\Libraries\Raknet\include\WSAStartupSingleton.h" />
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h" />
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h" />
+    <ClInclude Include="dirent.h" />
+    <ClInclude Include="getopt.h" />
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="server_manager.h" />
     <ClInclude Include="ui_windows.h" />
@@ -380,10 +387,14 @@
     <ClInclude Include="MainEventListener.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="network_engine.h" />
+    <ClInclude Include="particle_emitter.h" />
+    <ClInclude Include="particle_manager.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="projectile.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="sound_engine.h" />
+    <ClInclude Include="unistd.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="XMLParser.h" />
   </ItemGroup>

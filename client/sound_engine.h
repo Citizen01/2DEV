@@ -25,7 +25,7 @@ private:
 	MySoundEndReceiver* soundEndEvent;
 
 public:
-	sound_engine();
+	sound_engine(App* a);
 	~sound_engine(void);
 
 	void playClick();

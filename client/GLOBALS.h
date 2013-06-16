@@ -10,6 +10,7 @@ namespace constants {
 	const std::string PATH_TO_MEDIA = "../Media";
 	const std::string MAP_HEIGHTMAP_NAME = "heightmap.png";
 	const std::string MAP_TEXTURE_NAME = "texture.png";
+	const int DEFAULT_SERVER_PORT = 12320;
 
 	//Utilisé pour traduire en irr::EKEY_CODE
 	//std::map<std::string,irr::EKEY_CODE> KEYMAP;
@@ -30,7 +31,20 @@ namespace constants {
 		TOGGLEMENU,
 		ACTION_CODES_COUNT
 	};
+
+	enum PARTICLE_TYPE
+	{
+		PARTICLE_FIRE_NORMAL, //Feu dirigé vers le haut
+		PARTICLE_FIRE_DIRECTED, //Feu dirigé autrement (ex: propulsion)
+		PARTICLE_EXPLOSION, //Explosion
+		PARTICLE_SMOKE_WHITE, //Fumée blanche
+		PARTICLE_SMOKE_BLACK, //Fumée noire
+		PARTICLE_LIGHT_WHITE, //Lumière blanche (addLightSceneNode ?)
+		PARTICLE_TYPE_COUNT //Contient le nombre de types de particules.
+	};
+
 }
+
 
 struct GameRules
 {

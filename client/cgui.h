@@ -4,6 +4,7 @@
 #include <CEGUI.h>
 #include <RendererModules\Irrlicht\CEGUIIrrlichtRenderer.h>
 #include <string>
+#include "app.h"
 
 class Cgui
 {
@@ -12,9 +13,10 @@ private:
 	std::string skin;
 	irr::IrrlichtDevice* device;
 	CEGUI::IrrlichtRenderer& irrRenderer;
+	App* app;
 
 public:
-	Cgui(irr::IrrlichtDevice* device, std::string skin);
+	Cgui(irr::IrrlichtDevice* device, App* a);
 	~Cgui(void);
 
 	/* Charge le skin, crée la root window */
@@ -31,5 +33,7 @@ public:
 	irr::IrrlichtDevice* getDevice();
 
 	CEGUI::IrrlichtRenderer& getRenderer();
+
+	std::vector<std::string> Cgui::getPlaneThumbs();
 };
 

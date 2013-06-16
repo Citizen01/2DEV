@@ -7,6 +7,7 @@
 #include "plane.h"
 #include "MainEventListener.h"
 
+class Cgui;
 class Map;
 class Plane;
 class MainEventListener;
@@ -22,7 +23,7 @@ private:
 
 
 public:
-	graphics_engine();
+	graphics_engine(App* a);
 	~graphics_engine(void);
 
 	void frame();

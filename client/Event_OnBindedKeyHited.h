@@ -3,10 +3,8 @@
 #include "GLOBALS.h"
 #include <irrlicht.h>
 
-/*
-struct onBindedKeyHited
+struct ev_onBindedKeyHited
 {
-	ACTION_CODE action_code;
+	constants::ACTION_CODE actionCode;
 	bool pressedDown;
 };
-*/

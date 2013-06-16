@@ -29,7 +29,7 @@ Plane::~Plane(void)
 void Plane::loadMesh()
 {
 	scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
-	std::string modefile = constants::PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
+	std::string modefile = constants::PATH_TO_MEDIA + "/planes/"+_name+"/"+_name+".3DS";
 	_model = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
   
 	//On met l'auto-éclairage (debug)

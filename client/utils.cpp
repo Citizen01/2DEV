@@ -36,7 +36,7 @@ bool isFile(const string file)
 	return (bool)ifile;
 }
 
-extern std::map<std::string,irr::EKEY_CODE> KEYMAP;
+extern map<string,EKEY_CODE> KEYMAP;
 
 EKEY_CODE strToEkeyCode(string str)
 {
@@ -44,11 +44,12 @@ EKEY_CODE strToEkeyCode(string str)
 		return KEYMAP.at(str);
 	else
 		return KEYMAP.at("INVALID_KEY");
+	
 }
 
 string ekeyCodeToStr(EKEY_CODE code)
 {
-	for (std::map<std::string,irr::EKEY_CODE>::iterator it=KEYMAP.begin(); it!=KEYMAP.end(); ++it)
+	for (map<string,irr::EKEY_CODE>::iterator it=KEYMAP.begin(); it!=KEYMAP.end(); ++it)
 	{
 		if (it->second == code)
 			return it->first;
@@ -56,9 +57,9 @@ string ekeyCodeToStr(EKEY_CODE code)
 	return NULL;
 }
 
-extern std::map<std::string,ACTION_CODE> ACTIONMAP;
+extern map<string,ACTION_CODE> ACTIONMAP;
 
-constants::ACTION_CODE strToActionCode(std::string str)
+constants::ACTION_CODE strToActionCode(string str)
 {
 	if (ACTIONMAP.find(str) != ACTIONMAP.end())
 		return ACTIONMAP.at(str);
@@ -66,9 +67,9 @@ constants::ACTION_CODE strToActionCode(std::string str)
 		return ACTIONMAP.at("INVALID_ACTION");
 }
 
-std::string actionCodeToStr(constants::ACTION_CODE code)
+string actionCodeToStr(constants::ACTION_CODE code)
 {
-	for (std::map<std::string,constants::ACTION_CODE>::iterator it=ACTIONMAP.begin(); it!=ACTIONMAP.end(); ++it)
+	for (map<string,constants::ACTION_CODE>::iterator it=ACTIONMAP.begin(); it!=ACTIONMAP.end(); ++it)
 	{
 		if (it->second == code)
 			return it->first;
@@ -76,61 +77,154 @@ std::string actionCodeToStr(constants::ACTION_CODE code)
 	return NULL;
 }
 
-void createExplosion(irr::core::vector3df position){
+scene::IParticleSystemSceneNode* createFire(irr::core::vector3df position){
 		IrrlichtDevice* device =  App::getSingleton()->getGraphicEngine()->getDevice();
 		scene::ISceneManager* smgr = device->getSceneManager();
 		scene::IParticleSystemSceneNode* ps = smgr->addParticleSystemSceneNode(false);
 		video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
-	
+
 		//create a particle
-		scene::IParticleSphereEmitter* em = ps->createSphereEmitter
-			(position,
-			100.00f,
-			core::vector3df(0.3f,0.3f,0.3f),
-			5,
-			10,
-			video::SColor(255, 0, 0,0),
-			video::SColor(255,255,255,255),
-			2000,
-			40000,
-			0,
-			core::dimension2df(5.0f, 5.0f),
-			core::dimension2df(50.0f, 50.0f));
+		scene::IParticleEmitter* em = ps->createBoxEmitter(
+		core::aabbox3d<f32>(-7,0,-7,7,1,7), // emitter size
+		core::vector3df(0.0f,0.06f,0.0f),   // initial direction
+		80,100,                             // emit rate
+		video::SColor(0,255,255,255),       // darkest color
+		video::SColor(0,255,255,255),       // brightest color
+		800,2000,0,                         // min and max age, angle
+		core::dimension2df(10.f,10.f),         // min size
+		core::dimension2df(20.f,20.f));        // max size
 		
 		ps->setEmitter(em); // this grabs the emitter
 		em->drop(); // so we can drop it here without deleting it
 		scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
 		
 		ps->addAffector(paf); // same goes for the affector
-		paf->drop(); 
+		paf->drop();
 
-		ps->setPosition(position);
+		core::vector3df pl_pos = position;
+		ps->setPosition(pl_pos);
 		ps->setScale(core::vector3df(2,2,2));
 		ps->setMaterialFlag(video::EMF_LIGHTING, false);
 		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
-		ps->setMaterialTexture(0, driver->getTexture((PATH_TO_MEDIA + "/test/fire.bmp").c_str()));
+		ps->setMaterialTexture(0, driver->getTexture("../Media/test/fire.bmp"));
+		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+
+		return ps;
+}
+
+void createExplosion(irr::core::vector3df position){
+
+		scene::IParticleSystemSceneNode* ps = App::getSingleton()->getGraphicEngine()->getSceneManager()->addParticleSystemSceneNode(false);
+		video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
+
+		//create a particle
+		scene::IParticleEmitter* em = ps->createBoxEmitter(
+		core::aabbox3d<f32>(0.1,0.1,0.1,0.1,0.1,0.1), // emitter size
+		core::vector3df(0.01f,0.01f,0.01f),   // initial direction
+		500,500,                             // emit rate
+		video::SColor(0,255,255,255),       // darkest color
+		video::SColor(0,255,255,255),       // brightest color
+		1000,1000,360,                         // min and max age, angle
+		core::dimension2df(6.f,6.f),         // min size
+		core::dimension2df(6.f,6.f));        // max size
+		
+		ps->setEmitter(em); // this grabs the emitter
+		em->drop(); // so we can drop it here without deleting it
+		scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
+		
+		ps->addAffector(paf); // same goes for the affector
+		paf->drop();
+
+		core::vector3df pl_pos = position;
+		ps->setPosition(pl_pos);
+		//ps->setScale(core::vector3df(2,2,2));
+		ps->setMaterialFlag(video::EMF_LIGHTING, false);
+		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
+		ps->setMaterialTexture(0, driver->getTexture("../Media/test/fire.bmp"));
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 }
 
-void addTableRow(MultiColumnList* tabl, vector<char*> row_datas)
+void addTableRow(MultiColumnList* tabl, vector<string> row_datas)
 {	
+	if(!tabl || row_datas.size() <= 0)
+		return;
+
 	uint rownum = tabl->addRow();
 	for (unsigned int i=0; i < tabl->getColumnCount(); i++)
 	{
 		ListboxTextItem* list = new ListboxTextItem(row_datas[i]);
 		tabl->setItem(list, i, rownum);
-	}	
+		list->setSelectionBrushImage("TaharezLook", "MultiListSelectionBrush");
+	}
 }
 
 void clearTable(MultiColumnList* tabl)
 {
-	for (unsigned int i=0; i < tabl->getRowCount(); i++)
-		tabl->removeRow(i);
+	if(!tabl)
+		return;
+
+	tabl->resetList();
 }
 
-void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas)
+
+void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<string>> table_datas)
 {
+	if(!tabl || table_datas.size() <= 0)
+		return;
+
 	clearTable(tabl);
 	for (unsigned int i = 0; i < table_datas.size(); i++)
 		addTableRow(tabl, table_datas[i]);
+}
+
+void removeRow(MultiColumnList* tabl, int line)
+{
+	if(!tabl)
+		return;
+
+	ListboxItem* selectedItem = tabl->getFirstSelectedItem();
+	int index = findIndexOfItem(tabl, selectedItem);
+	if (index != -1)
+	{
+		tabl->removeRow(line);
+	}
+}
+
+int findIndexOfItem(MultiColumnList* tabl, ListboxItem* item)
+{
+	if(!tabl || !item)
+		return -1;
+
+	for (unsigned int i=0; i < tabl->getRowCount(); i++)
+			if (tabl->isListboxItemInRow(item, i))
+				return i;
+	return -1;
+}
+
+string intToString(int number)
+{
+	std::ostringstream ostr;
+	ostr << number; 
+	return ostr.str();
+}
+
+Faction* getFactionByName(std::string name)
+{
+	vector<Faction*> factionList = App::getSingleton()->getGameEngine()->GetGame()->getFactionList();
+	
+	for (unsigned int i = 0; i < factionList.size(); i++)
+	{
+		Faction* fac = factionList.at(i);
+		if (fac->GetName() == name)
+			return fac;
+	}
+	return NULL;
+}
+
+void showCursor(bool show)
+{
+	if (show)
+		CEGUI::MouseCursor::getSingleton().show();
+	else
+		CEGUI::MouseCursor::getSingleton().hide();
 }

@@ -1,13 +1,14 @@
 #include "engine.h"
-#include <cstdlib> //Pour NULL
+//#include <cstdlib> //Pour NULL
 
 #include "game_engine.h"
 #include "graphics_engine.h"
 #include "network_engine.h"
 #include "sound_engine.h"
 
-engine::engine()
+engine::engine(App* a)
 {
+	app = a;
 	ge = NULL;
 	ne = NULL;
 	gfxe = NULL;

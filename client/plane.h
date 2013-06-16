@@ -34,6 +34,8 @@ public:
 
 	void loadMesh();
 
+	inline Player* getPilot() { return m_Pilot; }
+
 	inline std::string getName() { return _name; }
 	RakNet::RakString GetRakName();
 

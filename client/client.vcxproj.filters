@@ -441,11 +441,26 @@
     <ClCompile Include="ui_main_menu.cpp">
       <Filter>Source Files\graphics\ui</Filter>
     </ClCompile>
-    <ClCompile Include="ui_team_join.cpp">
-      <Filter>Source Files\graphics\ui</Filter>
-    </ClCompile>
     <ClCompile Include="server_manager.cpp">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_plane_selection.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_team_selection.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="particle_emitter.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="particle_manager.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_ingame_menu.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="projectile.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -969,6 +984,24 @@
       <Filter>Header Files\utils\rapidxml</Filter>
     </ClInclude>
     <ClInclude Include="server_manager.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="particle_manager.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="particle_emitter.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="projectile.h">
+      <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="unistd.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="getopt.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>

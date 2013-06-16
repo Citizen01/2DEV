@@ -10,7 +10,7 @@ class game_engine : public engine
 {
 public:
 
-	game_engine();
+	game_engine(App* a);
 	~game_engine(void);
 	
 	void LaunchGame(std::string mapName);

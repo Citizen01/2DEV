@@ -1,65 +1,65 @@
 #include "plane.h"
 
 #include "GLOBALS.h"
-#include "utils.h"
 #include "server.h"
-
+#include "physic_engine.h"
 #include "faction.h"
 #include "player.h"
 
+using namespace std;
 using namespace irr;
 using namespace RakNet;
 
-Plane::Plane(Player* pilot, std::string name, scene::ISceneManager* sceneManager)
+using namespace constants;
+
+Plane::Plane(Player* pilot, std::string name)
 {
 	m_Pilot = pilot;
+
 	//Crée un avion en fonction du nom de ce dernier
-	_name = name;
+	m_Name = name;
 
-	loadMesh(sceneManager); //Chargement du modèle 3d
+	loadMesh(); //Chargement du modèle 3d
+	
+	physics_engine::getSingleton()->addPlane(this);
 
-	EnginePower = 0;
-	MaxEnginePower = 10;
+	m_EnginePower = 0;
+	m_MaxEnginePower = 1000;
+	
+	m_StallSpeed = 100;
+	m_MaxSpeed = 1000; // a changer en poids dans certains cas
+
+	m_FuelLoad = 100;
+	m_MaxFuelLoad = 100;
 }
 
 Plane::~Plane(void)
 {
 }
 
-
-void Plane::loadMesh(scene::ISceneManager* sceneManager)
+void Plane::loadMesh()
 {	
-	std::string modefile = constants::PATH_TO_MEDIA + "/planes/SU 25/SU 25.3DS";
-	_model = sceneManager->addAnimatedMeshSceneNode(sceneManager->getMesh(modefile.c_str()));
+	std::string modefile = constants::PATH_TO_MEDIA + "/planes/" + m_Name + "/" + m_Name + ".3DS";
+	m_Model = Server::getSingleton()->getSceneManager()->addAnimatedMeshSceneNode(Server::getSingleton()->getSceneManager()->getMesh(modefile.c_str()));
 	
-	_model->setPosition(m_Pilot->GetFaction()->GetPosition());
-	_model->setRotation(m_Pilot->GetFaction()->GetRotation());
+	m_Model->setPosition(m_Pilot->getFaction()->getPosition());
+	m_Model->setRotation(m_Pilot->getFaction()->getRotation());
 }
 
-RakString Plane::GetRakName()
+void Plane::incrementEnginePower()
 {
-	return RakString(_name.c_str());
-}
-
-int Plane::GetEnginePower()
-{
-	return EnginePower;
-}
-
-void Plane::IncrementEnginePower()
-{
-	EnginePower ++;
-	if(EnginePower > MaxEnginePower)
+	m_EnginePower ++;
+	if(m_EnginePower > m_MaxEnginePower)
 	{
-		EnginePower = MaxEnginePower;
+		m_EnginePower = m_MaxEnginePower;
 	}
 }
 
-void Plane::DecrementEnginePower()
+void Plane::decrementEnginePower()
 {
-	EnginePower --;
-	if(EnginePower < 0)
+	m_EnginePower --;
+	if(m_EnginePower < 0)
 	{
-		EnginePower = 0;
+		m_EnginePower = 0;
 	}
 }

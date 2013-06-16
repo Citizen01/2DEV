@@ -5,6 +5,7 @@
 #include <CEGUI.h>
 #include <vector>
 #include "GLOBALS.h"
+#include "faction.h"
 
 /* Fonction qui permet de vérifier si un dossier donné existe.
  * @return bool - true si le dossier existe, false sinon.
@@ -20,6 +21,15 @@ bool isValidPath(const std::string);
  * @return bool - true si le fichier existe et accéssible en lecture, false sinon.
  */
 bool isFile(const std::string);
+
+//Permet de faire tourner, sur 3 axes, un node (~objet) selon un degré donné et selon le repère local du node.
+void rotateNodeInLocalSpace(irr::scene::ISceneNode* node, irr::f32 degs, const irr::core::vector3df& axis);
+
+//Permet de faire bouger, sur 3 axes, un node (~objet) selon une direction et selon le repère local du node.
+void moveNodeInLocalSpace(irr::scene::ISceneNode* node, const irr::core::vector3df& dir, irr::f32 dist);
+
+//Permet de positionner la caméra par rapport à un node (~objet) selon un offset donné.
+void makeCockpit(irr::scene::ICameraSceneNode *camera, irr::scene::ISceneNode *node, irr::core::vector3df offset);
 
 /* Permet de traduire une touche sous forme de string en code EKEY_CODE d'irrlicht.
  * @return EKEY_CODE - Retourne le EKEY_CODE correspondant, EKEY_CODE::KEY_KEY_CODES_COUNT
@@ -42,13 +52,41 @@ constants::ACTION_CODE strToActionCode(std::string str);
  */
 std::string actionCodeToStr(constants::ACTION_CODE);
 
+//Crée une explosion à la position indiquées
 void createExplosion(irr::core::vector3df position);
 
 //Permet d'ajouter une ligne dans un tableau
-void addTableRow(CEGUI::MultiColumnList* tabl, std::vector<char*> row_datas);
+void addTableRow(CEGUI::MultiColumnList* tabl, std::vector<std::string> row_datas);
 
 //Permet de vider le tableau
 void clearTable(CEGUI::MultiColumnList* tabl);
 
 //Permet de mettre à jour le tableau
-void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<char*>> table_datas);
+void updateTable(CEGUI::MultiColumnList* tabl, std::vector<std::vector<std::string>> table_datas);
+
+//Permet de supprimer la "line"ème ligne du tableau
+void removeRow(CEGUI::MultiColumnList* tabl, int line);
+
+//Permet de trouver l'index de l'item spécifié dans le tableau donné
+int findIndexOfItem(CEGUI::MultiColumnList* tabl, CEGUI::ListboxItem* item);
+
+//Permet de récupérer la liste des thumbnails des avions
+std::vector<std::string> getPlaneThumbs();
+
+//Crée un feu et renvoit un pointeur de IParticleSystemSceneNode
+irr::scene::IParticleSystemSceneNode* createFire(irr::core::vector3df position);
+
+//Crée de la fumée et renvoit un pointeur de IParticleSystemSceneNode
+irr::scene::IParticleSystemSceneNode* createSmoke(irr::core::vector3df position);
+
+//Transforme un int en string
+std::string intToString(int number);
+
+/*
+* Récupère un pointeur vers la fonction portant le nom name
+* @return un poiteur vers la faction si trouvé, NULL sinon.
+*/
+Faction* getFactionByName(std::string name);
+
+//Affiche ou cache le curseur
+void showCursor(bool show);

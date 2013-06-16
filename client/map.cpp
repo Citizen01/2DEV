@@ -60,6 +60,8 @@ bool Map::loadTerrain()
 
 				_terrain->scaleTexture(1.0f, 1.0f);
 
+				setPosition(_position);
+
 				return true;
 			}
 			else
@@ -176,6 +178,8 @@ string Map::getTexture()
 bool Map::setPosition(core::vector3df position)
 {
 	_position = position;
+	core::vector3df center = _terrain->getTerrainCenter();
+	_terrain->setPosition(position-center);
 	return true;
 }
 	

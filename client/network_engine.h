@@ -19,7 +19,7 @@ class network_engine : public engine
 {
 	public:
 
-		network_engine();
+		network_engine(App* a);
 		~network_engine(void);
 
 		void connect(char* ip, int port);
@@ -35,13 +35,20 @@ class network_engine : public engine
 		void askForFactions();
 		void askForPlayers();
 		void askForPlayersStates();
+		void askForProjectiles();
 
 		void askForLocalPlayer();
 		void askForLocalPlane(std::string planeModel);
 
 		void askToEnterFaction(Faction* faction);
+		
 		void askToAccelerate();
 		void askToDecelerate();
+		void askToDive();
+		void askToStraighten();
+		void askToRollLeft();
+		void askToRollRight();
+		void askToShootMissile(Plane* target = NULL);
 		
 		void getMap();
 		void getFactions();
@@ -49,10 +56,13 @@ class network_engine : public engine
 
 		void playerEnterFaction();
 		void playerGetPlane();
-
+		
 		void acceleratePlane();
 		void deceleratePlane();
+		void shootMissile();
+
 		void movePlane();
+		void updateProjectile();
 
 		void readMessage();
 
@@ -80,22 +90,36 @@ class network_engine : public engine
 		enum GameMessages
 		{
 			ID_ANSWER_TO_MAP = ID_USER_PACKET_ENUM,
-			ID_ASK_FOR_MAP = ID_USER_PACKET_ENUM + 1,
-			ID_ASK_FOR_FACTIONS = ID_USER_PACKET_ENUM + 2,
-			ID_ANSWER_TO_FACTIONS = ID_USER_PACKET_ENUM + 3,
-			ID_ASK_FOR_PLAYERS = ID_USER_PACKET_ENUM + 4,
-			ID_ANSWER_TO_PLAYERS = ID_USER_PACKET_ENUM + 5,
-			ID_ASK_FOR_LOCAL_PLAYER = ID_USER_PACKET_ENUM + 6,
-			ID_ASK_TO_ENTER_FACTION = ID_USER_PACKET_ENUM + 7,
-			ID_PLAYER_ENTER_FACTION = ID_USER_PACKET_ENUM + 8,
-			ID_PLAYER_DO_NOT_ENTER_FACTION = ID_USER_PACKET_ENUM + 9,
-			ID_ASK_FOR_LOCAL_PLANE = ID_USER_PACKET_ENUM + 10,
-			ID_PLAYER_GET_PLANE = ID_USER_PACKET_ENUM + 11,
-			ID_ASK_FOR_PLAYERS_STATES = ID_USER_PACKET_ENUM + 12,
-			ID_ASK_TO_ACCELERATE = ID_USER_PACKET_ENUM + 13,
-			ID_ACCELERATE_PLANE = ID_USER_PACKET_ENUM + 14,
-			ID_ASK_TO_DECELERATE = ID_USER_PACKET_ENUM + 15,
-			ID_DECELERATE_PLANE = ID_USER_PACKET_ENUM + 16,
-			ID_MOVE_PLANE = ID_USER_PACKET_ENUM + 17
+			ID_ASK_FOR_MAP,
+			ID_ASK_FOR_FACTIONS,
+			ID_ANSWER_TO_FACTIONS,
+			ID_ASK_FOR_PLAYERS,
+			ID_ANSWER_TO_PLAYERS,
+			ID_ASK_FOR_LOCAL_PLAYER,
+			ID_ASK_TO_ENTER_FACTION,
+			ID_PLAYER_ENTER_FACTION,
+			ID_PLAYER_DO_NOT_ENTER_FACTION,
+			ID_ASK_FOR_LOCAL_PLANE,
+			ID_PLAYER_GET_PLANE,
+			ID_ASK_FOR_PLAYERS_STATES,
+			ID_ASK_FOR_PROJECTILES,
+			ID_ASK_TO_ACCELERATE,
+			ID_ACCELERATE_PLANE,
+			ID_ASK_TO_DECELERATE,
+			ID_DECELERATE_PLANE,
+			ID_ASK_TO_DIVE,
+			ID_DIVE_PLANE,
+			ID_ASK_TO_STRAIGHTEN,
+			ID_STRAIGHTEN_PLANE,
+			ID_ASK_TO_ROLL_LEFT,
+			ID_ROLL_LEFT_PLANE,
+			ID_ASK_TO_ROLL_RIGHT,
+			ID_ROLL_RIGHT_PLANE,
+			ID_MOVE_PLANE,
+			ID_ASK_TO_SHOOT_MISSILE,
+			ID_SHOOT_MISSILE,
+			ID_UPDATE_PROJECTILE,
+
+			TOTAL_MESSAGES
 		};
 };

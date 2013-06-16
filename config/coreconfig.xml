@@ -1,9 +1,9 @@
 <mainconfig>
 	<settings>
-		<nickname>Civilian</nickname>
+		<nickname>TomTom</nickname>
 		<anti_aliasing>0</anti_aliasing>
 		<display_windowed>1</display_windowed>
-		<current_skin>default</current_skin>
+		<skin>default</skin>
 	</settings>
 	<binds>
 		<bind control="accelerate">z</bind>
@@ -15,7 +15,7 @@
 		<bind control="roll_left">arrow_left</bind>
 		<bind control="roll_right">arrow_right</bind>
 		<bind control="primary_fire">click_left</bind>
-		<bind control="secondary_fire">click_right</bind>
+		<bind control="secondary_fire">n</bind>
 		<bind control="equipment">a</bind>
 		<bind control="toggle_menu">escape</bind>
 	</binds>

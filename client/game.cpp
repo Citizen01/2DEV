@@ -1,5 +1,8 @@
 #include "game.h"
 #include "app.h"
+#include "ui_windows.h"
+#include "projectile.h"
+#include "utils.h"
 
 using namespace std;
 using namespace RakNet;
@@ -15,7 +18,7 @@ game::~game(void)
 	delete map;
 }
 
-void game::addPlayer(RakString playerName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
+void game::addPlayer(RakString playerName, NetworkIDManager* networkIDManager, NetworkID networkID)
 {
 	player_list.push_back(new Player(playerName, networkIDManager, networkID));
 	if(playerName.C_String() == App::getSingleton()->settings["nickname"])
@@ -48,9 +51,15 @@ bool game::removePlayer(Player* p)
 	}
 }
 
-void game::addFaction(std::string factionName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
+void game::addFaction(string factionName, NetworkIDManager* networkIDManager, NetworkID networkID)
 {
 	faction_list.push_back(new Faction(factionName, networkIDManager, networkID));
+	updateJoinFactionWindow();
+}
+
+void game::addProjectile(Player* owner, RakNet::NetworkIDManager* networkIDManager, NetworkID networkID, RakString modelFile)
+{
+	projectile_list.push_back(new Projectile(owner, networkIDManager, networkID, modelFile));
 }
 
 Player* game::getLocalPlayer()
@@ -76,4 +85,25 @@ std::vector<Player*> game::getPlayerList()
 std::vector<Faction*> game::getFactionList()
 {
 	return faction_list;
+}
+
+void game::updateJoinFactionWindow()
+{
+	vector<vector<string>> datas;
+	for (unsigned int i=0; i < faction_list.size(); i++)
+	{
+		Faction* faction = faction_list.at(i);
+		string factionName = faction->GetName();
+		int playerCount = faction->GetPlayers().size();
+		int playerMax = rules.FactionSlots;
+
+		playerMax = 5;//TODO: Remove hack
+
+		string population = intToString(playerCount) + "/" + intToString(playerMax);
+		vector<string> tmp;
+		tmp.push_back(factionName);
+		tmp.push_back(population);
+		datas.push_back(tmp);
+	}
+	update_team_selection(datas);
 }
