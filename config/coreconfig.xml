@@ -3,7 +3,7 @@
 		<nickname>Civilian</nickname>
 		<anti_aliasing>0</anti_aliasing>
 		<display_windowed>1</display_windowed>
-		<current_skin>default</current_skin>
+		<skin>default</skin>
 	</settings>
 	<binds>
 		<bind control="accelerate">z</bind>

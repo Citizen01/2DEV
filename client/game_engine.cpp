@@ -11,7 +11,7 @@ using namespace std;
 using namespace irr;
 using namespace constants;
 
-game_engine::game_engine()
+game_engine::game_engine(App* a) : engine(a)
 {
 	m_Game = NULL;
 }

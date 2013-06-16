@@ -152,7 +152,7 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 
-    MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
 	ListboxItem* item = serverList->getFirstSelectedItem();
 	if (item)
 	{
@@ -251,7 +251,7 @@ void create_main_menu()
 	Exit->subscribeEvent(PushButton::EventClicked, handleExitBtn);
 
 	// Load a Quick Connect
-	Window* QuickWin = wmgr.loadWindowLayout("Quicked.layout", "QuickCo_");
+	Window* QuickWin = wmgr.loadWindowLayout("QuickConnect.layout", "QuickCo_");
 	MenuBackground->addChildWindow(QuickWin);
 	QuickWin->setVisible (false);
 	QuickWin->setProperty("AlwaysOnTop", "True");
@@ -264,7 +264,7 @@ void create_main_menu()
 	
 	
 	// Load a Server_list
-	Window* Srvl = wmgr.loadWindowLayout("Server_list.layout", "Srvl_");
+	Window* Srvl = wmgr.loadWindowLayout("ServerList.layout", "Srvl_");
 	MenuBackground->addChildWindow( Srvl );
 	Srvl->setVisible (false);
 	Srvl->setProperty("AlwaysOnTop", "True");

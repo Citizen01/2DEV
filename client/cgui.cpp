@@ -1,16 +1,21 @@
 #include "Cgui.h"
 #include "ui_windows.h"
+#include "GLOBALS.h"
+#include "utils.h"
 #include <iostream>
 #include <windows.h>
+#include "dirent.h"
 
 using namespace CEGUI;
 using namespace irr;
 using namespace std;
+using namespace constants;
 
-Cgui::Cgui(IrrlichtDevice* device, string skin) : irrRenderer(IrrlichtRenderer::bootstrapSystem( *device ))
+Cgui::Cgui(IrrlichtDevice* device, App* a) : irrRenderer(IrrlichtRenderer::bootstrapSystem( *device ))
 {
 	this->device = device;
-	setSkin(skin);
+	app = a;
+	setSkin(app->settings["skin"]);
 
 	init();
 	precache();
@@ -27,7 +32,7 @@ bool Cgui::init()
 		DefaultResourceProvider* rp = static_cast<DefaultResourceProvider*>
 			(System::getSingleton().getResourceProvider());
 
-		string skins_path = "../Media/cegui/skins/";
+		string skins_path = PATH_TO_MEDIA + "/CEGUI/skins/";
 		
 		rp->setResourceGroupDirectory("schemes", string(skins_path+skin+"/schemes/").c_str());
 		rp->setResourceGroupDirectory("imagesets", string(skins_path+skin+"/imagesets/").c_str());
@@ -75,9 +80,40 @@ bool Cgui::precache()
 	cout << "[CEGUI] Precaching all windows for the game ..." << endl;
 
 	create_main_menu(); //Menu principal du jeu
-	create_team_join(); //Fenêtre de selection d'une team
+	create_team_selection(); //Fenêtre de selection d'une team
+	create_plane_selection(); //Fenêtre de selection d'un avion
 
 	cout << "[CEGUI] Successfully precached all windows for the game !" << endl;
+
+	//Chargement des thumbnails des avions
+	cout << "[CEGUI] Precaching all images for the game ..." << endl;
+
+	ImagesetManager& imgr = ImagesetManager::getSingleton();
+	vector<string> thumbs = getPlaneThumbs();
+	vector<string> planes;
+	for (unsigned int i=0; i < thumbs.size(); i++)
+	{
+		string planename = "unknown";
+		unsigned int pos1 = thumbs[i].find("thumb_");
+		unsigned int pos2 = thumbs[i].find(".png");
+		if (pos1 != string::npos && pos2 != string::npos)
+		{
+			planename = thumbs[i].substr(pos1+6, pos2-(pos1+6));
+		}
+
+		if (planename != "unknown")
+		{
+			if (planename != "none")
+				planes.push_back(planename);
+			imgr.createFromImageFile("plane_thumb_"+planename, "thumbs/"+thumbs[i], "imagesets");
+			cout << "[INFO] " << thumbs[i] << " loaded !" << endl;
+		}
+	}
+
+	update_plane_selection(planes);
+
+	cout << "[CEGUI] Successfully precached all images for the game !" << endl;
+
 	return true;
 }
 
@@ -111,4 +147,23 @@ irr::IrrlichtDevice* Cgui::getDevice()
 CEGUI::IrrlichtRenderer& Cgui::getRenderer()
 {
 	return irrRenderer;
+}
+
+vector<string> Cgui::getPlaneThumbs()
+{
+	vector<string> planeThumbs;
+
+	DIR *dir;
+	struct dirent *ent;
+	string skin = app->settings["skin"];
+	string thumbs_path = "..\\Media\\CEGUI\\skins\\" + skin + "\\imagesets\\thumbs\\";
+	if ((dir = opendir(thumbs_path.c_str())) != NULL) {
+	  while ((ent = readdir (dir)) != NULL) {
+		string filename = ent->d_name;
+		if ( filename != "." && filename != "..")
+			planeThumbs.push_back(ent->d_name);
+	  }
+	  closedir(dir);
+	}
+	return planeThumbs;
 }

@@ -8,7 +8,7 @@ using namespace std;
 using namespace RakNet;
 
 
-network_engine::network_engine()
+network_engine::network_engine(App* a) : engine(a)
 {
 	cout << "Starting the network engine." << endl;
 

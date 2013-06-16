@@ -19,7 +19,7 @@ private:
 	std::vector<irrklang::ISound*> soundVector2D;
 
 public:
-	sound_engine();
+	sound_engine(App* a);
 	~sound_engine(void);
 
 	void play2D(std::string name);

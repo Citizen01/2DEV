@@ -441,11 +441,14 @@
     <ClCompile Include="ui_main_menu.cpp">
       <Filter>Source Files\graphics\ui</Filter>
     </ClCompile>
-    <ClCompile Include="ui_team_join.cpp">
-      <Filter>Source Files\graphics\ui</Filter>
-    </ClCompile>
     <ClCompile Include="server_manager.cpp">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_plane_selection.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_team_selection.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -969,6 +972,9 @@
       <Filter>Header Files\utils\rapidxml</Filter>
     </ClInclude>
     <ClInclude Include="server_manager.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="dirent.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>

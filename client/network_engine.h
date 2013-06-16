@@ -19,7 +19,7 @@ class network_engine : public engine
 {
 	public:
 
-		network_engine();
+		network_engine(App* a);
 		~network_engine(void);
 
 		void connect(char* ip, int port);

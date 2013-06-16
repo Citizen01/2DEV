@@ -58,3 +58,6 @@ void removeRow(CEGUI::MultiColumnList* tabl, int line);
 
 //Permet de trouver l'index de l'item spécifié dans le tableau donné
 int findIndexOfItem(CEGUI::MultiColumnList* tabl, CEGUI::ListboxItem* item);
+
+//Permet de récupérer la liste des thumbnails des avions
+std::vector<std::string> getPlaneThumbs();

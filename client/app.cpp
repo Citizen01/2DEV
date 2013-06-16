@@ -18,11 +18,15 @@ App* App::instance = NULL;
 
 App::App()
 {
+	initialiseGlobals();
+	loadSettings();
+	loadBinds();
+
 	//Crée et store les différents modules
-	gfx = new graphics_engine();
-	g = new game_engine();
-	n = new network_engine();
-	s = new sound_engine();
+	gfx = new graphics_engine(this);
+	g = new game_engine(this);
+	n = new network_engine(this);
+	s = new sound_engine(this);
 
 	/// Linkage des modules entre eux ///
 	//game_engine aux autres//
@@ -45,9 +49,6 @@ App::App()
 	s->link_graphics_engine(gfx);
 	s->link_network_engine(n);
 
-	initialiseGlobals();
-	loadSettings();
-	loadBinds();
 	server_manager::getSingleton()->loadServers();
 
 	running = true;

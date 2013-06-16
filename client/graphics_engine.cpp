@@ -1,12 +1,13 @@
 #include "graphics_engine.h"
 #include "MainEventListener.h"
+#include "app.h"
 #include <iostream>
 
 using namespace std;
 using namespace CEGUI;
 using namespace irr;
 
-graphics_engine::graphics_engine()
+graphics_engine::graphics_engine(App* a) : engine(a)
 {
 	video::E_DRIVER_TYPE driverType = video::EDT_DIRECT3D9;
 	if (driverType==video::EDT_COUNT)
@@ -17,7 +18,7 @@ graphics_engine::graphics_engine()
 	irr::SIrrlichtCreationParameters params; //Liste des paramètres à passé lors de la création du device
 	/////////////////// CONFIG ///////////////////
 	//Paramètres indispensables:
-	params.DriverType = driverType; //Doit être récup depuis le fichier de config
+	params.DriverType = driverType;
 	params.WindowSize = core::dimension2d<u32>(1024, 768);//Doit être récup depuis le fichier de config
 	//Paramètres supplémentaires ici:
 	params.Fullscreen = false;
@@ -37,7 +38,7 @@ graphics_engine::graphics_engine()
 	driver->setTextureCreationFlag(video::ETCF_ALWAYS_32_BIT, true);
 
 	///////// Création de CEGUI avec le skin default /////////
-	cegui = new Cgui(device, "default");
+	cegui = new Cgui(device, app);
 
 	mainrcvr = new MainEventListener();
 	device->setEventReceiver(&(*mainrcvr));

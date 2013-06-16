@@ -95,5 +95,5 @@ void game::updateJoinFactionWindow()
 		tmp.push_back(population);
 		datas.push_back(tmp);
 	}
-	team_join_updateTeams(datas);
+	update_team_selection(datas);
 }

@@ -2,6 +2,7 @@
 
 #include <irrlicht.h>
 
+class App;
 class game_engine;
 class graphics_engine;
 class network_engine;
@@ -11,7 +12,7 @@ class engine : public irr::IEventReceiver
 {
 public:
 	//Partie du constructeur commune à tous les moteurs
-	engine();
+	engine(App* a);
 	virtual ~engine();
 
 	//Méthodes permettant le linkage avec les autres modules
@@ -30,6 +31,7 @@ public:
 
 protected:
 	//Référencement de tous les moteurs
+	App* app;
 	game_engine *ge;
 	network_engine *ne;
 	graphics_engine *gfxe;

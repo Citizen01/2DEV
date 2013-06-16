@@ -6,7 +6,12 @@
 void create_main_menu();
 void show_main_menu(bool visible);
 
-//Fenêtre de séléction de team
-void create_team_join();
-void show_team_join(bool visible);
-void team_join_updateTeams(std::vector<std::vector<std::string>> values);
+//Fenêtre de sélection de team
+void create_team_selection();
+void show_team_selection(bool visible);
+void update_team_selection(std::vector<std::vector<std::string>> values);
+
+//Fenêtre de selection de l'avion
+void create_plane_selection();
+void show_plane_selection(bool visible);
+void update_plane_selection(std::vector<std::string> values);

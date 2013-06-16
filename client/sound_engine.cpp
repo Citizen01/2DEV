@@ -5,7 +5,7 @@
 using namespace std;
 using namespace constants;
 
-sound_engine::sound_engine()
+sound_engine::sound_engine(App* a) : engine(a)
 {
 	// start irrKlang with default parameters
 	soundEngine = irrklang::createIrrKlangDevice();
