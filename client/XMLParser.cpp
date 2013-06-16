@@ -22,6 +22,8 @@ bool XMLParser::openXML(string fileName)
 		return false;
 	}
 
+	filename = fileName;
+
 	buffer = vector<char>((istreambuf_iterator<char>(file)), istreambuf_iterator<char>());
 	buffer.push_back('\0');
 
@@ -95,13 +97,18 @@ void XMLParser::loadServerList()
 	if (root_node != 0)
 	{
 		server_manager* srvmgr = server_manager::getSingleton();
+		vector<server>& serverList = srvmgr->getServerList();
 		for(xml_node<> *server_node = root_node->first_node(); server_node; server_node = server_node->next_sibling())
 		{
 			string name = server_node->first_attribute("name")->value();
 			string ip = server_node->first_attribute("ip")->value();
 			string port = server_node->first_attribute("port")->value();
 			
-			srvmgr->addServer(name, ip, port);
+			server srv;
+			srv.name = name;
+			srv.ip = ip;
+			srv.port = port;
+			serverList.push_back(srv);
 		}
 	}
 }
@@ -109,39 +116,42 @@ void XMLParser::loadServerList()
 void XMLParser::saveServerList()
 {
 	xml_node<> *root_node = m_Doc.first_node();
-	if (root_node != 0)
+	if (root_node == 0)
 		return;
 
 	//Vide le node
 	root_node->remove_all_nodes();
 
 	//Remplit le node
-	std::vector<server> serverlist = server_manager::getSingleton()->getServerList();
+	std::vector<server>& serverlist = server_manager::getSingleton()->getServerList();
 	for(unsigned int i=0; i < serverlist.size(); i++)
 	{
 		//server node
 		xml_node<> *node = m_Doc.allocate_node(node_element, "server", "");
-		m_Doc.append_node(node);
+		root_node->append_node(node);
 
 		server srv = serverlist[i];
 
 		//attribut name:
-		xml_attribute<> *name = m_Doc.allocate_attribute("name", srv.name.c_str());
+		const char* nameVal = m_Doc.allocate_string(srv.name.c_str());
+		xml_attribute<> *name = m_Doc.allocate_attribute("name", nameVal);
 		node->append_attribute(name);
 
 		//attribut ip:
-		xml_attribute<> *ip = m_Doc.allocate_attribute("ip", srv.ip.c_str());
+		const char* ipVal = m_Doc.allocate_string(srv.ip.c_str());
+		xml_attribute<> *ip = m_Doc.allocate_attribute("ip", ipVal);
 		node->append_attribute(ip);
 
 		//attribut port:
-		xml_attribute<> *port = m_Doc.allocate_attribute("port", srv.port.c_str());
+		const char* portVal = m_Doc.allocate_string(srv.port.c_str());
+		xml_attribute<> *port = m_Doc.allocate_attribute("port", portVal);
 		node->append_attribute(port);
-
-		// Save to file
-		/*std::ofstream file_stored("../config/file_stored.xml");
-		file_stored << m_Doc;
-		file_stored.close();*/
 	}
+
+	// Save to file
+	std::ofstream file_stored(filename);
+	file_stored << m_Doc;
+	file_stored.close();
 }
 
 XMLParser::~XMLParser() 
