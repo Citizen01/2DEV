@@ -2,11 +2,14 @@
 #include "app.h"
 #include "utils.h"
 #include <CEGUI.h>
+#include "NetworkIDManager.h"
+#include "faction.h"
 #include <vector>
 
 using namespace std;
 using namespace CEGUI;
 using namespace constants;
+using namespace	RakNet;
 
 ////////////////// CLICS HANDLERS //////////////////
 //Bouton Join de la fenêtre de selection de team
@@ -22,8 +25,8 @@ bool handleTeamJoinBtnJoin (const CEGUI::EventArgs &e)
 	if (selectedItem != NULL)
 	{
 		string factionName = selectedItem->getText().c_str();
-		//TODO: Ask for changing team
-
+		Faction* fac = getFactionByName(factionName);
+		App::getSingleton()->getNetworkEngine()->askToEnterFaction(fac);
 	}
 	return true;
 }

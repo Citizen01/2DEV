@@ -2,6 +2,7 @@
 #include "app.h"
 #include "ui_windows.h"
 #include "projectile.h"
+#include "utils.h"
 
 using namespace std;
 using namespace RakNet;
@@ -53,6 +54,7 @@ bool game::removePlayer(Player* p)
 void game::addFaction(string factionName, NetworkIDManager* networkIDManager, NetworkID networkID)
 {
 	faction_list.push_back(new Faction(factionName, networkIDManager, networkID));
+	updateJoinFactionWindow();
 }
 
 void game::addProjectile(Player* owner, RakNet::NetworkIDManager* networkIDManager, NetworkID networkID, RakString modelFile)
@@ -95,7 +97,9 @@ void game::updateJoinFactionWindow()
 		int playerCount = faction->GetPlayers().size();
 		int playerMax = rules.FactionSlots;
 
-		string population = playerCount + "/" + playerMax;
+		playerMax = 5;//TODO: Remove hack
+
+		string population = intToString(playerCount) + "/" + intToString(playerMax);
 		vector<string> tmp;
 		tmp.push_back(factionName);
 		tmp.push_back(population);

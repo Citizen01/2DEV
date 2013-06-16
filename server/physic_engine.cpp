@@ -84,7 +84,7 @@ void physics_engine::addPlane(Plane* plane)
 	core::vector3df position = node->getPosition();
 	core::vector3df rotation = node->getRotation();
 
-	if (planeName == "SU 25")
+	if (planeName == "SU25")
 	{
 		// Set the initial position of the object
 		btTransform transform;

@@ -207,3 +207,24 @@ string intToString(int number)
 	ostr << number; 
 	return ostr.str();
 }
+
+Faction* getFactionByName(std::string name)
+{
+	vector<Faction*> factionList = App::getSingleton()->getGameEngine()->GetGame()->getFactionList();
+	
+	for (unsigned int i = 0; i < factionList.size(); i++)
+	{
+		Faction* fac = factionList.at(i);
+		if (fac->GetName() == name)
+			return fac;
+	}
+	return NULL;
+}
+
+void showCursor(bool show)
+{
+	if (show)
+		CEGUI::MouseCursor::getSingleton().show();
+	else
+		CEGUI::MouseCursor::getSingleton().hide();
+}

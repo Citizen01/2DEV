@@ -4,6 +4,7 @@
 #include "projectile.h"
 #include "unistd.h" //Pour la fonction sleep
 #include "ui_windows.h"
+#include "utils.h"
 
 using namespace std;
 using namespace RakNet;
@@ -105,19 +106,6 @@ void network_engine::GetReady()
 {
 	if (!m_Connected)
 		return;
-
-	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == NULL)
-	{
-		askForLocalPlayer();
-	}
-	else if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetFaction() == NULL)
-	{
-		askToEnterFaction(m_NetworkIDManager->GET_OBJECT_FROM_ID<Faction*>(1));
-	}
-	else
-	{
-		askForLocalPlane("SU 25");
-	}
 }
 
 void network_engine::askForMap()
@@ -158,9 +146,9 @@ void network_engine::askForLocalPlayer()
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server for our own player : " + App::getSingleton()->settings["nickname"] << endl;
+	cout << "Asking the server for our own player : " + app->settings["nickname"] << endl;
 
-	RakString playerName(App::getSingleton()->settings["nickname"].c_str());
+	RakString playerName(app->settings["nickname"].c_str());
 
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_LOCAL_PLAYER);
@@ -179,7 +167,7 @@ void network_engine::askForLocalPlane(string planeModel)
 
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_LOCAL_PLANE);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	bsOut.Write(planeName);
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
@@ -212,7 +200,7 @@ void network_engine::askToEnterFaction(Faction* faction)
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ENTER_FACTION);
 	bsOut.Write(faction->GetNetworkID());
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -224,7 +212,7 @@ void network_engine::askToAccelerate()
 	cout << "Asking the server to accelerate." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ACCELERATE);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -236,7 +224,7 @@ void network_engine::askToDecelerate()
 	cout << "Asking the server to decelerate." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_DECELERATE);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -245,7 +233,7 @@ void network_engine::askToDive()
 	cout << "Asking the server to dive." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_DIVE);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -254,7 +242,7 @@ void network_engine::askToStraighten()
 	cout << "Asking the server to straighten." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_STRAIGHTEN);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -263,7 +251,7 @@ void network_engine::askToRollLeft()
 	cout << "Asking the server to roll left." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ROLL_LEFT);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -272,7 +260,7 @@ void network_engine::askToRollRight()
 	cout << "Asking the server to roll right." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ROLL_RIGHT);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -281,7 +269,7 @@ void network_engine::askToShootMissile(Plane* target)
 	cout << "Asking the server to shoot a missile." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_SHOOT_MISSILE);
-	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
 	if(target != NULL)
 	{
 		bsOut.Write(target->getPilot()->GetNetworkID());
@@ -306,7 +294,7 @@ void network_engine::getMap()
 	bsIn.IgnoreBytes(sizeof(MessageID));
 
 	bsIn.Read(mapName);
-	App::getSingleton()->getGameEngine()->LaunchGame(mapName.C_String());
+	ge->LaunchGame(mapName.C_String());
 
 	askForFactions();
 }
@@ -332,7 +320,7 @@ void network_engine::getFactions()
 		bsIn.Read(factionName);
 		bsIn.Read(factionNetworkID);
 
-		App::getSingleton()->getGameEngine()->GetGame()->addFaction(factionName.C_String(), m_NetworkIDManager, factionNetworkID);
+		ge->GetGame()->addFaction(factionName.C_String(), m_NetworkIDManager, factionNetworkID);
 	}
 
 	askForPlayers();
@@ -359,12 +347,14 @@ void network_engine::getPlayers()
 		bsIn.Read(playerName);
 		bsIn.Read(playerNetworkId);
 
-		App::getSingleton()->getGameEngine()->GetGame()->addPlayer(playerName, m_NetworkIDManager, playerNetworkId);
+		ge->GetGame()->addPlayer(playerName, m_NetworkIDManager, playerNetworkId);
 	}
 
-	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == NULL)
+	if(ge->GetGame()->getLocalPlayer() == NULL)
 	{
 		askForPlayersStates();
+		askForLocalPlayer();
+		show_team_selection(true);
 	}
 }
 
@@ -392,6 +382,12 @@ void network_engine::playerEnterFaction()
 		player->GetFaction()->RemovePlayer(player);
 	}
 	faction->AddPlayer(player);
+
+	if (player == ge->GetGame()->getLocalPlayer())
+	{
+		show_team_selection(false);
+		show_plane_selection(true);
+	}
 }
 
 void network_engine::playerGetPlane()
@@ -411,13 +407,15 @@ void network_engine::playerGetPlane()
 	Player* player = m_NetworkIDManager->GET_OBJECT_FROM_ID<Player*>(playerNetworkID);
 
 	bsIn.Read(planeModel);
-
 	player->SetPlane(planeModel.C_String());
 
-	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == NULL)
+	if (player = ge->GetGame()->getLocalPlayer())
 	{
-		askForProjectiles();
+		show_plane_selection(false);
+		showCursor(false);
 	}
+
+	askForProjectiles();
 }
 
 void network_engine::acceleratePlane()
@@ -469,7 +467,7 @@ void network_engine::shootMissile()
 	RakString model;
 	bsIn.Read(model);
 
-	App::getSingleton()->getGameEngine()->GetGame()->addProjectile(player, m_NetworkIDManager, projectileNetworkID, model);
+	ge->GetGame()->addProjectile(player, m_NetworkIDManager, projectileNetworkID, model);
 }
 
 void network_engine::movePlane()

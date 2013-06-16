@@ -104,7 +104,7 @@ void Server::sendFactions()
 	m_BSOut.Write((MessageID)ID_ANSWER_TO_FACTIONS);
 	m_BSOut.Write(m_FactionList.size());
 
-	for(unsigned int i = 0; i < m_FactionList.size(); i ++)
+	for(unsigned int i = 0; i < m_FactionList.size(); i++)
 	{
 		m_BSOut.Write(m_FactionList[i]->getRakName());
 		m_BSOut.Write(m_FactionList[i]->GetNetworkID());

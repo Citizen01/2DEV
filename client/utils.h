@@ -5,6 +5,7 @@
 #include <CEGUI.h>
 #include <vector>
 #include "GLOBALS.h"
+#include "faction.h"
 
 /* Fonction qui permet de vérifier si un dossier donné existe.
  * @return bool - true si le dossier existe, false sinon.
@@ -80,3 +81,12 @@ irr::scene::IParticleSystemSceneNode* createSmoke(irr::core::vector3df position)
 
 //Transforme un int en string
 std::string intToString(int number);
+
+/*
+* Récupère un pointeur vers la fonction portant le nom name
+* @return un poiteur vers la faction si trouvé, NULL sinon.
+*/
+Faction* getFactionByName(std::string name);
+
+//Affiche ou cache le curseur
+void showCursor(bool show);

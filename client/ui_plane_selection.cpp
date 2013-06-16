@@ -24,8 +24,7 @@ bool handleBtnPlay (const CEGUI::EventArgs &e)
 	if (selectedItem != NULL)
 	{
 		string planeName = selectedItem->getText().c_str();
-		//TODO: Ask to the server
-
+		App::getSingleton()->getNetworkEngine()->askForLocalPlane(planeName);
 	}
 	return true;
 }

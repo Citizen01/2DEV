@@ -174,7 +174,6 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 		{
 			MultiColumnList* deleteServerList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Delete");
 			int line = findIndexOfItem(serverList, item);
-			cout << "found item at index " << line << endl;
 			removeRow(serverList, line);
 		}
 	}
@@ -379,7 +378,6 @@ void update_server_list()
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
-
 	server_manager* srvmgr = server_manager::getSingleton();
 	vector<server> servers = srvmgr->getServerList();
 	for (unsigned int i=0; i < servers.size(); i++)

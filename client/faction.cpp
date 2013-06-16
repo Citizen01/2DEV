@@ -1,5 +1,5 @@
 #include "faction.h"
-
+#include "app.h"
 #include "player.h"
 
 using namespace std;
@@ -28,6 +28,7 @@ void Faction::AddPlayer(Player* player)
 {
 	player->SetFaction(this);
 	m_Players.push_back(player);
+	App::getSingleton()->getGameEngine()->GetGame()->updateJoinFactionWindow();
 }
 
 void Faction::RemovePlayer(Player* player)
