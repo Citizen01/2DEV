@@ -68,3 +68,19 @@ void Plane::decrementEnginePower()
 		m_EnginePower = 0;
 	}
 }
+
+void Plane::takeDammage(int value)
+{
+	if(value == -1)
+	{
+		this->~Plane();
+	}
+	else
+	{
+		m_Life -= value;
+		if(m_Life <= 0)
+		{
+			this->~Plane();
+		}
+	}
+}

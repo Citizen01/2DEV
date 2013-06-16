@@ -16,7 +16,7 @@ Faction::Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, R
 	this->SetNetworkID(networkID);
 	
 	m_Position = core::vector3df(0, 10, 0);
-	m_Rotation = core::vector3df(-90.f, 0.f, 0.f);
+	m_Rotation = core::vector3df(0.f, 0.f, 0.f);
 	m_MaxPlayers = 3;
 }
 

@@ -40,23 +40,23 @@ public:
 
 		btScalar addSingleResult(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
 		{
-			int type0 = ((collidableObject*)((btRigidBody*)colObj0Wrap->getCollisionObject())->getUserPointer())->objectType;
-			int type1 = ((collidableObject*)((btRigidBody*)colObj1Wrap->getCollisionObject())->getUserPointer())->objectType;
+			//int type0 = ((collidableObject*)((btRigidBody*)colObj0Wrap->getCollisionObject())->getUserPointer())->objectType;
+			//int type1 = ((collidableObject*)((btRigidBody*)colObj1Wrap->getCollisionObject())->getUserPointer())->objectType;
 
-			switch(ObjectTypes(type0))
-			{
-			case MAP:
-				break;
-			case BASE:
-				break;
-			/*case PLANE:
-				Plane* plane = (Plane*)((btRigidBody*)colObj0Wrap->getCollisionObject())->getUserPointer();
-				if(type1 == MAP)
-				{
-					plane->takeDammage(-1);
-				}
-				if(type1 == BASE*/
-			}
+			//switch(ObjectTypes(type0))
+			//{
+			//case MAP:
+			//	break;
+			//case BASE:
+			//	break;
+			//case PLANE:
+			//	Plane* plane = (Plane*)((btRigidBody*)colObj0Wrap->getCollisionObject())->getUserPointer();
+			//	if(type1 == MAP)
+			//	{
+			//		plane->takeDammage(-1);
+			//	}
+			//	if(type1 == BASE
+			//}
 			return 0;
 		}
 	};
@@ -73,6 +73,6 @@ public:
 	void addPlane(Plane* plane);
 	void addProjectile(Projectile* projectile);
 
-	void rotate(btRigidBody* body, btVector3& direction);
+	void rotate(btRigidBody* body, btVector3& axis, int angle);
 };
 

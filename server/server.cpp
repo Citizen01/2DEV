@@ -330,7 +330,7 @@ void Server::divePlane()
 	bsIn.Read(playerNetworkID);
 	Player* player = m_NetworkIDManager->GET_OBJECT_FROM_ID<Player*>(playerNetworkID);
 	
-	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(0.1, 0, 0));
+	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(1, 0, 0), 1);
 }
 
 void Server::straightenPlane()
@@ -344,7 +344,7 @@ void Server::straightenPlane()
 	bsIn.Read(playerNetworkID);
 	Player* player = m_NetworkIDManager->GET_OBJECT_FROM_ID<Player*>(playerNetworkID);
 	
-	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(-0.1, 0, 0));
+	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(1, 0, 0), -1);
 }
 
 void Server::rollLeftPlane()
@@ -358,7 +358,7 @@ void Server::rollLeftPlane()
 	bsIn.Read(playerNetworkID);
 	Player* player = m_NetworkIDManager->GET_OBJECT_FROM_ID<Player*>(playerNetworkID);
 	
-	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(0, 0, 0.1));
+	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(0, 0, 1), 1);
 }
 
 void Server::rollRightPlane()
@@ -372,7 +372,7 @@ void Server::rollRightPlane()
 	bsIn.Read(playerNetworkID);
 	Player* player = m_NetworkIDManager->GET_OBJECT_FROM_ID<Player*>(playerNetworkID);
 	
-	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(0, 0, -0.1));
+	physics_engine::getSingleton()->rotate(player->getPlane()->getBody(), btVector3(0, 0, 1), -1);
 }
 
 void Server::shootMissile()
@@ -501,8 +501,6 @@ void Server::updateProjectiles(unsigned int deltaTime)
 		projectile->updateTimeToLive(deltaTime);
 
 		body->activate(true);
-
-		body->applyCentralForce(body->getWorldTransform().getBasis().getColumn(2) * projectile->getSpeed());
 
 		m_BSOut.Reset();
 
