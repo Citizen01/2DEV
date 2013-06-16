@@ -71,6 +71,7 @@ void show_team_selection(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("TS_JoinTeam")->setVisible(visible);
+	showCursor(visible);
 }
 
 

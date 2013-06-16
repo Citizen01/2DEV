@@ -93,6 +93,7 @@ void show_plane_selection(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("PS_SelectYurPlan")->setVisible(visible);
+	showCursor(visible);
 }
 
 ////// MANIPULATION DU TABLEAU //////

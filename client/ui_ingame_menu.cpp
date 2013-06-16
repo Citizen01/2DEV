@@ -1,5 +1,6 @@
 #include "ui_windows.h"
 #include "app.h"
+#include "utils.h"
 #include <CEGUI.h>
 
 using namespace std;
@@ -96,11 +97,14 @@ void show_ingame_menu(bool visible)
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("IGM_IngameMenu")->setVisible(visible);
+	showCursor(visible);
 }
 
 void toggle_ingame_menu()
 {
 	WindowManager& wmgr = WindowManager::getSingleton();
 	Window* ig_menu = (Window*)wmgr.getWindow("IGM_IngameMenu");
-	ig_menu->setVisible(!ig_menu->isVisible());
+	bool visible = ig_menu->isVisible();
+	ig_menu->setVisible(!visible);
+	showCursor(visible);
 }
