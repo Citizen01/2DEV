@@ -61,7 +61,7 @@ void physics_engine::updatePhysics(u32 deltaTime)
 // Passes bullet's orientation to irrlicht
 void physics_engine::updateIrrlichtNode(btRigidBody* body)
 {
-	scene::ISceneNode* node = static_cast<scene::ISceneNode*>(body->getUserPointer());
+	scene::ISceneNode* node = ((collidableObject*)body->getUserPointer())->getNode();
 
 	// Set position
 	btVector3 point = body->getCenterOfMassPosition();
@@ -119,13 +119,16 @@ void physics_engine::addPlane(Plane* plane)
 		body->setFriction(0);
 
 		// Store a pointer to the irrlicht node so we can update it later
-		body->setUserPointer((void*)(node));
+		body->setUserPointer((void*)(plane));
 
 		// Add it to the world
 		m_DynamicsWorld->addRigidBody(body);
 		m_RigidBodies.push_back(body);
 
 		plane->setBody(body);
+
+		ContactSensorCallback callback;
+		m_DynamicsWorld->contactTest(body, callback);
 	}
 	//else if à faire pour les autres types d'avion
 }
@@ -160,7 +163,10 @@ void physics_engine::addProjectile(Projectile* projectile)
 		btRigidBody* body = new btRigidBody(10, motionState, shape, localInertia);
 
 		// Store a pointer to the irrlicht node so we can update it later
-		body->setUserPointer((void*)(node));
+
+		body->setUserPointer((void*)(projectile));
+
+		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 		// Add it to the world
 		m_DynamicsWorld->addRigidBody(body);
@@ -170,11 +176,11 @@ void physics_engine::addProjectile(Projectile* projectile)
 		body->setGravity(btVector3(0, 0, 0));
 
 		projectile->setBody(body);
-		
-		/*int type = PLANE;
 
-		ContactSensorCallback callback(body, (void*)projectile, type);
-		m_DynamicsWorld->contactTest(body, callback);*/
+		body->translate(transform.getBasis().getColumn(2) * 10);
+
+		ContactSensorCallback callback;
+		m_DynamicsWorld->contactTest(body, callback);
 	}
 	//else if à faire pour les autres types d'avion
 }

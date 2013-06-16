@@ -7,11 +7,12 @@
 
 #include "GLOBALS.h"
 #include "server.h"
+#include "collidableObject.h"
 
 class Player;
 class Plane;
 
-class Projectile : public RakNet::NetworkIDObject
+class Projectile : public collidableObject, public RakNet::NetworkIDObject
 {
 public:
 
@@ -24,6 +25,8 @@ public:
 	
 	void loadMesh(RakNet::RakString modelFile);
 	inline irr::scene::IAnimatedMeshSceneNode* getMesh() { return m_Model; }
+
+	inline irr::scene::ISceneNode* getNode() { return static_cast<irr::scene::ISceneNode*>(m_Model);  }
 
 	inline RakNet::RakString getModelType() { return m_ModelType; }
 	

@@ -1,5 +1,4 @@
 <servers>
-	<server name="localhost" ip="127.0.0.1" port="12320"/>
 	<server name="Server Name" ip="192.168.0.13" port="12320"/>
 </servers>
 

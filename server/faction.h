@@ -29,6 +29,8 @@ public:
 	irr::core::vector3df getPosition();
 	irr::core::vector3df getRotation();
 
+	inline int getMaxPlayers() { return m_MaxPlayers; }
+
 private:
 	
 	std::string m_Name;
@@ -37,4 +39,6 @@ private:
 	
 	irr::core::vector3df m_Position;
 	irr::core::vector3df m_Rotation;
+
+	int m_MaxPlayers;
 };

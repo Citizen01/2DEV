@@ -88,6 +88,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				ne->askToRollRight();
 				break;
 			case PRIMARY_FIRE:
+				//TODO: A BOUGER
 				App::getSingleton()->getSoundEngine()->play3D("tir.mp3",this->GetGame()->getLocalPlayer()->GetPlane()->getPosition(),10.0f,250.0f);
 				//TODO
 				break;
@@ -101,8 +102,8 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case TOGGLEMENU:
 				{
-					toggle_ingame_menu();
-					particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
+					toggle_ingame_menu(); 
+					//TODO: DELETE HACK
 					scene::ICameraSceneNode* cam = gfxe->getSceneManager()->addCameraSceneNodeFPS(0, 50, 0.005);
 					cam->setPosition(core::vector3df(0, 2, 0));
 				}

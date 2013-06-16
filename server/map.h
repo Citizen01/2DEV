@@ -1,10 +1,10 @@
 #pragma once
 
 #include <string>
-
 #include <irrlicht.h>
+#include "collidableObject.h"
 
-class Map
+class Map : public collidableObject
 {
 private:
 
@@ -26,4 +26,5 @@ public:
 	irr::core::vector3df getScale();
 
 	irr::scene::ITerrainSceneNode* getTerrain();
+	inline irr::scene::ISceneNode* getNode() { return static_cast<irr::scene::ISceneNode*>(m_Terrain);  }
 };

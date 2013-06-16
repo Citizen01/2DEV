@@ -359,6 +359,7 @@
     <ClInclude Include="..\Libraries\Raknet\include\WSAStartupSingleton.h" />
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h" />
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h" />
+    <ClInclude Include="collidableObject.h" />
     <ClInclude Include="faction.h" />
     <ClInclude Include="GLOBALS.h" />
     <ClInclude Include="map.h" />

@@ -13,6 +13,7 @@ using namespace constants;
 
 Map::Map(string name, core::vector3df scale)
 {
+	objectType = 0;
 	m_Name = name;
 	m_Scale = scale;
 

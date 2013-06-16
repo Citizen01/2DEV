@@ -14,6 +14,8 @@ using namespace constants;
 
 Plane::Plane(Player* pilot, std::string name)
 {
+	objectType = 2;
+
 	m_Pilot = pilot;
 
 	//Crée un avion en fonction du nom de ce dernier
@@ -27,10 +29,13 @@ Plane::Plane(Player* pilot, std::string name)
 	m_MaxEnginePower = 1000;
 	
 	m_StallSpeed = 100;
-	m_MaxSpeed = 1000; // a changer en poids dans certains cas
+	m_MaxSpeed = 1000;
 
-	m_FuelLoad = 100;
 	m_MaxFuelLoad = 100;
+	m_FuelLoad = m_MaxFuelLoad;
+
+	m_MaxLife = 100;
+	m_Life = m_MaxLife;
 }
 
 Plane::~Plane(void)

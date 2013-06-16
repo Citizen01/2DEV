@@ -1,17 +1,16 @@
 #pragma once
 
 #include <string>
-
 #include "RakString.h"
-
 #include <irrlicht.h>
-
 #include <btBulletDynamicsCommon.h>
+
+#include "collidableObject.h"
 
 class Faction;
 class Player;
 
-class Plane
+class Plane : public collidableObject
 {
 private:
 
@@ -30,7 +29,10 @@ private:
 
 	int m_FuelLoad;
 	int m_MaxFuelLoad;
-	
+
+	int m_Life;
+	int m_MaxLife;
+
 public:
 
 	Plane(Player* pilot, std::string name);
@@ -42,6 +44,7 @@ public:
 	inline RakNet::RakString getRakName() { return RakNet::RakString(m_Name.c_str()); }
 
 	inline irr::scene::IAnimatedMeshSceneNode* getMesh() { return m_Model; }
+	inline irr::scene::ISceneNode* getNode() { return static_cast<irr::scene::ISceneNode*>(m_Model);  }
 
 	inline irr::core::vector3df getPosition() { return m_Model->getPosition(); }
 	inline irr::core::vector3df getRotation() { return m_Model->getRotation(); }

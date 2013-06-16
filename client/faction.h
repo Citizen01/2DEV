@@ -14,7 +14,7 @@ class Faction : public RakNet::NetworkIDObject
 {
 public:
 	
-	Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID);
+	Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID, int maxPlayers);
 
 	std::string GetName();
 
@@ -28,6 +28,8 @@ public:
 	irr::core::vector3df GetPosition();
 	irr::core::vector3df GetRotation();
 
+	inline int getMaxPlayers() { return m_MaxPlayers; }
+
 private:
 	
 	std::string m_Name;
@@ -36,4 +38,6 @@ private:
 	
 	irr::core::vector3df m_Position;
 	irr::core::vector3df m_Rotation;
+
+	int m_MaxPlayers;
 };

@@ -1,4 +1,5 @@
 #include "game.h"
+
 #include "app.h"
 #include "ui_windows.h"
 #include "projectile.h"
@@ -51,9 +52,10 @@ bool game::removePlayer(Player* p)
 	}
 }
 
-void game::addFaction(string factionName, NetworkIDManager* networkIDManager, NetworkID networkID)
+
+void game::addFaction(string factionName, NetworkIDManager* networkIDManager, NetworkID networkID, int maxPlayers)
 {
-	faction_list.push_back(new Faction(factionName, networkIDManager, networkID));
+	faction_list.push_back(new Faction(factionName, networkIDManager, networkID, maxPlayers));
 	updateJoinFactionWindow();
 }
 

@@ -6,7 +6,7 @@ using namespace std;
 using namespace RakNet;
 using namespace irr;
 
-Faction::Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
+Faction::Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID, int maxPlayers)
 {
 	m_Name = name;
 
@@ -17,6 +17,8 @@ Faction::Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, R
 	
 	m_Position = core::vector3df(50000, 19997, 50015);
 	m_Rotation = core::vector3df(0.f, 0.f, 0.f);
+
+	m_MaxPlayers = maxPlayers;
 }
 
 string Faction::GetName()

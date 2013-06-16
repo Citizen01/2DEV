@@ -75,6 +75,19 @@ int App::run()
 
 	show_main_menu(true);
 
+	scene::IMeshSceneNode* box = device->getSceneManager()->addCubeSceneNode(1, 0, -1, core::vector3df(0, 0, 0), core::vector3df(0, 0, 0), core::vector3df(10000, 1, 10000));
+	box->setMaterialTexture(0, getGraphicEngine()->getDriver()->getTexture("../Media/texture.jpg"));
+	box->setMaterialFlag(video::EMF_LIGHTING, false);
+	
+	//scene::ISceneManager* smgr = App::getSingleton()->getGraphicEngine()->getSceneManager();
+	//std::string modefile = constants::PATH_TO_MEDIA + "/projectiles/missile/missile.3DS";
+	//scene::IAnimatedMeshSceneNode* missile = smgr->addAnimatedMeshSceneNode(smgr->getMesh(modefile.c_str()));
+ // 
+	////On met l'auto-éclairage (debug)
+	//missile->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	//
+	//missile->setPosition(core::vector3df(10, 2, 10));
+
 	int lastFPS = -1;
 	while(device->run() && running)
 	{

@@ -108,6 +108,7 @@ void Server::sendFactions()
 	{
 		m_BSOut.Write(m_FactionList[i]->getRakName());
 		m_BSOut.Write(m_FactionList[i]->GetNetworkID());
+		m_BSOut.Write(m_FactionList[i]->getMaxPlayers());
 	}
 
 	reply();
@@ -206,7 +207,7 @@ void Server::playerEnterFaction()
 
 		reply();
 	}
-	else if(faction != m_NetworkIDManager->GET_OBJECT_FROM_ID<Faction*>(1) && faction->getPlayers().size() == 10) //TODO: remplacer par max faction slots
+	else if(faction != m_NetworkIDManager->GET_OBJECT_FROM_ID<Faction*>(1) && faction->getPlayers().size() == faction->getMaxPlayers())
 	{
 		m_BSOut.Write((MessageID)ID_PLAYER_DO_NOT_ENTER_FACTION);
 		m_BSOut.Write("There is no more available slots in this faction.");
@@ -416,8 +417,6 @@ void Server::movePlanes()
 			Plane* plane = m_PlayerList[i]->getPlane();
 			if(plane != NULL)
 			{
-				cout << "Moving planes." << endl;
-
 				//Bullet simulation
 				physics_engine::getSingleton()->updatePhysics(deltaTime);
 
@@ -462,12 +461,12 @@ void Server::movePlanes()
 				core::vector3df rotation = plane->getRotation();
 
 				//TODO: à supprimer
-				cout << "(" << position.X << "," << position.Y << "," << position.Z << "),"
+				/*cout << "(" << position.X << "," << position.Y << "," << position.Z << "),"
 				<< "(" << rotation.X << "," << rotation.Y << "," << rotation.Z << ") "
 				<< localVelocity.getX() << " | "
 				<< localVelocity.getY() << " | "
 				<< localVelocity.getZ() << " ||| "
-				<< velocity <<endl;
+				<< velocity <<endl;*/
 
 				m_BSOut.Reset();
 
@@ -495,8 +494,6 @@ void Server::updateProjectiles(unsigned int deltaTime)
 {
 	for(unsigned int i = 0; i < m_ProjectileList.size(); i ++)
 	{
-		cout << "Moving projectiles." << endl;
-
 		Projectile* projectile = m_ProjectileList[i];
 		btRigidBody* body = projectile->getBody();
 
@@ -514,7 +511,7 @@ void Server::updateProjectiles(unsigned int deltaTime)
 		core::vector3df position = projectile->getPosition();
 		core::vector3df rotation = projectile->getRotation();
 
-		cout << projectile->getTimeToLive() << endl;
+		//cout << projectile->getTimeToLive() << endl;
 
 		m_BSOut.Write(projectile->GetNetworkID());
 

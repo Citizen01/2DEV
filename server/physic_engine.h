@@ -1,13 +1,10 @@
 #pragma once
 
 #include <vector>
-
 #include <irrlicht.h>
-
 #include <btBulletDynamicsCommon.h>
 
 #include "plane.h"
-
 #include "projectile.h"
 
 class physics_engine
@@ -39,28 +36,27 @@ public:
 
 	struct ContactSensorCallback : public btCollisionWorld::ContactResultCallback
 	{
-		ContactSensorCallback(btRigidBody* body, void* pointer, int& objectType) : btCollisionWorld::ContactResultCallback(), body(body), object(pointer), objectType(objectType) { }
-	
-		btRigidBody* body;
-		void* object;
-		int& objectType;
+		ContactSensorCallback() : btCollisionWorld::ContactResultCallback() { }
 
-	public:
-
-		virtual btScalar addSingleResult(btManifoldPoint& contactPoint, const btCollisionObject* object0, int partId0, int index0, const btCollisionObject* object1, int partId1, int index1)
+		btScalar addSingleResult(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
 		{
-			btVector3 point;
+			int type0 = ((collidableObject*)((btRigidBody*)colObj0Wrap->getCollisionObject())->getUserPointer())->objectType;
+			int type1 = ((collidableObject*)((btRigidBody*)colObj1Wrap->getCollisionObject())->getUserPointer())->objectType;
 
-			if(object0 == body)
+			switch(ObjectTypes(type0))
 			{
-				point = contactPoint.m_localPointA;
+			case MAP:
+				break;
+			case BASE:
+				break;
+			/*case PLANE:
+				Plane* plane = (Plane*)((btRigidBody*)colObj0Wrap->getCollisionObject())->getUserPointer();
+				if(type1 == MAP)
+				{
+					plane->takeDammage(-1);
+				}
+				if(type1 == BASE*/
 			}
-			else
-			{
-				assert(object1 == body && "body does not match either collision object");
-				point = contactPoint.m_localPointB;
-			}
-
 			return 0;
 		}
 	};

@@ -316,11 +316,14 @@ void network_engine::getFactions()
 	{
 		RakString factionName = "";
 		NetworkID factionNetworkID;
+		int maxPlayers;
 		
 		bsIn.Read(factionName);
 		bsIn.Read(factionNetworkID);
+		bsIn.Read(maxPlayers);
 
-		ge->GetGame()->addFaction(factionName.C_String(), m_NetworkIDManager, factionNetworkID);
+
+		App::getSingleton()->getGameEngine()->GetGame()->addFaction(factionName.C_String(), m_NetworkIDManager, factionNetworkID, maxPlayers);
 	}
 
 	askForPlayers();
@@ -415,7 +418,10 @@ void network_engine::playerGetPlane()
 		showCursor(false);
 	}
 
-	askForProjectiles();
+	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == NULL)
+	{
+		askForProjectiles();
+	}
 }
 
 void network_engine::acceleratePlane()
@@ -559,7 +565,6 @@ void network_engine::frame()
 				cout << "Connection lost." << endl;
 				m_Connected = false;
 				break;
-
 			case ID_REMOTE_NEW_INCOMING_CONNECTION:
 				cout << "Another client has connected." << endl;
 				break;
@@ -578,7 +583,6 @@ void network_engine::frame()
 			case ID_ANSWER_TO_PLAYERS:
 				getPlayers();
 				break;
-
 			case ID_PLAYER_ENTER_FACTION:
 				playerEnterFaction();
 				break;
@@ -587,19 +591,16 @@ void network_engine::frame()
 				break;
 			case ID_PLAYER_GET_PLANE:
 				playerGetPlane();
-				break;
-					
+				break;					
 			case ID_ACCELERATE_PLANE:
 				acceleratePlane();
 				break;
 			case ID_DECELERATE_PLANE:
 				deceleratePlane();
 				break;
-
 			case ID_SHOOT_MISSILE:
 				shootMissile();
 				break;
-					
 			case ID_MOVE_PLANE:
 				movePlane();
 				break;
@@ -608,7 +609,7 @@ void network_engine::frame()
 				break;
 
 			default:
-				cout << "Unknown message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
+				cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
 		}
 	}
 }

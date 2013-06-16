@@ -35,7 +35,7 @@ public:
 	void addPlayer(RakNet::RakString playerName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID);
 	bool removePlayer(Player* p);
 	
-	void addFaction(std::string factionName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID);
+	void addFaction(std::string factionName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID, int maxPlayers);
 
 	void addProjectile(Player* owner, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID, RakNet::RakString modelFile);
 
