@@ -65,7 +65,6 @@ bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 //Bouton Connect de la fenêtre Quick Connect
 bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 {
-	cout << "T'est Co Gros !" << endl;
 	WindowManager& wmgr = WindowManager::getSingleton();
 	
 	Editbox* champIp = (Editbox*) wmgr.getWindow("QuickCo_Quick_connect/IpAdress");
@@ -84,17 +83,13 @@ bool handleQuickConnectBtnCo (const CEGUI::EventArgs &e)
 
 	App::getSingleton()->getNetworkEngine()->connect(cstr, port);
 	delete [] cstr;
-	//monTableau->getFirstSelectedItem();
 	return true;
 }
 
 //Bouton Add de la fenêtre Server List
 bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 {
-
-	cout << "Ta Ajoute un PONEY Gros !" << endl;
 	WindowManager& wmgr = WindowManager::getSingleton();
-	
 
 	Editbox* serverChamp = (Editbox*) wmgr.getWindow("Srvl_ServerList/Server_Name");
 	string serverName = serverChamp->getText().c_str();
@@ -128,9 +123,6 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 		ip = resultat[0];
 		port = resultat[1];
 	}
-	
-	cout << "ip : " << ip << endl;
-	cout <<"port : " << port << endl;
 	
 	string fullAddr = ip +":"+ port;
 	
@@ -174,10 +166,52 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 //Bouton Connect de la fenêtre Quick Connect
 bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 {
-	cout << "T'est Co Gros !" << endl;
+	WindowManager& wmgr = WindowManager::getSingleton();
 
-	//:) oui ^^ des indica
+	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
+	
+	ListboxItem* serverNameItem = serverList->getFirstSelectedItem();
+	string serverNameItemText = serverNameItem->getText().c_str();
 
+	ListboxItem* adressItem = serverList->getNextSelected(serverNameItem);
+	string adressItemText = adressItem->getText().c_str();
+
+	size_t pos = 0;
+	string token;
+	vector<std::string> resultat;
+	string delimiter = ":";
+	string ip;
+	string port;
+
+	while((pos = adressItemText.find(delimiter)) != string::npos)
+	{
+		token = adressItemText.substr(0, pos);
+		resultat.push_back(token);
+		adressItemText.erase(0,pos + delimiter.length());
+	}
+	resultat.push_back(adressItemText);
+
+	if (resultat.size() == 1)
+	{
+		ip = adressItemText;
+		port = "60000";
+	}
+	else
+	{
+		ip = resultat[0];
+		port = resultat[1];
+	}
+	
+	int p;
+	std::istringstream ss(port);
+	ss >> p;
+	
+	char *ipChar = new char[ip.length() + 1];
+	strcpy(ipChar, ip.c_str());
+	cout << ipChar << endl;
+
+	server_manager::getSingleton()->loadServers();
+	App::getSingleton()->getNetworkEngine()->connect(ipChar, p);
 	return true;
 }
 
