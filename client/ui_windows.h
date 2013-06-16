@@ -19,3 +19,4 @@ void update_plane_selection(std::vector<std::string> values);
 //Menu ingame
 void create_ingame_menu();
 void show_ingame_menu(bool visible);
+void toggle_ingame_menu();

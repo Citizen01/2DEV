@@ -1,9 +1,8 @@
-
 #include "GLOBALS.h"
 
-using namespace constants;
 using namespace irr;
 
+using namespace constants;
 
 std::map<std::string,irr::EKEY_CODE> KEYMAP;
 std::map<std::string,constants::ACTION_CODE> ACTIONMAP;
@@ -12,6 +11,7 @@ std::map<std::string,constants::ACTION_CODE> ACTIONMAP;
  * Certaines variables ne peuvent pas être initialisées au moment 
  * de leur déclaration, elles sont donc initialisées ici.
  */
+
 void initialiseGlobals()
 {
 	/////////////////////////// EKEY_CODE ///////////////////////////

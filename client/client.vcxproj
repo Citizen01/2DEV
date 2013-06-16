@@ -209,6 +209,7 @@
     <ClCompile Include="particle_manager.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="projectile.cpp" />
     <ClCompile Include="sound_engine.cpp" />
     <ClCompile Include="ui_plane_selection.cpp" />
     <ClCompile Include="ui_team_selection.cpp" />
@@ -369,6 +370,7 @@
     <ClInclude Include="..\Libraries\Raknet\include\XBox360Includes.h" />
     <ClInclude Include="..\Libraries\Raknet\include\_FindFirst.h" />
     <ClInclude Include="dirent.h" />
+    <ClInclude Include="getopt.h" />
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="server_manager.h" />
     <ClInclude Include="ui_windows.h" />
@@ -389,8 +391,10 @@
     <ClInclude Include="particle_manager.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="projectile.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="sound_engine.h" />
+    <ClInclude Include="unistd.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="XMLParser.h" />
   </ItemGroup>

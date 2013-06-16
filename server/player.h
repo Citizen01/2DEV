@@ -2,10 +2,12 @@
 
 #include <string>
 
-#include <irrlicht.h>
-
 #include "NetworkIDManager.h"
 #include "RakString.h"
+
+#include <irrlicht.h>
+
+#include "server.h"
 
 class Faction;
 class Plane;
@@ -14,51 +16,23 @@ class Player : public RakNet::NetworkIDObject
 {
 private:
 
-	std::string nickname;
+	std::string m_Nickname;
 
 	Faction* m_Faction;
 
-	Plane* plane;
-
-	irr::scene::ICameraSceneNode* m_Camera;
-
-	//Seul le network devra modifier ces vars: 
-	int score;
-	int cash;
-	int kills;
-	int deaths;
-	int ping;
+	Plane* m_Plane;
 
 public:
 	
-	Player(RakNet::RakString nick, RakNet::NetworkIDManager* networkIDManager);
+	Player(RakNet::RakString nickName, RakNet::NetworkIDManager* networkIDManager);
 	~Player();
 	
-	Faction* GetFaction();
-	void SetFaction(Faction* faction);
+	inline std::string getNickname() { return m_Nickname; }
+	inline RakNet::RakString getRakNickName() { return RakNet::RakString(m_Nickname.c_str()); }
 
-	Plane* GetPlane();
-	void SetPlane(RakNet::RakString name, irr::scene::ISceneManager* sceneManager);
+	inline Faction* getFaction() { return m_Faction; }
+	inline void setFaction(Faction* faction) { m_Faction = faction; }
 
-	void updateThirdView();
-
-	//// GETTERS AND SETTERS //// 
-	
-	std::string getNickname();
-	RakNet::RakString GetRakName();
-
-	void setScore(int score);
-	int getScore();
-
-	void setCash(int cash);
-	int getCash();
-
-	void setKills(int kills);
-	int getKills();
-
-	void setDeaths(int deaths);
-	int getDeaths();
-
-	void setPing(int ping);
-	int getPing();
+	inline Plane* getPlane() { return m_Plane; }
+	void setPlane(RakNet::RakString name);
 };

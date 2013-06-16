@@ -1,13 +1,12 @@
 #pragma once
 
 #include <string>
-#include <iostream>
 #include <vector>
-
-#include <irrlicht.h>
 
 #include "NetworkIDManager.h"
 #include "RakString.h"
+
+#include <irrlicht.h>
 
 class Player;
 
@@ -17,18 +16,18 @@ public:
 	
 	Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID);
 
-	std::string GetName();
-	RakNet::RakString GetRakName();
+	std::string getName();
+	RakNet::RakString getRakName();
 
-	void AddPlayer(Player* player);
-	void RemovePlayer(Player* player);
+	void addPlayer(Player* player);
+	void removePlayer(Player* player);
 
-	bool HasPlayer(Player* player);
+	bool hasPlayer(Player* player);
 
-	std::vector<Player*> GetPlayers();
+	std::vector<Player*> getPlayers();
 
-	irr::core::vector3df GetPosition();
-	irr::core::vector3df GetRotation();
+	irr::core::vector3df getPosition();
+	irr::core::vector3df getRotation();
 
 private:
 	

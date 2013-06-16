@@ -1,6 +1,7 @@
 #include "game.h"
 #include "app.h"
 #include "ui_windows.h"
+#include "projectile.h"
 
 using namespace std;
 using namespace RakNet;
@@ -16,7 +17,7 @@ game::~game(void)
 	delete map;
 }
 
-void game::addPlayer(RakString playerName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
+void game::addPlayer(RakString playerName, NetworkIDManager* networkIDManager, NetworkID networkID)
 {
 	player_list.push_back(new Player(playerName, networkIDManager, networkID));
 	if(playerName.C_String() == App::getSingleton()->settings["nickname"])
@@ -49,9 +50,14 @@ bool game::removePlayer(Player* p)
 	}
 }
 
-void game::addFaction(std::string factionName, RakNet::NetworkIDManager* networkIDManager, RakNet::NetworkID networkID)
+void game::addFaction(string factionName, NetworkIDManager* networkIDManager, NetworkID networkID)
 {
 	faction_list.push_back(new Faction(factionName, networkIDManager, networkID));
+}
+
+void game::addProjectile(Player* owner, RakNet::NetworkIDManager* networkIDManager, NetworkID networkID, RakString modelFile)
+{
+	projectile_list.push_back(new Projectile(owner, networkIDManager, networkID, modelFile));
 }
 
 Player* game::getLocalPlayer()

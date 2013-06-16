@@ -97,3 +97,10 @@ void show_ingame_menu(bool visible)
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("IGM_IngameMenu")->setVisible(visible);
 }
+
+void toggle_ingame_menu()
+{
+	WindowManager& wmgr = WindowManager::getSingleton();
+	Window* ig_menu = (Window*)wmgr.getWindow("IGM_IngameMenu");
+	ig_menu->setVisible(!ig_menu->isVisible());
+}

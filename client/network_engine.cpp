@@ -1,8 +1,9 @@
 #include "network_engine.h"
 
 #include <iostream>
-
 #include "app.h"
+#include "projectile.h"
+#include "unistd.h" //Pour la fonction sleep
 
 using namespace std;
 using namespace RakNet;
@@ -30,38 +31,46 @@ void network_engine::connect(char* ip, int port)
 	m_ServerIP = ip;
 	m_ServerPort = port;
 
-	cout << "Connecting to the server '" << m_ServerIP << "':'" << m_ServerPort << "'" << endl;
+	cout << "Connecting to the server " << m_ServerIP << ":" << m_ServerPort << endl;
 	m_Peer->Startup(1, &m_SocketDescriptor, 1);
 	m_Peer->Connect(m_ServerIP, m_ServerPort, 0,0);
 
-	for (m_Packet = m_Peer->Receive(); m_Packet; m_Peer->DeallocatePacket(m_Packet), m_Packet = m_Peer->Receive())
-	{
-		switch (GetPacketIdentifier(m_Packet))
+	//Essaye de se connecter 1 fois par seconde et 10 fois
+	int maxAttempts = 10;
+	int attempts = 1;
+	int code = -1;
+	do{
+		cout << "Connection attempt #" << attempts << endl;
+		Sleep(1000);
+		for (m_Packet = m_Peer->Receive(); m_Packet; m_Peer->DeallocatePacket(m_Packet), m_Packet = m_Peer->Receive())
 		{
-			case ID_CONNECTION_REQUEST_ACCEPTED:
-				{
-					cout << "Our connection request has been accepted." << endl;
-					m_Connected = true;
-					m_ServerAddress = m_Packet->systemAddress;
-				}
-				break;
-			case ID_ALREADY_CONNECTED:
-				cout << "We are already connected." << endl;
-				break;	
-
-			case ID_CONNECTION_ATTEMPT_FAILED:
-				cout << "Our connection attempt has failed." << endl;
-				break;
-			case ID_NO_FREE_INCOMING_CONNECTIONS:
-				cout << "The server is full." << endl;
-				break;	
-
-			default:
-				cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
-				break;
+			m_ServerAddress = m_Packet->systemAddress;
+			code = GetPacketIdentifier(m_Packet);
 		}
+	} while( code == -1 && attempts++ < maxAttempts);
+	
+	switch (code)
+	{
+		case ID_CONNECTION_REQUEST_ACCEPTED:
+			{
+				cout << "Our connection request has been accepted." << endl;
+				m_Connected = true;
+				askForMap();
+			}
+			break;
+		case ID_ALREADY_CONNECTED:
+			cout << "We are already connected." << endl;
+			break;	
+		case ID_CONNECTION_ATTEMPT_FAILED:
+			cout << "Connection timed out !" << endl;
+			break;
+		case ID_NO_FREE_INCOMING_CONNECTIONS:
+			cout << "The server is full." << endl;
+			break;
+		default:
+			cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
+			break;
 	}
-	askForMap();
 }
 
 void network_engine::disconnect()
@@ -185,6 +194,14 @@ void network_engine::askForPlayersStates()
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
+void network_engine::askForProjectiles()
+{
+	cout << "Asking the server for projectiles." << endl;
+	BitStream bsOut;
+	bsOut.Write((MessageID)ID_ASK_FOR_PROJECTILES);
+	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
+}
+
 void network_engine::askToEnterFaction(Faction* faction)
 {
 	if (!m_Connected)
@@ -219,6 +236,59 @@ void network_engine::askToDecelerate()
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_DECELERATE);
 	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
+}
+
+void network_engine::askToDive()
+{
+	cout << "Asking the server to dive." << endl;
+	BitStream bsOut;
+	bsOut.Write((MessageID)ID_ASK_TO_DIVE);
+	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
+}
+
+void network_engine::askToStraighten()
+{
+	cout << "Asking the server to straighten." << endl;
+	BitStream bsOut;
+	bsOut.Write((MessageID)ID_ASK_TO_STRAIGHTEN);
+	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
+}
+
+void network_engine::askToRollLeft()
+{
+	cout << "Asking the server to roll left." << endl;
+	BitStream bsOut;
+	bsOut.Write((MessageID)ID_ASK_TO_ROLL_LEFT);
+	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
+}
+
+void network_engine::askToRollRight()
+{
+	cout << "Asking the server to roll right." << endl;
+	BitStream bsOut;
+	bsOut.Write((MessageID)ID_ASK_TO_ROLL_RIGHT);
+	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
+}
+
+void network_engine::askToShootMissile(Plane* target)
+{
+	cout << "Asking the server to shoot a missile." << endl;
+	BitStream bsOut;
+	bsOut.Write((MessageID)ID_ASK_TO_SHOOT_MISSILE);
+	bsOut.Write(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetNetworkID());
+	if(target != NULL)
+	{
+		bsOut.Write(target->getPilot()->GetNetworkID());
+	}
+	else
+	{
+		bsOut.Write(UNASSIGNED_NETWORK_ID);
+	}
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
 }
 
@@ -342,6 +412,11 @@ void network_engine::playerGetPlane()
 	bsIn.Read(planeModel);
 
 	player->SetPlane(planeModel.C_String());
+
+	if(App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer() == NULL)
+	{
+		askForProjectiles();
+	}
 }
 
 void network_engine::acceleratePlane()
@@ -376,12 +451,30 @@ void network_engine::deceleratePlane()
 	player->GetPlane()->DecrementEnginePower();
 }
 
+void network_engine::shootMissile()
+{
+	cout << "Shooting a missile." << endl;
+	
+	BitStream bsIn(m_Packet->data, m_Packet->length, false);
+	bsIn.IgnoreBytes(sizeof(MessageID));
+					
+	NetworkID playerNetworkID;	
+	bsIn.Read(playerNetworkID);
+	Player* player = m_NetworkIDManager->GET_OBJECT_FROM_ID<Player*>(playerNetworkID);
+
+	NetworkID projectileNetworkID;
+	bsIn.Read(projectileNetworkID);
+
+	RakString model;
+	bsIn.Read(model);
+
+	App::getSingleton()->getGameEngine()->GetGame()->addProjectile(player, m_NetworkIDManager, projectileNetworkID, model);
+}
+
 void network_engine::movePlane()
 {
 	if (!m_Connected)
 		return;
-
-	//cout << "Moving a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
@@ -405,6 +498,34 @@ void network_engine::movePlane()
 	float rotationZ;
 	bsIn.Read(rotationZ);
 	player->GetPlane()->SetRotation(core::vector3df(rotationX, rotationY, rotationZ));
+}
+
+void network_engine::updateProjectile()
+{
+	cout << "Moving a projectile." << endl;
+	
+	BitStream bsIn(m_Packet->data, m_Packet->length, false);
+	bsIn.IgnoreBytes(sizeof(MessageID));
+					
+	NetworkID projectileNetworkID;	
+	bsIn.Read(projectileNetworkID);
+	Projectile* projectile = m_NetworkIDManager->GET_OBJECT_FROM_ID<Projectile*>(projectileNetworkID);
+	
+	float positionX;
+	bsIn.Read(positionX);
+	float positionY;
+	bsIn.Read(positionY);
+	float positionZ;
+	bsIn.Read(positionZ);
+	projectile->setPosition(core::vector3df(positionX, positionY, positionZ));
+
+	float rotationX;
+	bsIn.Read(rotationX);
+	float rotationY;
+	bsIn.Read(rotationY);
+	float rotationZ;
+	bsIn.Read(rotationZ);
+	projectile->setRotation(core::vector3df(rotationX, rotationY, rotationZ));
 }
 
 void network_engine::readMessage()
@@ -449,7 +570,6 @@ void network_engine::frame()
 			case ID_REMOTE_CONNECTION_LOST:
 				cout << "Another client has lost the connection." << endl;
 				break;
-					
 			case ID_ANSWER_TO_MAP:
 				getMap();
 				break;
@@ -469,19 +589,27 @@ void network_engine::frame()
 			case ID_PLAYER_GET_PLANE:
 				playerGetPlane();
 				break;
-
+					
 			case ID_ACCELERATE_PLANE:
 				acceleratePlane();
 				break;
 			case ID_DECELERATE_PLANE:
 				deceleratePlane();
 				break;
+
+			case ID_SHOOT_MISSILE:
+				shootMissile();
+				break;
+					
 			case ID_MOVE_PLANE:
 				movePlane();
 				break;
+			case ID_UPDATE_PROJECTILE:
+				updateProjectile();
+				break;
 
 			default:
-				cout << "Message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
+				cout << "Unknown message with identifier " << (int)m_Packet->data[0] << " has arrived." << endl;
 		}
 	}
 }

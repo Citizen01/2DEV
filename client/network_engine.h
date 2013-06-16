@@ -35,13 +35,20 @@ class network_engine : public engine
 		void askForFactions();
 		void askForPlayers();
 		void askForPlayersStates();
+		void askForProjectiles();
 
 		void askForLocalPlayer();
 		void askForLocalPlane(std::string planeModel);
 
 		void askToEnterFaction(Faction* faction);
+		
 		void askToAccelerate();
 		void askToDecelerate();
+		void askToDive();
+		void askToStraighten();
+		void askToRollLeft();
+		void askToRollRight();
+		void askToShootMissile(Plane* target = NULL);
 		
 		void getMap();
 		void getFactions();
@@ -49,10 +56,13 @@ class network_engine : public engine
 
 		void playerEnterFaction();
 		void playerGetPlane();
-
+		
 		void acceleratePlane();
 		void deceleratePlane();
+		void shootMissile();
+
 		void movePlane();
+		void updateProjectile();
 
 		void readMessage();
 
@@ -92,10 +102,22 @@ class network_engine : public engine
 			ID_ASK_FOR_LOCAL_PLANE = ID_USER_PACKET_ENUM + 10,
 			ID_PLAYER_GET_PLANE = ID_USER_PACKET_ENUM + 11,
 			ID_ASK_FOR_PLAYERS_STATES = ID_USER_PACKET_ENUM + 12,
-			ID_ASK_TO_ACCELERATE = ID_USER_PACKET_ENUM + 13,
-			ID_ACCELERATE_PLANE = ID_USER_PACKET_ENUM + 14,
-			ID_ASK_TO_DECELERATE = ID_USER_PACKET_ENUM + 15,
-			ID_DECELERATE_PLANE = ID_USER_PACKET_ENUM + 16,
-			ID_MOVE_PLANE = ID_USER_PACKET_ENUM + 17
+			ID_ASK_FOR_PROJECTILES = ID_USER_PACKET_ENUM + 13,
+			ID_ASK_TO_ACCELERATE = ID_USER_PACKET_ENUM + 14,
+			ID_ACCELERATE_PLANE = ID_USER_PACKET_ENUM + 15,
+			ID_ASK_TO_DECELERATE = ID_USER_PACKET_ENUM + 16,
+			ID_DECELERATE_PLANE = ID_USER_PACKET_ENUM + 17,
+			ID_ASK_TO_DIVE = ID_USER_PACKET_ENUM + 18,
+			ID_DIVE_PLANE = ID_USER_PACKET_ENUM + 19,
+			ID_ASK_TO_STRAIGHTEN = ID_USER_PACKET_ENUM + 20,
+			ID_STRAIGHTEN_PLANE = ID_USER_PACKET_ENUM + 21,
+			ID_ASK_TO_ROLL_LEFT = ID_USER_PACKET_ENUM + 22,
+			ID_ROLL_LEFT_PLANE = ID_USER_PACKET_ENUM + 23,
+			ID_ASK_TO_ROLL_RIGHT = ID_USER_PACKET_ENUM + 24,
+			ID_ROLL_RIGHT_PLANE = ID_USER_PACKET_ENUM + 25,
+			ID_MOVE_PLANE = ID_USER_PACKET_ENUM + 26,
+			ID_ASK_TO_SHOOT_MISSILE = ID_USER_PACKET_ENUM + 27,
+			ID_SHOOT_MISSILE = ID_USER_PACKET_ENUM + 28,
+			ID_UPDATE_PROJECTILE = ID_USER_PACKET_ENUM + 29
 		};
 };

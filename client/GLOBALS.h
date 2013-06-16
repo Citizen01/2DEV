@@ -10,6 +10,7 @@ namespace constants {
 	const std::string PATH_TO_MEDIA = "../Media";
 	const std::string MAP_HEIGHTMAP_NAME = "heightmap.png";
 	const std::string MAP_TEXTURE_NAME = "texture.png";
+	const int DEFAULT_SERVER_PORT = 12320;
 
 	//Utilisé pour traduire en irr::EKEY_CODE
 	//std::map<std::string,irr::EKEY_CODE> KEYMAP;

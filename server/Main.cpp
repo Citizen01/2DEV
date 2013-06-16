@@ -4,5 +4,7 @@ using namespace std;
 
 int main(void)
 {
-	return Server::GetSingleton()->Run();
+	Server::getSingleton()->run();
+
+	return 0;
 }

@@ -15,49 +15,44 @@ Faction::Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, R
 	this->SetNetworkIDManager(networkIDManager);
 	this->SetNetworkID(networkID);
 	
-	m_Position = core::vector3df(50000, 19997, 50015);
-	m_Rotation = core::vector3df(0.f, 0.f, 0.f);
-
-	//TODO: REMOVE HACK
-	m_Position = core::vector3df(0, 0, 0);
+	m_Position = core::vector3df(0, 10, 0);
+	m_Rotation = core::vector3df(-90.f, 0.f, 0.f);
 }
 
-string Faction::GetName()
+string Faction::getName()
 {
 	return m_Name;
 }
 
-RakString Faction::GetRakName()
+RakString Faction::getRakName()
 {
 	return RakString(m_Name.c_str());
 }
 
-void Faction::AddPlayer(Player* player)
+void Faction::addPlayer(Player* player)
 {
-	player->SetFaction(this);
+	player->setFaction(this);
 	m_Players.push_back(player);
 }
 
-void Faction::RemovePlayer(Player* player)
+void Faction::removePlayer(Player* player)
 {
 	for (unsigned int i = 0; i < m_Players.size(); i++)
 	{
-		Player* p = m_Players[i];
-		if (player == p)
+		if (player == m_Players[i])
 		{
-			player->SetFaction(NULL);
+			player->setFaction(NULL);
 			m_Players.erase(m_Players.begin() + i);
 			break;
 		}
 	}
 }
 
-bool Faction::HasPlayer(Player* player)
+bool Faction::hasPlayer(Player* player)
 {
 	for (unsigned int i = 0; i < m_Players.size(); i++)
 	{
-		Player* p = m_Players[i];
-		if (player == p)
+		if (player == m_Players[i])
 		{
 			return true;
 		}
@@ -65,17 +60,17 @@ bool Faction::HasPlayer(Player* player)
 	return false;
 }
 
-vector<Player*> Faction::GetPlayers()
+vector<Player*> Faction::getPlayers()
 {
 	return m_Players;
 }
 
-irr::core::vector3df Faction::GetPosition()
+irr::core::vector3df Faction::getPosition()
 {
 	return m_Position;
 }
 
-irr::core::vector3df Faction::GetRotation()
+irr::core::vector3df Faction::getRotation()
 {
 	return m_Rotation;
 }

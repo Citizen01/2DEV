@@ -62,8 +62,8 @@ bool game_engine::OnEvent(const SEvent& event)
 				ne->askToAccelerate();
 				break;
 			case DECELERATE:
-				ne->askToDecelerate();
 				//TODO
+				ne->askToDecelerate();
 				break;
 			case LEFT:
 				//TODO
@@ -73,15 +73,19 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case DIVE:
 				//TODO
+				ne->askToDive();
 				break;
 			case STRAIGHTEN:
 				//TODO
+				ne->askToStraighten();
 				break;
 			case ROLL_LEFT:
 				//TODO
+				ne->askToRollLeft();
 				break;
 			case ROLL_RIGHT:
 				//TODO
+				ne->askToRollRight();
 				break;
 			case PRIMARY_FIRE:
 				App::getSingleton()->getSoundEngine()->play3D("tir.mp3",this->GetGame()->getLocalPlayer()->GetPlane()->getPosition(),10.0f,250.0f);
@@ -89,15 +93,19 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case SECONDARY_FIRE:
 				//TODO
+				ne->askToShootMissile();
 				break;
 			case EQUIPMENT:
 				//TODO
 				ne->GetReady();
 				break;
 			case TOGGLEMENU:
-				show_main_menu(false);
-				//TODO
-				particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
+				{
+					toggle_ingame_menu();
+					particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
+					scene::ICameraSceneNode* cam = gfxe->getSceneManager()->addCameraSceneNodeFPS(0, 50, 0.005);
+					cam->setPosition(core::vector3df(0, 2, 0));
+				}
 				break;
 			default:
 				//Nothing

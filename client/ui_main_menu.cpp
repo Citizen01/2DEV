@@ -131,7 +131,7 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 	if (resultat.size() == 1)
 	{
 		ip = ipAdress;
-		port = "60000";
+		port = DEFAULT_SERVER_PORT;
 	}
 	else
 	{
@@ -214,7 +214,7 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 	if (resultat.size() == 1)
 	{
 		ip = adressItemText;
-		port = "60000";
+		port = DEFAULT_SERVER_PORT;
 	}
 	else
 	{
