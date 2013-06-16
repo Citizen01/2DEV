@@ -1,9 +1,10 @@
 <mainconfig>
 	<settings>
 		<nickname>TomTom</nickname>
-		<anti_aliasing>0</anti_aliasing>
-		<display_windowed>1</display_windowed>
+		<display_windowed>fullscreen</display_windowed>
 		<skin>default</skin>
+    	<resolution_x>1024</resolution_x>
+    	<resolution_y>768</resolution_y>
 	</settings>
 	<binds>
 		<bind control="accelerate">z</bind>

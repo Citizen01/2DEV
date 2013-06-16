@@ -151,7 +151,6 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 		row.push_back(fullAddr);
 		addTableRow(serverList, row);
 	}
-	
 	return true;
 }
 
@@ -177,7 +176,6 @@ bool handleSrvlBtnDelete (const CEGUI::EventArgs &e)
 			removeRow(serverList, line);
 		}
 	}
-
 	return true;
 }
 
@@ -189,7 +187,7 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	MultiColumnList* serverList = (MultiColumnList*) wmgr.getWindow("Srvl_ServerList/Server_list");
-	
+
 	ListboxItem* serverNameItem = serverList->getFirstSelectedItem();
 	string serverNameItemText = serverNameItem->getText().c_str();
 
@@ -290,6 +288,7 @@ void create_main_menu()
 	ServerList->setText("Server List");
 	//Pop Server list
 	ServerList->subscribeEvent(PushButton::EventClicked, handleSrvlBtnWin);
+	
 
 	// About 
 	PushButton* About = (PushButton*)wmgr.createWindow("TaharezLook/Button", "About");
@@ -346,6 +345,7 @@ void create_main_menu()
 	SrvlTableau->addColumn("Address", 1, UDim(0.38f, 0));
 	SrvlTableau->setSelectionMode(MultiColumnList::SelectionMode::RowSingle);
 	SrvlTableau->setProperty("SelectionMode", "0");
+	SrvlTableau->subscribeEvent(PushButton::EventMouseDoubleClick, handleSrvlBtnCo);
 
 	// Load About
 	Window* AboutWidget = wmgr.loadWindowLayout("About.layout", "Ab_");

@@ -121,9 +121,10 @@ void App::loadSettings(){
 
 void App::loadDefaultSettings(){
 	settings["nickname"] = "Unknown_Pilot";
-	settings["anti_aliasing"] = "0";
-	settings["display_windowed"] = "1";
+	settings["display_windowed"] = "fullsreen";
 	settings["current_skin"] = "default";
+	settings["resolution_x"] = "1024";
+	settings["resolution_y"] = "768";
 }
 
 ////////////// BINDS ////////////////

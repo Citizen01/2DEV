@@ -19,10 +19,21 @@ graphics_engine::graphics_engine(App* a) : engine(a)
 	irr::SIrrlichtCreationParameters params; //Liste des paramètres à passé lors de la création du device
 	/////////////////// CONFIG ///////////////////
 	//Paramètres indispensables:
+	string ResolutionX = app->settings["resolution_x"];
+	string ResolutionY = app->settings["resolution_y"];
+	int x = atoi(ResolutionX.c_str());
+	int y = atoi(ResolutionY.c_str());
+
 	params.DriverType = driverType;
-	params.WindowSize = core::dimension2d<u32>(1024, 768);//Doit être récup depuis le fichier de config
+	params.WindowSize = core::dimension2d<u32>(x, y);
+	
 	//Paramètres supplémentaires ici:
 	params.Fullscreen = false;
+
+	if (app->settings["fullscreen"] == "true")
+		params.Fullscreen = true;
+	else
+		params.Fullscreen = false;
 	//////////////////////////////////////////////
 
 	//Création de l'objet device (Base d'Irrlicht)
