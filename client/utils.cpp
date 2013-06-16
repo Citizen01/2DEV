@@ -201,3 +201,10 @@ int findIndexOfItem(MultiColumnList* tabl, ListboxItem* item)
 				return i;
 	return -1;
 }
+
+string intToString(int number)
+{
+	std::ostringstream ostr;
+	ostr << number; 
+	return ostr.str();
+}

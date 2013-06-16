@@ -77,3 +77,6 @@ irr::scene::IParticleSystemSceneNode* createFire(irr::core::vector3df position);
 
 //Crée de la fumée et renvoit un pointeur de IParticleSystemSceneNode
 irr::scene::IParticleSystemSceneNode* createSmoke(irr::core::vector3df position);
+
+//Transforme un int en string
+std::string intToString(int number);

@@ -131,7 +131,7 @@ bool handleSrvlBtnAdd (const CEGUI::EventArgs &e)
 	if (resultat.size() == 1)
 	{
 		ip = ipAdress;
-		port = DEFAULT_SERVER_PORT;
+		port = intToString(DEFAULT_SERVER_PORT);
 	}
 	else
 	{
@@ -214,7 +214,7 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 	if (resultat.size() == 1)
 	{
 		ip = adressItemText;
-		port = DEFAULT_SERVER_PORT;
+		port = intToString(DEFAULT_SERVER_PORT);
 	}
 	else
 	{
@@ -228,7 +228,6 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 	
 	char *ipChar = new char[ip.length() + 1];
 	strcpy(ipChar, ip.c_str());
-	cout << ipChar << endl;
 
 	server_manager::getSingleton()->loadServers();
 	App::getSingleton()->getNetworkEngine()->connect(ipChar, p);
