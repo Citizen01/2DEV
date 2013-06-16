@@ -61,6 +61,11 @@ void Player::SetCamera()
 	m_Camera->setFarValue(420000.0f);
 }
 
+scene::ICameraSceneNode* Player::GetCamera()
+{
+	return m_Camera;
+}
+
 void Player::updateThirdView()
 {
 	//get rotation matrix of node
@@ -84,6 +89,7 @@ void Player::updateThirdView()
 	m_Camera->setPosition(plane->getPosition() + offset); //position camera in front of the ship
 	m_Camera->setUpVector(upv); //set up vector of camera
 	m_Camera->setTarget(plane->getPosition() + frv); //set target of camera (look at point)
+	App::getSingleton()->getSoundEngine()->setAsReady();
 }
 
 ///////////////// GETTERS AND SETTERS /////////////////

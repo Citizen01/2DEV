@@ -85,8 +85,6 @@ void Server::broadcastToPlayersWhoAreReady()
 
 void Server::sendMap()
 {
-	cout << "Sending the map to a client." << endl;
-
 	m_BSOut.Reset();
 						
 	m_BSOut.Write((MessageID)ID_ANSWER_TO_MAP);
@@ -97,8 +95,6 @@ void Server::sendMap()
 
 void Server::sendFactions()
 {
-	cout << "Sending the factions to a client." << endl;
-
 	m_BSOut.Reset();
 
 	m_BSOut.Write((MessageID)ID_ANSWER_TO_FACTIONS);
@@ -116,8 +112,6 @@ void Server::sendFactions()
 
 void Server::sendPlayers()
 {
-	cout << "Sending the players to a client." << endl;
-
 	m_BSOut.Reset();
 
 	m_BSOut.Write((MessageID)ID_ANSWER_TO_PLAYERS);
@@ -134,8 +128,6 @@ void Server::sendPlayers()
 
 void Server::newPlayer()
 {
-	cout << "Broadcasting a new player." << endl;
-
 	m_PlayersWhoAreReady.push_back(m_Packet->systemAddress);
 
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
@@ -157,8 +149,6 @@ void Server::newPlayer()
 
 void Server::newPlane()
 {
-	cout << "Broadcasting a new plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -185,8 +175,6 @@ void Server::newPlane()
 
 void Server::playerEnterFaction()
 {
-	cout << "Managing player in factions." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -232,8 +220,6 @@ void Server::playerEnterFaction()
 
 void Server::sendPlayerStates()
 {
-	cout << "Sending players in factions and planes." << endl;
-
 	for(unsigned int i = 0; i < m_PlayerList.size(); i ++)
 	{
 		if(m_PlayerList[i]->getFaction() != NULL)
@@ -262,8 +248,6 @@ void Server::sendPlayerStates()
 
 void Server::sendProjectiles()
 {
-	cout << "Sending players in factions and planes." << endl;
-
 	for(unsigned int i = 0; i < m_ProjectileList.size(); i ++)
 	{
 		m_BSOut.Reset();
@@ -279,8 +263,6 @@ void Server::sendProjectiles()
 
 void Server::acceleratePlane()
 {
-	cout << "Accelerating a plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -300,8 +282,6 @@ void Server::acceleratePlane()
 
 void Server::deceleratePlane()
 {
-	cout << "Decelerating a plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -321,8 +301,6 @@ void Server::deceleratePlane()
 
 void Server::divePlane()
 {
-	cout << "Diving a plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -335,8 +313,6 @@ void Server::divePlane()
 
 void Server::straightenPlane()
 {
-	cout << "Straigthening a plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -349,8 +325,6 @@ void Server::straightenPlane()
 
 void Server::rollLeftPlane()
 {
-	cout << "Rolling left a plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -363,8 +337,6 @@ void Server::rollLeftPlane()
 
 void Server::rollRightPlane()
 {
-	cout << "Rolling right a plane." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -377,8 +349,6 @@ void Server::rollRightPlane()
 
 void Server::shootMissile()
 {
-	cout << "Shooting a missile." << endl;
-
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 						
@@ -460,14 +430,6 @@ void Server::movePlanes()
 				core::vector3df position = plane->getPosition();
 				core::vector3df rotation = plane->getRotation();
 
-				//TODO: à supprimer
-				/*cout << "(" << position.X << "," << position.Y << "," << position.Z << "),"
-				<< "(" << rotation.X << "," << rotation.Y << "," << rotation.Z << ") "
-				<< localVelocity.getX() << " | "
-				<< localVelocity.getY() << " | "
-				<< localVelocity.getZ() << " ||| "
-				<< velocity <<endl;*/
-
 				m_BSOut.Reset();
 
 				m_BSOut.Write((MessageID)ID_MOVE_PLANE);
@@ -508,8 +470,6 @@ void Server::updateProjectiles(unsigned int deltaTime)
 
 		core::vector3df position = projectile->getPosition();
 		core::vector3df rotation = projectile->getRotation();
-
-		//cout << projectile->getTimeToLive() << endl;
 
 		m_BSOut.Write(projectile->GetNetworkID());
 

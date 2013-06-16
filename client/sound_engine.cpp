@@ -1,6 +1,7 @@
 #include "sound_engine.h"
 #include "GLOBALS.h"
 #include <iostream>
+#include "app.h"
 
 using namespace std;
 using namespace constants;
@@ -11,6 +12,7 @@ sound_engine::sound_engine(App* a) : engine(a)
 	// start irrKlang with default parameters
 	soundEngine = irrklang::createIrrKlangDevice();
 	soundEndEvent = new MySoundEndReceiver();
+	ready = false;
 }
 
 sound_engine::~sound_engine(void)
@@ -129,6 +131,14 @@ bool sound_engine::OnEvent(const irr::SEvent& event)
 */
 void sound_engine::frame()
 {
+	if (ready)
+	{
+		scene::ICameraSceneNode* camera = App::getSingleton()->getGameEngine()->GetGame()->getLocalPlayer()->GetCamera();
+		if (camera)
+			updateListenerPosition(camera->getAbsolutePosition(),camera->getTarget());
+	}
+
+
 	int innerCounter = 0;
 	for (std::map<scene::IAnimatedMeshSceneNode*, std::vector<irrklang::ISound*>>::iterator it = soundMap3D.begin(); it != soundMap3D.end(); ++it)
 	{
@@ -159,4 +169,9 @@ void sound_engine::frame()
 void sound_engine::MySoundEndReceiver::OnSoundStopped (irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData)
 {
 	sound->drop();
+}
+
+void sound_engine::setAsReady()
+{
+	ready = true;
 }

@@ -112,8 +112,6 @@ void network_engine::askForMap()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Asking the server for the map." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_MAP);
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
@@ -124,7 +122,6 @@ void network_engine::askForFactions()
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server for factions." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_FACTIONS);
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
@@ -135,7 +132,6 @@ void network_engine::askForPlayers()
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server for players." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_PLAYERS);
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
@@ -145,8 +141,6 @@ void network_engine::askForLocalPlayer()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Asking the server for our own player : " + app->settings["nickname"] << endl;
 
 	RakString playerName(app->settings["nickname"].c_str());
 
@@ -160,8 +154,6 @@ void network_engine::askForLocalPlane(string planeModel)
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Asking the server for our own plane." << endl;
 
 	RakString planeName(planeModel.c_str());
 
@@ -177,7 +169,6 @@ void network_engine::askForPlayersStates()
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server for players in factions, and planes." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_PLAYERS_STATES);
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
@@ -185,7 +176,6 @@ void network_engine::askForPlayersStates()
 
 void network_engine::askForProjectiles()
 {
-	cout << "Asking the server for projectiles." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_FOR_PROJECTILES);
 	m_Peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, m_ServerAddress, false);
@@ -196,7 +186,6 @@ void network_engine::askToEnterFaction(Faction* faction)
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server to enter a faction." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ENTER_FACTION);
 	bsOut.Write(faction->GetNetworkID());
@@ -209,7 +198,6 @@ void network_engine::askToAccelerate()
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server to accelerate." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ACCELERATE);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -221,7 +209,6 @@ void network_engine::askToDecelerate()
 	if (!m_Connected)
 		return;
 
-	cout << "Asking the server to decelerate." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_DECELERATE);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -230,7 +217,6 @@ void network_engine::askToDecelerate()
 
 void network_engine::askToDive()
 {
-	cout << "Asking the server to dive." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_DIVE);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -239,7 +225,6 @@ void network_engine::askToDive()
 
 void network_engine::askToStraighten()
 {
-	cout << "Asking the server to straighten." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_STRAIGHTEN);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -248,7 +233,6 @@ void network_engine::askToStraighten()
 
 void network_engine::askToRollLeft()
 {
-	cout << "Asking the server to roll left." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ROLL_LEFT);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -257,7 +241,6 @@ void network_engine::askToRollLeft()
 
 void network_engine::askToRollRight()
 {
-	cout << "Asking the server to roll right." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_ROLL_RIGHT);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -266,7 +249,6 @@ void network_engine::askToRollRight()
 
 void network_engine::askToShootMissile(Plane* target)
 {
-	cout << "Asking the server to shoot a missile." << endl;
 	BitStream bsOut;
 	bsOut.Write((MessageID)ID_ASK_TO_SHOOT_MISSILE);
 	bsOut.Write(ge->GetGame()->getLocalPlayer()->GetNetworkID());
@@ -286,8 +268,6 @@ void network_engine::getMap()
 	if (!m_Connected)
 		return;
 
-	cout << "Receiving the server's map." << endl;
-
 	RakString mapName = "";
 
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
@@ -303,8 +283,6 @@ void network_engine::getFactions()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Receiving the server's factions." << endl;
 
 	unsigned int factionCount = 0;
 
@@ -333,8 +311,6 @@ void network_engine::getPlayers()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Receiving the server's players." << endl;
 
 	unsigned int playerCount = 0;
 
@@ -365,8 +341,6 @@ void network_engine::playerEnterFaction()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "A player entered a faction." << endl;
 	
 	NetworkID factionNetworkID;
 	NetworkID playerNetworkID;
@@ -397,8 +371,6 @@ void network_engine::playerGetPlane()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "A player got her/his plane." << endl;
 	
 	NetworkID playerNetworkID;
 	RakString planeModel;
@@ -428,8 +400,6 @@ void network_engine::acceleratePlane()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Accelerating a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
@@ -444,8 +414,6 @@ void network_engine::deceleratePlane()
 {
 	if (!m_Connected)
 		return;
-
-	cout << "Decelerating a plane." << endl;
 	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
@@ -457,9 +425,7 @@ void network_engine::deceleratePlane()
 }
 
 void network_engine::shootMissile()
-{
-	cout << "Shooting a missile." << endl;
-	
+{	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 					
@@ -506,9 +472,7 @@ void network_engine::movePlane()
 }
 
 void network_engine::updateProjectile()
-{
-	cout << "Moving a projectile." << endl;
-	
+{	
 	BitStream bsIn(m_Packet->data, m_Packet->length, false);
 	bsIn.IgnoreBytes(sizeof(MessageID));
 					

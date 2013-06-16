@@ -23,6 +23,7 @@ private:
 	std::map<scene::IAnimatedMeshSceneNode*, std::vector<irrklang::ISound*>> soundMap3D;
 	irrklang::ISound* backgroundMusic;
 	MySoundEndReceiver* soundEndEvent;
+	bool ready;
 
 public:
 	sound_engine(App* a);
@@ -37,6 +38,8 @@ public:
 	void attach3DSound(std::string name, irr::scene::IAnimatedMeshSceneNode* node, float minDistance, float maxDistance, bool looped = false);
 
 	void updateListenerPosition(core::vector3df position, core::vector3df direction);
+
+	void sound_engine::setAsReady();
 
 	void frame();
 
