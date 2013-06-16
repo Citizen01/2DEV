@@ -191,6 +191,7 @@
     <ClCompile Include="..\Libraries\Raknet\include\WSAStartupSingleton.cpp" />
     <ClCompile Include="..\Libraries\Raknet\include\_FindFirst.cpp" />
     <ClCompile Include="server_manager.cpp" />
+    <ClCompile Include="ui_ingame_menu.cpp" />
     <ClCompile Include="ui_main_menu.cpp" />
     <ClCompile Include="cgui.cpp" />
     <ClCompile Include="engine.cpp" />

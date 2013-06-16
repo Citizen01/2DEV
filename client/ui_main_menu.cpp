@@ -15,6 +15,7 @@ using namespace std;
 bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* QuickCoWin = wmgr.getWindow("QuickCo_Quick_connect");
@@ -27,6 +28,7 @@ bool handleQuickConnectBtnWin (const CEGUI::EventArgs &e)
 bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* SrvlWin = wmgr.getWindow("Srvl_ServerList");
@@ -39,6 +41,7 @@ bool handleSrvlBtnWin (const CEGUI::EventArgs &e)
 bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -51,6 +54,7 @@ bool handleAboutBtnWin (const CEGUI::EventArgs &e)
 bool handleExitBtn (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	App::getSingleton()->stop();
 	return true;
 }
@@ -59,6 +63,7 @@ bool handleExitBtn (const CEGUI::EventArgs &e)
 bool handleAboutBtnWinClose (const CEGUI::EventArgs &e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	Window* AboutWin = wmgr.getWindow("Ab_AboutWin");
@@ -235,6 +240,7 @@ bool handleSrvlBtnCo (const CEGUI::EventArgs &e)
 bool handleQuickConnectClose (const EventArgs&e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("QuickCo_Quick_connect")->setVisible(false);
 	return true;
@@ -244,6 +250,7 @@ bool handleQuickConnectClose (const EventArgs&e)
 bool handleSrvlBtnClose (const EventArgs&e)
 {
 	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("Srvl_ServerList")->setVisible(false);
 	return true;

@@ -10,9 +10,12 @@ using namespace CEGUI;
 using namespace constants;
 
 ////////////////// CLICS HANDLERS //////////////////
-//Bouton Add de la fenêtre de selection d'avion
+
+//Bouton Play de la fenêtre de selection d'avion
 bool handleBtnPlay (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	MultiColumnList* tabl = (MultiColumnList*)wmgr.getWindow("PS_SelectYurPlan/Plane_colum");
@@ -27,8 +30,21 @@ bool handleBtnPlay (const CEGUI::EventArgs &e)
 	return true;
 }
 
+//Croix de la fenêtre
+bool handleClosePlaneSelection(const CEGUI::EventArgs &e)
+{
+	App::getSingleton()->getSoundEngine()->playClick();
+
+	show_plane_selection(false);
+
+	return true;
+}
+
+//Met à jour l'image de l'avion en fonction de l'avion selectionné
 bool update_plane_preview (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 	MultiColumnList* tabl = (MultiColumnList*) wmgr.getWindow("PS_SelectYurPlan/Plane_colum");
 	ListboxItem* item = tabl->getFirstSelectedItem();
@@ -52,7 +68,7 @@ void create_plane_selection()
 	// Load Team Join
 	Window* planeSelecWindow = wmgr.loadWindowLayout("PlaneSelection.layout", "PS_");
 	root->addChildWindow( planeSelecWindow );
-	planeSelecWindow->setVisible (false);
+	planeSelecWindow->setVisible(false);
 	planeSelecWindow->setProperty("AlwaysOnTop", "True");
 	//Btn Play
 	PushButton* playBtn = (PushButton*)wmgr.getWindow("PS_SelectYurPlan/Play");
@@ -67,7 +83,10 @@ void create_plane_selection()
 	DefaultWindow* planeImage = (DefaultWindow*)wmgr.getWindow("PS_SelectYurPlan/PlaneImg");
 	planeImage->setProperty( "FrameEnabled", "False" );
 	planeImage->setProperty( "BackgroundEnabled", "False" );
-	planeImage->setProperty("Image", "set:plane_thumb_none image:full_image");
+
+	//Croix de la fenêtre
+	PushButton* cross = (PushButton*)wmgr.getWindow("PS_SelectYurPlan__auto_closebutton__");
+	cross->subscribeEvent(PushButton::EventClicked, handleClosePlaneSelection);
 	
 }
 
@@ -79,6 +98,7 @@ void show_plane_selection(bool visible)
 
 ////// MANIPULATION DU TABLEAU //////
 
+//Met à jour la liste des avions disponibles
 void update_plane_selection(vector<string> values)
 {
 	vector<vector<string>> val;

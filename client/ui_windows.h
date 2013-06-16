@@ -15,3 +15,7 @@ void update_team_selection(std::vector<std::vector<std::string>> values);
 void create_plane_selection();
 void show_plane_selection(bool visible);
 void update_plane_selection(std::vector<std::string> values);
+
+//Menu ingame
+void create_ingame_menu();
+void show_ingame_menu(bool visible);

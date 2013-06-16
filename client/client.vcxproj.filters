@@ -456,6 +456,9 @@
     <ClCompile Include="particle_manager.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="ui_ingame_menu.cpp">
+      <Filter>Source Files\graphics\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">

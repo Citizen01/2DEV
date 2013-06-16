@@ -82,6 +82,7 @@ bool Cgui::precache()
 	create_main_menu(); //Menu principal du jeu
 	create_team_selection(); //Fenêtre de selection d'une team
 	create_plane_selection(); //Fenêtre de selection d'un avion
+	create_ingame_menu(); //Menu lors d'une partie
 
 	cout << "[CEGUI] Successfully precached all windows for the game !" << endl;
 
@@ -103,16 +104,16 @@ bool Cgui::precache()
 
 		if (planename != "unknown")
 		{
-			if (planename != "none")
-				planes.push_back(planename);
+			planes.push_back(planename);
 			imgr.createFromImageFile("plane_thumb_"+planename, "thumbs/"+thumbs[i], "imagesets");
 			cout << "[INFO] " << thumbs[i] << " loaded !" << endl;
 		}
 	}
 
+	cout << "[CEGUI] Successfully precached all images for the game !" << endl;
+
 	update_plane_selection(planes);
 
-	cout << "[CEGUI] Successfully precached all images for the game !" << endl;
 
 	return true;
 }

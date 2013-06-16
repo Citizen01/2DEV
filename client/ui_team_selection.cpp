@@ -9,9 +9,11 @@ using namespace CEGUI;
 using namespace constants;
 
 ////////////////// CLICS HANDLERS //////////////////
-//Bouton Add de la fenêtre de selection de team
+//Bouton Join de la fenêtre de selection de team
 bool handleTeamJoinBtnJoin (const CEGUI::EventArgs &e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 
 	MultiColumnList* tabl = (MultiColumnList*)wmgr.getWindow("TS_JoinTeam/TeamChoise");
@@ -27,8 +29,10 @@ bool handleTeamJoinBtnJoin (const CEGUI::EventArgs &e)
 }
 
 //Croix de la fenêtre join
-bool handleTeamJoinClose (const EventArgs&e)
+bool handleCloseTeamSelection(const EventArgs&e)
 {
+	App::getSingleton()->getSoundEngine()->playClick();
+
 	WindowManager& wmgr = WindowManager::getSingleton();
 	wmgr.getWindow("TS_JoinTeam")->setVisible(false);
 	return true;
@@ -44,14 +48,14 @@ void create_team_selection()
 	// Load Team Join
 	Window* TeamJoin = wmgr.loadWindowLayout("TeamSelection.layout", "TS_");
 	root->addChildWindow( TeamJoin );
-	TeamJoin->setVisible (false);
+	TeamJoin->setVisible(false);
 	TeamJoin->setProperty("AlwaysOnTop", "True");
 	//Btn Join
 	PushButton* JoinBtn = (PushButton*)wmgr.getWindow("TS_JoinTeam/Join");
 	JoinBtn->subscribeEvent(PushButton::EventClicked, handleTeamJoinBtnJoin);
 	//Croix close TeamJoin
 	PushButton* QuickClose = (PushButton*)wmgr.getWindow("TS_JoinTeam__auto_closebutton__");
-	QuickClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleTeamJoinClose));
+	QuickClose->subscribeEvent(PushButton::EventClicked,Event::Subscriber(handleCloseTeamSelection));
 
 	//Add Columns
 	MultiColumnList* JtTbl = (MultiColumnList*)wmgr.getWindow("TS_JoinTeam/TeamChoise");
