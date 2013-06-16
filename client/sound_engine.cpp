@@ -98,7 +98,7 @@ void sound_engine::frame()
 		scene::IAnimatedMeshSceneNode* modele = it->first;
 		core::vector3df position = modele->getAbsolutePosition();
 		std::vector<irrklang::ISound*> vector = it->second;
-		for(int counter = 0; counter < vector.size(); counter ++) {
+		for(unsigned int counter = 0; counter < vector.size(); counter ++) {
 			vector[counter]->setPosition(irrklang::vec3df(position.X, position.Y, position.Z));
 		}
 	}

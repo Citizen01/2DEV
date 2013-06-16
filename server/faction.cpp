@@ -17,6 +17,9 @@ Faction::Faction(std::string name, RakNet::NetworkIDManager* networkIDManager, R
 	
 	m_Position = core::vector3df(50000, 19997, 50015);
 	m_Rotation = core::vector3df(0.f, 0.f, 0.f);
+
+	//TODO: REMOVE HACK
+	m_Position = core::vector3df(0, 0, 0);
 }
 
 string Faction::GetName()

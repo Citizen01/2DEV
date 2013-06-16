@@ -1,6 +1,7 @@
 #include "graphics_engine.h"
 #include "MainEventListener.h"
 #include "app.h"
+#include "particle_manager.h"
 #include <iostream>
 
 using namespace std;
@@ -60,6 +61,7 @@ void graphics_engine::frame()
 {
 	driver->beginScene(true, true, 0 ); // GRAPHICS
 
+	particle_manager::getSingleton()->updateAll();
 	smgr->drawAll();
 
 	//Rendering all CEGUI elements

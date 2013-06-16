@@ -36,7 +36,7 @@ bool isFile(const string file)
 	return (bool)ifile;
 }
 
-extern map<string,irr::EKEY_CODE> KEYMAP;
+extern map<string,EKEY_CODE> KEYMAP;
 
 EKEY_CODE strToEkeyCode(string str)
 {
@@ -44,6 +44,7 @@ EKEY_CODE strToEkeyCode(string str)
 		return KEYMAP.at(str);
 	else
 		return KEYMAP.at("INVALID_KEY");
+	
 }
 
 string ekeyCodeToStr(EKEY_CODE code)
@@ -76,39 +77,70 @@ string actionCodeToStr(constants::ACTION_CODE code)
 	return NULL;
 }
 
-void createExplosion(irr::core::vector3df position){
+scene::IParticleSystemSceneNode* createFire(irr::core::vector3df position){
 		IrrlichtDevice* device =  App::getSingleton()->getGraphicEngine()->getDevice();
 		scene::ISceneManager* smgr = device->getSceneManager();
 		scene::IParticleSystemSceneNode* ps = smgr->addParticleSystemSceneNode(false);
 		video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
-	
+
 		//create a particle
-		scene::IParticleSphereEmitter* em = ps->createSphereEmitter
-			(position,
-			100.00f,
-			core::vector3df(0.3f,0.3f,0.3f),
-			5,
-			10,
-			video::SColor(255, 0, 0,0),
-			video::SColor(255,255,255,255),
-			2000,
-			40000,
-			0,
-			core::dimension2df(5.0f, 5.0f),
-			core::dimension2df(50.0f, 50.0f));
+		scene::IParticleEmitter* em = ps->createBoxEmitter(
+		core::aabbox3d<f32>(-7,0,-7,7,1,7), // emitter size
+		core::vector3df(0.0f,0.06f,0.0f),   // initial direction
+		80,100,                             // emit rate
+		video::SColor(0,255,255,255),       // darkest color
+		video::SColor(0,255,255,255),       // brightest color
+		800,2000,0,                         // min and max age, angle
+		core::dimension2df(10.f,10.f),         // min size
+		core::dimension2df(20.f,20.f));        // max size
 		
 		ps->setEmitter(em); // this grabs the emitter
 		em->drop(); // so we can drop it here without deleting it
 		scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
 		
 		ps->addAffector(paf); // same goes for the affector
-		paf->drop(); 
+		paf->drop();
 
-		ps->setPosition(position);
+		core::vector3df pl_pos = position;
+		ps->setPosition(pl_pos);
 		ps->setScale(core::vector3df(2,2,2));
 		ps->setMaterialFlag(video::EMF_LIGHTING, false);
 		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
-		ps->setMaterialTexture(0, driver->getTexture((PATH_TO_MEDIA + "/test/fire.bmp").c_str()));
+		ps->setMaterialTexture(0, driver->getTexture("../Media/test/fire.bmp"));
+		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+
+		return ps;
+}
+
+void createExplosion(irr::core::vector3df position){
+
+		scene::IParticleSystemSceneNode* ps = App::getSingleton()->getGraphicEngine()->getSceneManager()->addParticleSystemSceneNode(false);
+		video::IVideoDriver* driver = App::getSingleton()->getGraphicEngine()->getDriver();
+
+		//create a particle
+		scene::IParticleEmitter* em = ps->createBoxEmitter(
+		core::aabbox3d<f32>(0.1,0.1,0.1,0.1,0.1,0.1), // emitter size
+		core::vector3df(0.01f,0.01f,0.01f),   // initial direction
+		500,500,                             // emit rate
+		video::SColor(0,255,255,255),       // darkest color
+		video::SColor(0,255,255,255),       // brightest color
+		1000,1000,360,                         // min and max age, angle
+		core::dimension2df(6.f,6.f),         // min size
+		core::dimension2df(6.f,6.f));        // max size
+		
+		ps->setEmitter(em); // this grabs the emitter
+		em->drop(); // so we can drop it here without deleting it
+		scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
+		
+		ps->addAffector(paf); // same goes for the affector
+		paf->drop();
+
+		core::vector3df pl_pos = position;
+		ps->setPosition(pl_pos);
+		//ps->setScale(core::vector3df(2,2,2));
+		ps->setMaterialFlag(video::EMF_LIGHTING, false);
+		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
+		ps->setMaterialTexture(0, driver->getTexture("../Media/test/fire.bmp"));
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 }
 

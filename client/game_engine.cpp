@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "app.h"
 #include "events.h"
+#include "particle_manager.h"
 
 using namespace std;
 using namespace irr;
@@ -60,7 +61,11 @@ bool game_engine::OnEvent(const SEvent& event)
 				ne->askToAccelerate();
 				break;
 			case DECELERATE:
-				ne->askToDecelerate();
+				{
+					scene::ICameraSceneNode* cam = gfxe->getSceneManager()->addCameraSceneNodeFPS(0, 100, 0.1);
+					cam->setFarValue(42000);
+					ne->askToDecelerate();
+				}
 				//TODO
 				break;
 			case LEFT:
@@ -93,6 +98,7 @@ bool game_engine::OnEvent(const SEvent& event)
 				break;
 			case TOGGLEMENU:
 				//TODO
+				particle_manager::getSingleton()->createParticleEmitter(PARTICLE_EXPLOSION, core::vector3df(0, 0, 0));
 				break;
 			default:
 				//Nothing

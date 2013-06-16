@@ -204,6 +204,8 @@
     <ClCompile Include="MainEventListener.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="network_engine.cpp" />
+    <ClCompile Include="particle_emitter.cpp" />
+    <ClCompile Include="particle_manager.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="sound_engine.cpp" />
@@ -382,6 +384,8 @@
     <ClInclude Include="MainEventListener.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="network_engine.h" />
+    <ClInclude Include="particle_emitter.h" />
+    <ClInclude Include="particle_manager.h" />
     <ClInclude Include="plane.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="rapidxml.hpp" />
